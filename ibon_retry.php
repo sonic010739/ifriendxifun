@@ -162,15 +162,11 @@
 			$mailmessage .= "iF 活動小組 iFiFriends@gmail.com<br/>";
 			$mailmessage .= "如有任何問題請直接與我們連絡。<br/>";
 			$mailmessage .= "<a href=\"". $config["base_url"] ."\">". $config["base_url"] ."</a><br/>";
-			
-			
-			if ($email != "qkaduncan@msn.com")
-			{
+						
+			if ($email != "qkaduncan@msn.com") {
 				$tool->SendMail($email, $id, $mailtitle, $mailmessage, '');
 			}
 		}
-
-		
 					
 		if ($data["status"] == "CANCEL")
 		{
@@ -188,7 +184,7 @@
 		else if ($data["join_status"] == "EO_cancel")
 		{
 			// 2. 檢查參加的狀態。若被EO強制取消則需給予優惠卷			
-			$reason = "EO強制取消參加活動，已經使用iBon繳費的會員給予活動優惠卷。";
+			$reason = "EO強制取消參加活動，已經使用超商代碼繳費的會員給予活動優惠卷。";
 			
 			$sql  = "INSERT INTO `coupon` ( `coupon_id`, `coupon_type`, `uid`, `give_id`, ";
 			$sql .= "`reason`, `give_time`, `use_time`, `use_act` ) ";

@@ -175,13 +175,13 @@
 			$mailbody  = "親愛的 ". $mailinfo["realname"] ." 您好:<br />";
 			$mailbody .= "<br />";
 			$mailbody .= "您已登記了[iF]網站 ”". $mailinfo["act_name"] ."” 的活動，繳費後才算是報名成功喔~否則會在該";
-			$mailbody .= "活動繳費期限截止後取消您的登記，在此提醒您，記得在繳費期限內前往全省7-11以iBon完";
+			$mailbody .= "活動繳費期限截止後取消您的登記，在此提醒您，記得在繳費期限內前往全省全家便利商店以FamiPort完";
 			$mailbody .= "成繳費喲!!您的該場活動詳細內容以及繳費期限如下<br />";
 			$mailbody .= "<br />";
 			$mailbody .= "活動日期: ". $mailinfo["act_date"] ." <br />";
 			$mailbody .= "活動時間: ". $mailinfo["act_time"] ." <br />";
 			$mailbody .= "活動地點: ". $mailinfo["act_place"] ." <br />";			
-			$mailbody .= "iBon繳費號碼: ". $mailinfo["ibon_code"] ." <br />";
+			$mailbody .= "超商繳費代碼: ". $mailinfo["ibon_code"] ." <br />";
 			$mailbody .= "繳費期限: ". $mailinfo["ibon_deadline"] ." (過此期限將從名單中刪除)<br />";
 			$mailbody .= "<br />";
 			$mailbody .= "在此提醒您，若當日無法如期前往參加此活動，煩請務必於網站中進行取消參與活動的動作，";
@@ -211,14 +211,14 @@
 		public function PayDeadlineMailB($to_address, $to_name = "", $mailinfo)
 		{
 			// 信件主旨
-			$subject = "[iF] ". $mailinfo["realname"] ." iBon繳費代碼過期提醒";
+			$subject = "[iF] ". $mailinfo["realname"] ." 超商繳費代碼過期提醒";
 
 			// 信件內容
 			$mailbody  = "親愛的 ". $mailinfo["realname"] ." 您好:<br />";
 			$mailbody .= "<br />";
-			$mailbody .= "您登記[iF]網站中名為 ”". $mailinfo["act_name"] ."” 的活動，但是您的iBon繳費代碼已過繳費期限，因此";
-			$mailbody .= "iBon繳費代號已失效，請不要再以該繳費代號繳費。請重新登入[iF]會員介面產生新的有效iBon";
-			$mailbody .= "繳費代號，並儘速至7-11以iBon完成繳費喲!!<br />";
+			$mailbody .= "您登記[iF]網站中名為 ”". $mailinfo["act_name"] ."” 的活動，但是您的超商繳費代碼已過繳費期限，因此";
+			$mailbody .= "超商繳費代碼已失效，請不要再以該繳費代碼繳費。請重新登入[iF]會員介面產生新的有效超商繳費代碼";
+			$mailbody .= "繳費代號，並儘速至全家便利商店以FamiPort完成繳費喲!!<br />";
 			$mailbody .= "<br />";
 			$mailbody .= "提醒您，若未在[iF]活動繳費期限前完成繳費，[iF]將取消您的登記。<br />";
 			$mailbody .= "該場活動詳細內容以及繳費期限如下<br />";
@@ -226,7 +226,7 @@
 			$mailbody .= "活動日期: ". $mailinfo["act_date"] ." <br />";
 			$mailbody .= "活動時間: ". $mailinfo["act_time"] ." <br />";
 			$mailbody .= "活動地點: ". $mailinfo["act_place"] ." <br />";
-			$mailbody .= "iBon繳費期限: ". $mailinfo["ibon_deadline"] ." (此ibon繳費期限已過，請至網頁中產生新的ibon繳費代號)<br />";
+			$mailbody .= "超商繳費代碼: ". $mailinfo["ibon_deadline"] ." (此代碼繳費期限已過，請至網頁中產生新的超商繳費代碼)<br />";
 			$mailbody .= "[iF]繳費期限: ". $mailinfo["iF_deadline"] ."  (過此期限將從名單中刪除)<br />";
 			$mailbody .= "<br />";
 
@@ -269,7 +269,7 @@
 			$mailbody .= "活動時間: ". $mailinfo["act_time"] ." <br />";
 			$mailbody .= "活動主題: ". $mailinfo["act_topic"] ." <br />";
 			$mailbody .= "活動名稱: ". $mailinfo["act_name"] ." <br />";
-			$mailbody .= "iBon繳款代碼: ". $mailinfo["ibon_code"] ." <br />";
+			$mailbody .= "超商繳費代碼: ". $mailinfo["ibon_code"] ." <br />";
 			$mailbody .= "繳費時間: ". $mailinfo["ibon_paytime"] ." <br />";
 			$mailbody .= "<br />";
 			$mailbody .= "此外，系統中已將您的專屬link啟用，您的朋友們已經可以經由此連結取得報名活動的優惠嘍~<br />";
@@ -470,12 +470,12 @@
 			$mailbody .= "<br />";
 			$mailbody .= "再次提醒您，<br />";
 			$mailbody .= "<ol>";
-			$mailbody .= "<li>若您尚未繳費，切勿再使用此iBon代碼前往繳費</li>";
+			$mailbody .= "<li>若您尚未繳費，切勿再使用此超商繳費代碼前往繳費</li>";
 			$mailbody .= "<li>若您已經使用E-coupon完成繳費，iF系統將會致上一張E-coupon</li>";
-			$mailbody .= "<li>若您已經針對可使用優惠卷之場次完成iBon繳費，iF將不會退費，iF系統會致上一張E-coupon</li>";
+			$mailbody .= "<li>若您已經針對可使用優惠卷之場次完成繳費，iF將不會退費，iF系統會致上一張E-coupon</li>";
 			$mailbody .= "(E-coupon優惠卷可無限期使用，您可在未來在登記iF中其他相同費用之活動時，使用該優惠";
 			$mailbody .= "卷免費報名)<br />";
-			$mailbody .= "<li>若您已經完成iBon繳費，而該活動限制為不可使用優惠券，則請您與該場活動EO聯絡並了解退費的機制與方法</li>";
+			$mailbody .= "<li>若您已經完成繳費，而該活動限制為不可使用優惠券，則請您與該場活動EO聯絡並了解退費的機制與方法</li>";
 			$mailbody .= "</ol>";
 
 			// 信件結尾內容
@@ -530,7 +530,7 @@
 			$mailbody .= "<br />";
 			$mailbody .= "很抱歉，您於 ". $mailinfo["act_date"] ." 所登記報名之活動場次 ”". $mailinfo["act_name"] ."” 已被取消，特";
 			$mailbody .= "此通知請勿於當天前往活動現場參加活動，活動狀態請登入[iF]進行了解。此活動若尚未繳費，";
-			$mailbody .= "歡迎參考網頁中其他各種有趣的活動，若已使用優惠卷或由ibon繳費完成報名，則[iF]將給予";
+			$mailbody .= "歡迎參考網頁中其他各種有趣的活動，若已使用優惠卷或由FamiPort繳費完成報名，則[iF]將給予";
 			$mailbody .= "您活動優惠卷，此卷可參與費用相同且可使用優惠卷之活動。若您對於我們的活動有任何寶貴";
 			$mailbody .= "的意見或建議，[iF]都衷心的希望您能至部落格中與我們分享，因為這將是[iF]舉辦出更優質";
 			$mailbody .= "活動的最佳動力。<br />";
@@ -538,10 +538,10 @@
 			$mailbody .= "提醒您，<br />";
 			$mailbody .= "<ol>";
 			$mailbody .= "<li>若您已經使用E-coupon完成繳費，iF系統將會致上一張E-coupon</li>";
-			$mailbody .= "<li>若您已經針對可使用優惠卷之場次完成iBon繳費，iF將不會退費，iF系統會致上一張E-coupon</li>";
+			$mailbody .= "<li>若您已經針對可使用優惠卷之場次完成繳費，iF將不會退費，iF系統會致上一張E-coupon</li>";
 			$mailbody .= "(E-coupon優惠卷可無限期使用，您可在未來在登記iF中其他相同費用之活動時，使用該優惠";
 			$mailbody .= "卷免費報名)<br />";
-			$mailbody .= "<li>若您已經完成iBon繳費，而該活動限制為不可使用優惠券，則請您與該場活動EO聯絡並了解退費的機制與方法</li>";
+			$mailbody .= "<li>若您已經完成繳費，而該活動限制為不可使用優惠券，則請您與該場活動EO聯絡並了解退費的機制與方法</li>";
 			$mailbody .= "</ol>";
 
 			// 信件結尾內容
@@ -845,8 +845,8 @@
 			$mailbody .= "活動日期: ". $mailinfo["act_date"] ." <br />";
 			$mailbody .= "活動時間: ". $mailinfo["act_time"] ." <br />";
 			$mailbody .= "活動地點: ". $mailinfo["act_place"] ." <br />";
-			$mailbody .= "iBon繳費期限: ". $mailinfo["ibon_deadline"] ." <br />";
-			$mailbody .= "iBon繳費號碼: ". $mailinfo["ibon_code"] ." <br />";
+			$mailbody .= "超商繳費期限: ". $mailinfo["ibon_deadline"] ." <br />";
+			$mailbody .= "超商繳費代碼: ". $mailinfo["ibon_code"] ." <br />";
 			$mailbody .= "[iF]繳費期限: ". $mailinfo["iF_deadline"] ." (<b>此期限已到期!! 請勿前往繳費!!</b>)<br />";
 			$mailbody .= "<br />";
 			$mailbody .= "在此通知您，由於已過[iF]繳費期限而您尚未前往繳費，故[iF]系統已將您由此";

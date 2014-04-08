@@ -11,6 +11,7 @@
 	// google map api key
 	$config["gmap_key"] = "ABQIAAAAmKClDYveIGu_IGDykTAmDRRpISe262forPM-r4b-QDf0Ab5MfxS-MlIGUvj2qPhwXNBt6ddxvPvoDA";	
 	
-	// 綠界科技 iBon 代收商店代號
-	$config["store_no"] = "6701";
+	// 綠界科技超商代碼資訊
+	$config["store_no"] = '1649';
+	$config['enc_key']	= 'y79ra2RU1yp4j4F5wGmRKqxw';
 ?>

@@ -330,12 +330,53 @@
 			$linkmysql->query($sql);
 
 			// 新增ibon繳費單號到資料庫中
-			$ibon_code = sprintf("%08d%08d%05d", $uid, $aid,  $fees);
+			$od_sob = sprintf("%08d%08d%05d", $uid, $aid,  $fees);
+			
+			// 商品說明及備註。(會出現在超商繳費平台螢幕上)
+			$prd_desc = rawurlencode($activitie['name']);
+			$desc1 	= rawurlencode($activitie['act_date']);
+			$desc2 	= rawurlencode($activitie['act_time']);
+			$desc3 	= rawurlencode($member['username']);
+			$desc4 	= rawurlencode('付款後請保留繳費收據');
+			$ok_url	= rawurlencode($config["base_url"] .'cvs_ok.php');
+			
+			// ECBank 超商代碼繳費代碼取號網址
+			$ecbank_auth_url = 'https://ecbank.com.tw/gateway.php?payment_type=cvs' .
+					'&mer_id=' 		. $config["store_no"] 	.	// 商店代號
+					'&enc_key=' 	. $config['enc_key'] 	.
+					'&od_sob=' 		. $od_sob				.	// iF 系統單號
+					'&amt=' 		. $fees					.
+					'&prd_desc=' 	. $prd_desc				.
+					'&desc1=' 		. $desc1				.
+					'&desc2=' 		. $desc2				.
+					'&desc3=' 		. $desc3				.
+					'&desc4=' 		. $desc4				.
+					'&ok_url='		. $ok_url;					// 付款完成通知網址
+
+			$ch = curl_init();
+
+			curl_setopt($ch, CURLOPT_URL, $ecbank_auth_url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_HEADER, 0);
+
+			$result = curl_exec($ch);
+			
+			$process_time = date("Y-m-d H:i:s");				// 處理時間
+			parse_str($result, $res);
+
+			if (!isset($res['error']) || $res['error'] != '0')
+			{
+				//echo 'get code error!! error: ' . $res['error'] . '<br />';
+				$tool->ShowMsgPage("取得繳費代碼失敗，請洽系統管理員。");
+			}
+			
+			$ibon_no 	= $res['payno'];
+			$tsr		= $res['tsr'];
 
 			$sql  = "INSERT INTO `charge_ibon` (`charge_ibon_id`, `uid`, `aid`, `fees`, `success`, ";
 			$sql .= "`ibon_no` , `gwsr` , `process_time` , `pay_time` ) ";
-			$sql .= "VALUES ( '$ibon_code', '$uid', '$aid', '$fees', NULL , ";
-			$sql .= "NULL , NULL , NULL , NULL ); ";
+			$sql .= "VALUES ( '$od_sob', '$uid', '$aid', '$fees', 1, ";
+			$sql .= "'$ibon_no', '$tsr', NOW(), NULL ); ";
 			$linkmysql->query($sql);
 
 			// 將此會員加入參加活動資料中
@@ -343,53 +384,66 @@
 			$sql .= "`serial`, `aid`, `uid`, `charge_type`, `charge_id`, `intro_id`, ";
 			$sql .= "`no`, `option1`, `option2`, `option3`, `join_time`, `join_status` ) ";
 			$sql .= "VALUES ( ";
-			$sql .= "'', '$aid', '$uid', 'iBon', '$ibon_code', '0', ";
+			$sql .= "'', '$aid', '$uid', 'iBon', '$od_sob', '0', ";
 			$sql .= "NULL, NULL, NULL, NULL, NOW(), 'join' )";
 			$linkmysql->query($sql);
+			
+			// iF繳費截止日
+			$tmp = explode("-", $activitie['act_date']);
+			$iFDeadline = date("Y-m-d", mktime(0, 0, 0, $tmp[1], $tmp[2]-1, $tmp[0]));
 
+			if (preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})/" , $process_time, $matche))
+			{
+				$days = 7;
+
+				// 計算繳費期限:  $ibonDeadline: 信件用，$ibonDeadline2: 簡訊用
+				if (mktime(23, 59, 59, $tmp[1], $tmp[2]-1, $tmp[0]) < mktime($matche[4], $matche[5], 0, $matche[2], $matche[3]+$days, $matche[1]))
+				{
+					$ibonDeadline = date("Y-m-d H:i:s", mktime(23, 59, 59, $tmp[1], $tmp[2]-1, $tmp[0]));
+					$ibonDeadline2 = date("Y/m/d", mktime(0, 0, 0, $tmp[1], $tmp[2]-1, $tmp[0]));
+				}
+				else
+				{
+					$ibonDeadline = date("Y-m-d H:i:s", mktime($matche[4], $matche[5], 0, $matche[2], $matche[3]+$days, $matche[1]));
+					$ibonDeadline2 = date("Y/m/d", mktime($matche[4], $matche[5], 0, $matche[2], $matche[3]+$days, $matche[1]));
+				}
+			}
+
+			// 取出活動資料
+			$sql  = "SELECT `t`.`tname`, `a`.`act_date`, `a`.`act_time`, `a`.`name`, `p`.`placename`, `a`.`decription` ";
+			$sql .= "FROM `activitie` a ";
+			$sql .= "LEFT JOIN `user` u ON `a`.`ownerid` = `u`.`uid` ";
+			$sql .= "LEFT JOIN `place` p ON `a`.`place` = `p`.`pid` ";
+			$sql .= "LEFT JOIN `topic` t ON `a`.`topic` = `t`.`tid` ";
+			$sql .= "LEFT JOIN `group` g ON `a`.`group` = `g`.`gid` ";
+			$sql .= "WHERE `a`.`aid` = '$aid'";
+			$linkmysql->query($sql);
+
+			list($tname, $act_date, $act_time, $name, $placename, $decription) = mysql_fetch_array($linkmysql->listmysql);
+			
 			$linkmysql->close_mysql();
 
-			// 送出繳費單號至綠界科技系統
-			//$ibon_url = "ibon_echo.php";
-			$ibon_url = "http://ts.payonline.com.tw/new3in1_echo.php";
+			// 寄送繳費提醒信。
+			$mailinfo = array();
+			$mailinfo["realname"] = $member["realname"];
+			$mailinfo["act_name"] = $activitie['act_date'];
+			$mailinfo["act_date"] = $act_date;
+			$mailinfo["act_time"] = $act_time;
+			$mailinfo["act_place"] = $placename;
+			$mailinfo["ibon_code"] = $ibon_no;
+			$mailinfo["ibon_deadline"] = $ibonDeadline;
+			$mailinfo["iF_deadline"] = $iFDeadline;
 
-			$ch = curl_init();
+			$iFMail->PayDeadlineMailA($member["email"], $member["realname"], $mailinfo);
 
-			curl_setopt($ch, CURLOPT_URL, $ibon_url);
-			curl_setopt($ch, CURLOPT_POST, 7);
+			$phone = explode("-", $member["tel"]);
+			$member["tel"] = $phone[0].$phone[1].$phone[2];
 
-			$post_var  = "client="  . urlencode($config["store_no"]);
-			$post_var .= "&amount=" . urlencode($fees);
-			$post_var .= "&od_sob=" . urlencode($ibon_code);
-			$post_var .= "&Store=" . urlencode('famiport');	//暫時先用全家為主
-			$post_var .= "&h_back=" . urlencode('0');					
-			$post_var .= "&roturl=" . urlencode($config["base_url"] .'ibon_echo.php');
-			$post_var .= "&okurl=" . urlencode($config["base_url"] .'ibon_ok.php');
+			// 寄送繳費通知簡訊
+			$iFSMS->iBonNotify($member["tel"], $mailinfo["ibon_code"], $ibonDeadline2);
 
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $post_var);
-			//curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);	//php safe mode can't active
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_HEADER, 1);
-
-			$result = curl_exec ($ch);
-
-			list($header, $data) = explode("\n\n", $result, 2);
-			$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			curl_close($ch);
-
-			if ($http_code == 301 || $http_code == 302)
-			{
-				$matches = array();
-				preg_match('/Location:(.*?)\n/', $header, $matches);
-				$url = trim($matches[1]);
-
-				// 顯示 iBon code 於畫面上
-				header("Location: http://ts.payonline.com.tw/" . $url);
-			}
-			else
-			{
-				$tool->ShowMsgPage("連結超商代收後台失敗，請洽系統管理員。");
-			}
+			$_SESSION["ibon_code"] = $od_sob;
+			$tool->URL("index.php?act=activitiesjoin&sel=iboncode");
 		}
 		else if ($charge_method == "coupon")
 		{
@@ -557,11 +611,11 @@
 				{
 					$charge_status = 'Paid';
 					$give_id = 1;
-
+					
 					if ($data["use_coupon"] = "YES")
 					{
 						// 已繳費者，需給予活動抵用卷
-						$reason = "會員取消參加活動「". $data["name"]. "」，使用iBon繳費完成的會員給予活動優惠卷。";
+						$reason = "會員取消參加活動「". $data["name"]. "」，使用超商繳費完成的會員給予活動優惠卷。";
 
 						$sql  = "INSERT INTO `coupon` ( `coupon_id`, `coupon_type`, `uid`, `give_id`, ";
 						$sql .= "`reason`, `give_time`, `use_time`, `use_act` ) ";
@@ -572,7 +626,7 @@
 				}
 				
 				$sql = sprintf("DELETE FROM `charge_ibon` WHERE `charge_ibon_id` = '%s' LIMIT 1;", $data["charge_id"]);
-				$linkmysql->query($sql);				
+				$linkmysql->query($sql);
 			}
 			else if ($data["charge_type"] == "coupon")
 			{
@@ -651,14 +705,9 @@
 
 			if ($data["charge_type"] == "iBon")
 			{
-				// 使用iBon繳費
-				$sql = sprintf("SELECT `pay_time` FROM `charge_ibon` WHERE `charge_ibon_id` = '%s'", $data["charge_id"]);
-				$linkmysql->query($sql);
-				list($pay_time) = mysql_fetch_array($linkmysql->listmysql);
-
-				if (!empty($pay_time))
+				if ($charge_status == 'Paid')				
 				{
-					if ($data["use_coupon"] = "YES")
+					if ($data["use_coupon"] == "YES")
 					{
 						$linkmysql->close_mysql();
 						$message  = "已經取消報名活動，您已繳費完成，系統將退回一張活動優惠卷。";

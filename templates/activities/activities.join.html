@@ -116,6 +116,7 @@
 		if (confirm(str)) 
 		{		
 			return true;
+			//this.submit();
 		} 
 		else 
 		{
@@ -383,7 +384,7 @@
 	</td>
 </tr>
 <tr>
-	<td align="center">繳費方式</td>
+	<td align="center"><img src="./images/payment.gif" alt="繳費方式" border="0"/></td>
 	<td>
 		<font color="gray">請選擇您的繳費方式</font>
 		<br/>
@@ -506,10 +507,11 @@
 
 <br/>
 <center>
-	<input type="submit" name="Submit" value="我已了解注意事項，登記報名此活動" class=button>
-	<input type="reset" name="reset" value="我點錯了，不報名此活動" class=button onClick="alert('不報名活動'); location.href='index.php?act=activitielist';">
+
+	<input type="image" src="images/join.gif" border="0" />
+	&nbsp;
+	&nbsp;
+	<image src="images/nojoin.gif" border="0" onClick="alert('不報名活動'); location.href='index.php?act=activitielist';" />
+	
 </center>
 </form>
-
-
-

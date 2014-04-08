@@ -673,7 +673,7 @@
 						if (!empty($pay_time))
 						{
 							// 已繳費者，需給予活動抵用卷
-							$reason = "會員取消參加活動「". $data["name"]. "」，使用iBon繳費完成的會員給予活動優惠卷。";
+							$reason = "會員取消參加活動「". $data["name"]. "」，使用FamiPort繳費完成的會員給予活動優惠卷。";
 
 							$sql  = "INSERT INTO `coupon` ( `coupon_id`, `coupon_type`, `uid`, `give_id`, ";
 							$sql .= "`reason`, `give_time`, `use_time`, `use_act` ) ";

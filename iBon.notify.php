@@ -71,8 +71,8 @@
 				if (preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})/" , $process_time, $matche))
 				{	
 					// iBon繳費期限
-					$days = ($matche[4] + 3 >= 24) ? 6 : 7;
-					$ibonDeadline = date("Y-m-d H:i:s", mktime($matche[4]+3, $matche[5]+3, 0, $matche[2], $matche[3]+$days, $matche[1]));
+					$days = 7;
+					$ibonDeadline = date("Y-m-d H:i:s", mktime($matche[4], $matche[5], 0, $matche[2], $matche[3]+$days, $matche[1]));
 					
 					// 繳費期限前72小時
 					$ibonDeadline2 = date("Y-m-d", mktime(0, 0, 0, $matche[2], $matche[3]+4, $matche[1]));

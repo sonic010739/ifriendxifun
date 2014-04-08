@@ -27,7 +27,7 @@
 		// Open			開放報名
 		// ApplyCancel  待取消
 		// Proceed		待進行
-		// Close		過去舉辦			
+		// Close		過去舉辦
 		// Cancel		已取消
 					
 		$type = !isset($_GET['type']) ? "Open" : $_GET['type'];

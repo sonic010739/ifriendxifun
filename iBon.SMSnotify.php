@@ -65,7 +65,7 @@
 				if (preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})/" , $process_time, $matche))
 				{
 					// iBonÃº¶O´Á­­
-					$days = ($matche[4] + 3 >= 24) ? 6 : 7;
+					$days = 7;
 					$ibonDeadline = date("Y-m-d", mktime(0, 0, 0, $matche[2], $matche[3]+$days, $matche[1]));
 
 					if (date("Y-m-d") > $ibonDeadline)

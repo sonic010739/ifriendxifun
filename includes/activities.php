@@ -214,7 +214,8 @@
 				{
 					if ($data["status"] == "OPEN")
 					{
-						$data["option"] = "<font color=\"green\">立即登記報名</font>";
+						//$data["option"] = "<font color=\"green\">立即登記報名</font>";
+						$data["option"] = "<img src=\"images/join.gif\" alt=\"立即登記報名\" border=\"0\"/>";
 
 						if (date("Y-m-d") > $join_deadline)
 						{
@@ -255,7 +256,8 @@
 					}
 					else if ($data["status"] == "APPLY_CANCEL")
 					{
-						$data["option"] = "<font color=\"green\">立即登記報名</font>";
+						// $data["option"] = "<font color=\"green\">立即登記報名</font>";
+						$data["option"] = "<img src=\"images/join.gif\" alt=\"立即登記報名\" />";
 					}
 					else if ($data["status"] == "CANCEL")
 					{
@@ -721,17 +723,17 @@
 							
 							list($act_date) = mysql_fetch_array($linkmysql->listmysql);
 			
-							$days = ($matche[4] + 3 >= 24) ? 6 : 7;
+							$days = 7;
 							$tmp = explode("-", $act_date);	
 							
 							// 計算繳費期限
-							if (mktime(23, 59, 59, $tmp[1], $tmp[2]-1, $tmp[0]) < mktime($matche[4]+3, $matche[5]+3, 0, $matche[2], $matche[3]+$days, $matche[1]))
+							if (mktime(23, 59, 59, $tmp[1], $tmp[2]-1, $tmp[0]) < mktime($matche[4], $matche[5], 0, $matche[2], $matche[3]+$days, $matche[1]))
 							{				
 								$ibondata["ibon_deadline"] = date("Y-m-d H:i:s", mktime(23, 59, 59, $tmp[1], $tmp[2]-1, $tmp[0]));
 							}
 							else
 							{
-								$ibondata["ibon_deadline"] = date("Y-m-d H:i:s", mktime($matche[4]+3, $matche[5]+3, 0, $matche[2], $matche[3]+$days, $matche[1]));
+								$ibondata["ibon_deadline"] = date("Y-m-d H:i:s", mktime($matche[4], $matche[5], 0, $matche[2], $matche[3]+$days, $matche[1]));
 							}
 						}
 
@@ -743,6 +745,8 @@
 						$myjoindata["charge"] .= "繳費期限 : " . $ibondata["ibon_deadline"] . "<br/>";
 						$myjoindata["charge"] .= "繳費時間 : " . $ibondata["pay_time"] . "";
 					}
+					
+					$myjoindata["charge_type"] = "FamiPort";
 				}
 				else if ($myjoindata["charge_type"] == "coupon")
 				{
@@ -799,6 +803,7 @@
 					{
 						$joindata["charge"] = "<font color=\"red\">未繳費</font>";
 					}
+					$joindata["charge_type"] = "FamiPort";
 				}
 				else  if ($joindata["charge_type"] == "coupon")
 				{
@@ -806,6 +811,7 @@
 					$joindata["charge"] = sprintf("<a href=\"index.php?act=coupon&amp;sel=detail&amp;id=%d\">%s</a>", $joindata["charge_id"], $joindata["charge"]);
 				}
 
+				
 				// 使用者名稱連結
 				$joindata["username"] = $tool->ShowMemberLink( $joindata["uid"], $joindata["username"]);
 				
