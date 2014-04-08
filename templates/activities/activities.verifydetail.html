@@ -1,0 +1,82 @@
+<table width="600" align="center" border="1" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">申請者名稱</th>
+</tr>
+<tr>
+	<td align="center" width="150">申請者名稱</td>
+	<td><{ $verifydata.username }></td>
+</tr>
+<tr>
+	<td align="center">活動名稱</td>
+	<td><{ $verifydata.name }></td>
+</tr>
+<tr>
+	<td align="center">繳費方式</td>
+	<td><{ $verifydata.charge_type }></td>
+</tr>
+<tr>
+	<td align="center">繳費狀態</td>
+	<td><{ $verifydata.charge_status }></td>
+</tr>
+<tr>
+	<td align="center">取消類型</td>
+	<td><{ $verifydata.type }></td>
+</tr>
+<tr>
+	<td align="center">申請時間</td>
+	<td><{ $verifydata.apply_time }></td>
+</tr>
+<tr>
+	<td align="center">申請原因</td>
+	<td><{ $verifydata.reason }></td>
+</tr>
+
+<{ if $verify == 1}>
+<form name="usercancel" method="post" action="./activities.join.act.php?act=verify">
+<tr>
+	<td align="center">審查結果</td>
+	<td>		
+			<input name="id" type="hidden" value="<{ $verifydata.id }>">
+			<input type="radio" name="result" value="Pass" 	 id="abc"><label for="abc">通過</label>
+			<input type="radio" name="result" value="Refuse" id="def"><label for="def">拒絕</label>
+	</td>
+</tr>
+<tr>
+	<td align="center">評論</td>
+	<td>
+		<textarea name="comment" cols="52" rows="7" class="input">這在這裡留下審查的理由</textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="send" value="確定送出" class=button>
+		<input type="reset" name="reset" value="重新填寫" class=button>
+	</td>
+</tr>
+</table>
+</form>
+
+
+<{ else }>
+
+
+<tr>
+	<td align="center">審查結果</td>
+	<td><{ $verifydata.result }></td>
+</tr>
+<tr>
+	<td align="center">評論</td>
+	<td><{ $verifydata.comment }></td>
+</tr>
+<tr>
+	<td align="center">審查者</td>
+	<td><{ $verifydata.verify_name }></td>
+</tr>
+<tr>
+	<td align="center">審查時間</td>
+	<td><{ $verifydata.verify_time}></td>
+</tr>
+</table>
+
+
+<{ /if}>

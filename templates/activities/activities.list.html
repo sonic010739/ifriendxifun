@@ -1,0 +1,106 @@
+<table width="600" align="center" border="0">
+	<tr>
+		<td align="left"><{ $options }></td>	
+	</tr>
+</table>
+<br/>
+<{ if $filter.visable == 1 }>
+	<form method="post" name="filterform" action="./activities.act.php?act=search">
+	<table align="center" width="600" border="0">
+	<tr>
+		<td align="left">
+			<fieldset>
+				<legend>搜尋選項</legend>
+				活動主題&nbsp;
+				<select name="topic">			
+					<{ $filter.topic }>
+				</select>		
+				&nbsp;
+				
+				活動區域&nbsp;
+				<{ html_options name=city options=$filter.citys selected=$sel_city }>		
+				&nbsp;
+				
+				<{ if $filter.EOoption == 1 }>
+				EO&nbsp;
+				<select name="EO">			
+					<{ $filter.EO }>
+				</select>
+				<{ /if}>
+				
+				<br/>
+				
+				活動日期&nbsp;
+				<select name="act_year_lb">
+					<{ $filter.act_year_lb }>
+				</select>
+				年
+				<select name="act_month_lb">
+					<{ $filter.act_month_lb }>
+				</select>
+				月
+				<select name="act_day_lb">
+					<{ $filter.act_day_lb }>
+				</select>
+				日
+				至
+				<select name="act_year_ub">
+					<{ $filter.act_year_ub }>
+				</select>
+				年
+				<select name="act_month_ub">
+					<{ $filter.act_month_ub }>
+				</select>
+				月
+				<select name="act_day_ub">
+					<{ $filter.act_day_ub }>
+				</select>
+				日
+				&nbsp;
+				<input type="submit" name="Submit" value="搜尋" class="button">
+			</fieldset>
+		</td>		
+	</tr>
+	</table>
+	</form>
+<{ /if }>
+
+<{ if $list_count != 0 }>
+<!--
+<table width="600" align="center" border="0">
+	<tr>
+		<th align="left"><{ $list_title }></th>	
+	</tr>
+</table>
+-->
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr>
+		<th align="center" width="70">活動主題</th>
+		<th align="center" width="90">活動日期</th>
+		<th align="center" width="210">活動名稱</th>			
+		<th align="center" width="70">活動地點</th>
+		<th align="center" width="100">活動EO</th>
+		<th align="center" width="60">活動狀態</th>
+	</tr>
+	<{section name=key loop=$activitielist}>	
+	<tr>
+		<td align="center"  ><{ $activitielist[key].tname }></td>
+		<td align="center"><{ $activitielist[key].act_date }></td>
+		<td align="left"  ><{ $activitielist[key].name }></td>				
+		<td align="center"  ><{ $activitielist[key].placecity }></td>
+		<td align="left"  ><{ $activitielist[key].username }></td>
+		<td align="center"><{ $activitielist[key].status }></td>
+	</tr>
+	<{/section}>
+	<tr bgcolor="#DDDDDD">
+		<td align="right" colspan="6"><font color="gray">點選活動名稱進入活動報名頁面</font></td>	
+	</tr>
+</table>
+
+	<{ include file="page_foot.html" }>
+<{else}>
+	<center>
+		無任何活動資料
+	</center>
+<{/if}>

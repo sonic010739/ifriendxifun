@@ -1,0 +1,61 @@
+<center>
+<b>
+	配對對象問卷填寫
+</b>
+</center>
+
+<form name="questionary" method="post" action="./activities.join.act.php?act=questionary">
+<input type="hidden" name="aid" value="<{ $aid }>">
+<input type="hidden" name="member_count" value="<{ $member_count }>">
+<input type="hidden" name="match_count" value="<{ $match_count }>">
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr>
+		<th width="80" align="center">編號</th>
+		<th width="100" align="center">帳號名稱</th>
+		<th width="40" align="center">出席</th>
+		<th width="380" align="center">選擇的編號</th>
+	</tr>
+
+	<{section name=key loop=$memberdata}>
+	<tr>
+		<td align="center">
+			<{ $memberdata[key].sex_count }>
+		</td>
+		<td align="left"  >
+			<{ $memberdata[key].username }>
+		</td>
+		<td align="center">
+			<input type="checkbox" name="attendance[<{ $memberdata[key].no }>]" value="<{ $memberdata[key].no }>" <{ $memberdata[key].attendance }>>
+		</td>
+		<td align="left" style="line-height: 25px;">
+			<{section name=foo start=0 loop=$match_count step=1}>
+
+				&nbsp;<{ $smarty.section.foo.index+1 }>.
+
+				<select name="option[<{ $memberdata[key].no }>][<{ $smarty.section.foo.index }>]">
+					<{ $memberdata[key].option1[$smarty.section.foo.index] }>
+				</select>
+
+				<{ if ($smarty.section.foo.index+1) % 3 == 0}>
+					<br/>
+				<{ /if }>
+			<{/section}>
+		</td>
+	</tr>
+	<{/section}>
+
+	<tr>
+		<td align="right" colspan="4">
+			*每人最多可選擇<{ $match_count }>個會員，不足<{ $match_count }>個請保持空白
+		</td>
+	</tr>
+
+	<tr>
+		<td align="center" colspan="4">
+			<input type="submit" name="send" value="確定送出" class="button">
+			<input type="reset" name="reset" value="重新選擇" class="button">
+		</td>
+	</tr>
+</table>
+</form>

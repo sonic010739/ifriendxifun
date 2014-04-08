@@ -1,0 +1,28 @@
+<center>
+	<b>主題資料管理</b>
+</center>
+
+<br/>
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th width="500"  align="center">主題名稱</th>
+		<th width="100" align="center">功能選項</th>
+	</tr>
+	
+	<{section name=key loop=$topiclist}>	
+	<tr>
+		<td align="left"><{$topiclist[key].1}></td>
+		<td align="center">
+			<{$topiclist[key].2}>
+			<{$topiclist[key].3}>
+		</td>
+	</tr>
+	<{/section}>
+	
+	<tr bgcolor="#CCCCCC">
+		<td colspan="4" align=right><a href="./index.php?act=topic&amp;sel=add">新增主題資料</a></td>
+	</tr>	
+</table>
+
+<{include file="page_foot.html"}>

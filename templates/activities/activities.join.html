@@ -1,0 +1,515 @@
+<table width="600" align="center" border="1" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th align="center">報名注意事項</th>
+</tr>
+<tr>
+	<td>
+		<ol>
+			<li>主辦單位有取消活動的權利，被EO取消或會員自行取消報名之退費規定請見各活動詳情，或洽詢各活動EO。</li>
+			<li>若該活動為<b>適用優惠方案</b>且<b>可使用優惠卷</b>，完成報名繳費的會員，活動被EO取消或自行取消報名後系統將於活動關閉後統一給予優惠卷，惟欲取消參加之會員需在期限前提出。</li>
+			<li>優惠卷無使用期限之限制。</li>
+		</ol>
+	</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+<script type="text/javascript" src="javascript/prototypes.js"></script>
+<script type="text/javascript">
+	var initial_charge = <{ $activitiedata.charge }>;	
+	var link_discount = 0;
+	var email_discount = 0;
+	
+	function checkjoinact(joinact)
+	{	
+		if (!joinact.charge_methed[0].checked && !joinact.charge_methed[1].checked)
+		{
+			alert("未選擇繳費方式");
+			return false;
+		}		
+		
+		if (joinact.charge_methed[1].checked)
+		{
+			if (joinact.coupon_id.value == -1)
+			{
+				alert("未選擇使用的優惠卷");
+				joinact.coupon_id.focus();
+				return false;
+			}
+		}
+				
+<{ if $activitiedata.use_discount == "YES" }>
+		
+		if (document.joinact.usediscount.checked == true)
+		{
+			if (document.joinact.username.value != "" && document.joinact.usernamecheck.value != "OK")
+			{
+				alert("專屬連結未檢查\n");
+				joinact.username.focus();
+				return false;
+			}
+			
+			if (document.joinact.emailcheck.value != "OK")
+			{
+				alert("電子信箱未檢查!\n若未輸入任何電子信箱請直接點選檢查");
+				return false;
+			}
+		}
+		
+<{ /if }>
+
+		if (joinact.password.value == "")
+		{
+			alert("請提供您的會員密碼");
+			joinact.password.focus();
+			return false;
+		}
+		else if (joinact.password.value.length < 6 || joinact.password.value.length > 12)
+		{
+			alert("密碼最少6字元，最多12字元喔");
+			joinact.password.focus();
+			return false;
+		}
+		
+		joinact.Submit.disabled = true;
+		
+		str  = "";
+		
+		if (joinact.charge_methed[0].checked)
+		{
+			str  = "活動名稱: <{ $activitiedata.name }> \n";
+			str += "活動時間: <{ $activitiedata.act_date }> <{ $activitiedata.act_time }>\n";			
+			str += "\n";
+			str += "繳費類型: famiport \n";
+			
+<{ if $activitiedata.use_discount == "YES" }>
+
+			if (document.joinact.usediscount.checked == true)
+			{
+				str += "\n";
+				str += "優惠方案: 使用\n";
+				str += "專屬連結: 折扣 " + link_discount + "元\n";
+				str += "電子信箱: 折扣 " + email_discount + "元\n";
+			}
+			else if (document.joinact.usediscount.checked == false)
+			{
+				str += "\n";
+				str += "優惠方案: 不使用\n";
+			}			
+<{ /if }>
+			str += "\n";
+			str += "繳費金額: " + document.getElementById("charge").innerHTML + "元 \n\n";
+			str += "確定要登記報名此活動? \n";
+		}
+		else if (joinact.charge_methed[1].checked)
+		{
+			str  = "活動名稱: <{ $activitiedata.name }> \n";
+			str += "活動時間: <{ $activitiedata.act_date }> <{ $activitiedata.act_time }>\n";
+			str += "繳費類型: 活動優惠卷 \n\n";
+			str += "確定要登記報名此活動? \n";
+		}
+		
+
+		
+		if (confirm(str)) 
+		{		
+			return true;
+		} 
+		else 
+		{
+			joinact.Submit.disabled = false;
+			return false;
+		}
+	}
+	
+<{ if $activitiedata.use_discount == "YES" }>	
+
+	function ShowHideDetail()
+	{
+		var codeobj = document.getElementById('discount');
+		
+		if (codeobj.style.display == "")
+		{
+			codeobj.style.display = "none";
+			document.joinact.usediscount.checked = false;
+			document.joinact.username.value = "";
+			
+			// 清除已填寫的emai and id
+			var grp_email = document.getElementsByName('email');
+			var grp_id = document.getElementsByName('id');	
+			
+			for (var i = 0; i < grp_email.length; i ++)
+			{
+				grp_email[i].value = "";
+				grp_id[i].value = "";
+			}
+			
+			link_discount = 0;
+			email_discount = 0;
+			calculate();
+		}
+		else
+		{
+			codeobj.style.display = "";
+			document.joinact.usediscount.checked = true;
+		}
+	}	
+
+	function CheckLink()
+	{
+		var obj = document.getElementById("link_result");
+		var link_obj = document.getElementById("link_discount");
+		
+		
+		var url = "activities.join.act.php?&act=checklink&username=" + document.joinact.username.value;		
+		var myXMLHttpRequest = false;
+		
+		if (window.XMLHttpRequest) {
+			myXMLHttpRequest = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			myXMLHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+		} else {
+			alert('您的瀏覽器不支援 AJAX');
+		}
+		
+		if (myXMLHttpRequest)
+		{			
+			myXMLHttpRequest.open("GET", url);
+			myXMLHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		
+			myXMLHttpRequest.onreadystatechange = function()
+			{	      
+				if (myXMLHttpRequest.readyState == 4 && myXMLHttpRequest.status == 200)
+				{	
+					if (myXMLHttpRequest.responseText == "OK")
+					{
+						obj.innerHTML = "專屬連結已確認，獲得優惠一百元";
+						document.joinact.usernamecheck.value = "OK";
+						link_discount = 100;
+					}
+					else if (myXMLHttpRequest.responseText == "Empty")
+					{
+						obj.innerHTML = "專屬連結未填寫";
+						document.joinact.usernamecheck.value = "OK";
+						link_discount = 0;
+					}
+					else 
+					{
+						obj.innerHTML = myXMLHttpRequest.responseText;
+						link_discount = 0;
+					}
+					
+					link_obj.innerHTML = link_discount;
+					calculate();
+				}
+			}	
+			
+			obj.innerHTML = "<img src=\"./images/loading.gif\">";
+			document.joinact.usernamecheck.value = "";
+			link_discount = 0;
+			myXMLHttpRequest.send(url);			
+		}
+	}
+	
+	function CheckEmail()
+	{	
+		// 取得所有名為 email 的文字欄位		
+		var grp_email = document.getElementsByName('email');
+		var grp_id = document.getElementsByName('id');
+		var chk_email = new Array();
+		var email_obj = document.getElementById("email_discount");
+		
+		var count = 0;		
+		  
+		for (var i = 0; i < grp_email.length; i ++)
+		{
+			chk_email.push(grp_email[i].value.trim());
+		}
+				
+		for (var i = 0; i < chk_email.length; i ++) 
+		{
+			if ('' != chk_email[i]) 
+			{
+				regularExpression = /^[^\s]+@[^\s]+\.[^\s]{2,3}$/;
+								
+				if (!regularExpression.test(chk_email[i])) 
+				{
+					alert("請填正確格式的電子信箱");
+					grp_email[i].focus();
+					return false;	
+				}
+				
+				// 利用 slice 函式比對是否有重複值
+				if (i > 0 && chk_email.slice(0, i).exists(chk_email[i])) 
+				{
+					alert('請勿重覆輸入相同的值！');
+					grp_email[i].focus();
+					return false;
+				}
+				
+				count++;
+			}
+		}		
+						
+		var obj = document.getElementById("email_result");
+		var url = "activities.join.act.php?&act=checkemail";
+		var xhr = false;
+		
+		url += "&email1=" + grp_email[0].value;
+		url += "&email2=" + grp_email[1].value;
+		url += "&email3=" + grp_email[2].value;
+		url += "&email4=" + grp_email[3].value;
+		url += "&email5=" + grp_email[4].value;
+		url += "&email6=" + grp_email[5].value;
+		url += "&email7=" + grp_email[6].value;
+		url += "&email8=" + grp_email[7].value;
+		
+		if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		} else {
+			alert('您的瀏覽器不支援 AJAX');
+		}
+		
+		if (xhr)
+		{		   			
+			xhr.open("GET", url);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		
+			xhr.onreadystatechange = function()
+			{	      								
+				if (xhr.readyState == 4 && xhr.status == 200)
+				{	
+					if (xhr.responseText == "OK")
+					{
+						if (count <3) {
+							email_discount = 0;
+						} else if (count >=3 && count <8) {
+							email_discount = 50;
+						} else if (count == 8){
+							email_discount = 100;
+						}						
+						
+						obj.innerHTML = xhr.responseText;
+						
+						document.joinact.email1.value = grp_email[0].value;
+						document.joinact.email2.value = grp_email[1].value;
+						document.joinact.email3.value = grp_email[2].value;
+						document.joinact.email4.value = grp_email[3].value;
+						document.joinact.email5.value = grp_email[4].value;
+						document.joinact.email6.value = grp_email[5].value;
+						document.joinact.email7.value = grp_email[6].value;
+						document.joinact.email8.value = grp_email[7].value;
+						document.joinact.emailcheck.value = "OK";
+						
+						document.joinact.id1.value = grp_id[0].value;
+						document.joinact.id2.value = grp_id[1].value;
+						document.joinact.id3.value = grp_id[2].value;
+						document.joinact.id4.value = grp_id[3].value;
+						document.joinact.id5.value = grp_id[4].value;
+						document.joinact.id6.value = grp_id[5].value;
+						document.joinact.id7.value = grp_id[6].value;
+						document.joinact.id8.value = grp_id[7].value;
+					}
+					else
+					{
+						obj.innerHTML = xhr.responseText;
+					}
+					
+					email_obj.innerHTML = email_discount;
+					calculate();
+				}
+			}	
+			obj.innerHTML = "<img src=\"./images/loading.gif\">";
+			document.joinact.emailcheck.value = "";
+			email_discount = 0;
+			xhr.send(url);			
+		}
+	}
+
+	function calculate()
+	{
+		var charge = initial_charge - link_discount - email_discount;
+		var charge_obj = document.getElementById("charge"); 
+		charge_obj.innerHTML = charge;
+	}
+	
+	function setEmailcheck()
+	{
+		document.joinact.emailcheck.value = "";
+		document.getElementById("email_result").innerHTML = "";
+	}
+		
+<{ /if }>
+</script>
+
+<form name="joinact" onSubmit="return checkjoinact(this);" method="post" action="./activities.join.act.php?act=join">
+<input name="aid" type="hidden" value="<{ $activitiedata.0 }>">
+<input type="hidden" name="usernamecheck" class="input">
+<input type="hidden" name="emailcheck" class="input">
+
+<table width="600" align="center" border="1" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th align="center" colspan="2">活動資訊概要</th>
+</tr>
+<tr>
+	<td align="center" width="150">活動名稱</td>
+	<td><{ $activitiedata.name }></td>
+</tr>
+<tr>
+	<td align="center">活動日期</td>
+	<td><{ $activitiedata.act_date }></td>
+</tr>
+<tr>
+	<td align="center">活動時間</td>
+	<td><{ $activitiedata.act_time }></td>
+</tr>
+<tr>
+	<td align="center">活動場地</td>
+	<td>
+		<b><{ $activitiedata.placename }></b>&nbsp;&nbsp;
+		<a href="./index.php?act=place&amp;sel=detail&amp;pid=<{ $activitiedata.place }>" target="_blank">詳情</a>
+	</td>
+</tr>
+<tr>
+	<td align="center">
+		取消報名活動期限
+	</td>
+	<td>
+		<{ $activitiedata.deadline }>
+	</td>
+</tr>
+<tr>
+	<td align="center">繳費方式</td>
+	<td>
+		<font color="gray">請選擇您的繳費方式</font>
+		<br/>
+		<input type="radio" name="charge_methed" value="iBon">
+		使用famiport繳費
+		<{ if $activitiedata.use_discount == "YES" }>
+			<input type="checkbox" name="usediscount" value="YES" onclick="ShowHideDetail();">
+			
+			<font color="blue">我要加入Turn Our LiFe On計畫</font>
+			
+			<div id="discount" style='display: none'>
+				<br/>				
+				<a href="http://www.wretch.cc/blog/ififriend/12287533" target="_blank">
+					<font color="blue">&lt;&lt;Turn Our LiFe On 計畫內容&gt;&gt;</font>
+				</a>
+				
+				<br/>
+				<br/>
+				
+				在下列表格中將此活動推薦給您的好朋友<br/>
+				Step 1: 填入朋友的專屬連結立即享有100元優惠<br/>
+				
+				<br/>
+				-&nbsp;推薦我此活動朋友的專屬連結&nbsp;- <br/>
+				<{ $base_url}>index.php?id=<input type="text" name="username" style="width: 80px" class="input" onChange="CheckLink();"> 
+				<br/>
+				<font color="gray">專屬連結優惠檢查結果</font>
+				<span id="link_result"></span>
+				<br/>
+				<br/>
+				
+				Step 2:<br/>
+				&nbsp;&nbsp;分享給3位朋友立即享有50元優惠<br/>
+				&nbsp;&nbsp;分享給8位朋友立即享有100元優惠<br/>
+				<br/>
+				-&nbsp;推薦給以下好友&nbsp;-
+				<br/>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Name</b>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>E-mail</b>
+				<br/>
+				1.
+				<input type="text" name="id" 	size="12" class="input" onChange="setEmailcheck();">
+				<input type="text" name="email" size="30" class="input" onChange="setEmailcheck();"><br/>
+				2.
+				<input type="text" name="id" 	size="12" class="input" onChange="setEmailcheck();">
+				<input type="text" name="email" size="30" class="input" onChange="setEmailcheck();"><br/>
+				3.
+				<input type="text" name="id" 	size="12" class="input" onChange="setEmailcheck();">
+				<input type="text" name="email" size="30" class="input" onChange="setEmailcheck();"><br/>
+				4.
+				<input type="text" name="id" 	size="12" class="input" onChange="setEmailcheck();">
+				<input type="text" name="email" size="30" class="input" onChange="setEmailcheck();"><br/>
+				5.
+				<input type="text" name="id" 	size="12" class="input" onChange="setEmailcheck();">
+				<input type="text" name="email" size="30" class="input" onChange="setEmailcheck();"><br/>
+				6.
+				<input type="text" name="id" 	size="12" class="input" onChange="setEmailcheck();">
+				<input type="text" name="email" size="30" class="input" onChange="setEmailcheck();"><br/>
+				7.
+				<input type="text" name="id" 	size="12" class="input" onChange="setEmailcheck();">
+				<input type="text" name="email" size="30" class="input" onChange="setEmailcheck();"><br/>
+				8.
+				<input type="text" name="id" 	size="12" class="input" onChange="setEmailcheck();">
+				<input type="text" name="email" size="30" class="input" onChange="setEmailcheck();"><br/>
+				
+				<input type="hidden" name="email1" class="input">
+				<input type="hidden" name="email2" class="input">
+				<input type="hidden" name="email3" class="input">
+				<input type="hidden" name="email4" class="input">
+				<input type="hidden" name="email5" class="input">
+				<input type="hidden" name="email6" class="input">
+				<input type="hidden" name="email7" class="input">
+				<input type="hidden" name="email8" class="input">
+						
+				<input type="hidden" name="id1" class="input">
+				<input type="hidden" name="id2" class="input">
+				<input type="hidden" name="id3" class="input">
+				<input type="hidden" name="id4" class="input">
+				<input type="hidden" name="id5" class="input">
+				<input type="hidden" name="id6" class="input">
+				<input type="hidden" name="id7" class="input">
+				<input type="hidden" name="id8" class="input">
+				
+				<font color="gray">電子信箱不可重複，且不可與之前報名活動輸入的重複，<br/>輸入完成請點選檢查</font>
+				<a href="javascript://" onClick="CheckEmail();">檢查</a>
+				<span id="email_result" style="color: green"></span>
+				<br/>
+				<br/>
+				Step 1 獲得專屬連結折扣:<span id="link_discount">0</span>元!<br/>
+				Step 2 填寫電子信箱折扣:<span id="email_discount">0</span>元!<br/>
+				Step 3 要獲得免費的E-coupon優惠卷就等你的朋友們報名囉!!<br/>
+			</div>			
+		<{ /if}>
+		<br/>
+		繳費金額 新台幣<b><span id="charge"><{ $activitiedata.charge }></span></b>元
+		<br/>
+		<font color="red">*提醒您，iF繳費期限為 <{ $activitiedata.ibon_deadline }></font>
+		<br/>
+		<br/>
+		<input type="radio" name="charge_methed" value="coupon" <{ $activitiedata.coupon_disable }>>使用E-coupon優惠卷
+		<select name="coupon_id" <{ $activitiedata.coupon_disable }>>
+			<option value="-1">選擇要使用的優惠卷</option>
+			<{ $activitiedata.mycoupon }>
+		</select>
+		<br/>
+		<font color="red"><{ $activitiedata.coupon_info }>&nbsp;</font>
+		<br/>
+	</td>
+</tr>
+<tr>
+	<td align="center">輸入密碼</td>
+	<td>
+		<input name="password" type="password" size="12" maxlength="12" class="input" value="">
+		<br/>
+		<font color="gray">請輸入您的會員密碼</font>
+	</td>
+</tr>
+</table>
+
+<br/>
+<center>
+	<input type="submit" name="Submit" value="我已了解注意事項，登記報名此活動" class=button>
+	<input type="reset" name="reset" value="我點錯了，不報名此活動" class=button onClick="alert('不報名活動'); location.href='index.php?act=activitielist';">
+</center>
+</form>
+
+
+

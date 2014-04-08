@@ -1,0 +1,46 @@
+<table width="600" border="1" align="center" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">場地資料</th>
+</tr>
+<tr>
+	<td width="150" align="center">場地名稱</td>
+	<td><{$placedata.placename}></td>
+</tr>
+<tr>
+	<td align="center">場地電話</td>
+	<td><{$placedata.placetel}></td>
+</tr>
+<tr>
+	<td align="center">場地地址</td>
+	<td><{$placedata.placeaddress}></td>
+</tr>
+<tr>
+	<td align="center">區域</td>
+	<td><{$placedata.placecity}></td>
+</tr>
+<tr>
+	<td align="center">網頁連結</td>
+	<td><{$placedata.placelink}></td>
+</tr>
+<tr>
+	<td align="center">場地敘述</td>
+	<td><{$placedata.decription}></td>
+</tr>
+</table>
+<br/>
+
+<table width="500" border="0" align="center">
+<tr>
+	<th align="left">線上地圖</th>
+</tr>
+<tr>
+	<td align="center">
+		<iframe align="center" width="500" height="406" marginwidth="0" frameborder="0" scrolling="no" src="<{ $placedata.map }>"></iframe>
+	</td>
+</tr>
+</table>
+
+
+
+<br/>
+<br/>

@@ -1,0 +1,420 @@
+<script type="text/javascript">
+	function SetCheckBoxState(name,state)
+	{
+		var os = document.getElementsByName(name);
+		var n = os.length;
+		for(var i=0; i<n; i++)
+			os[i].checked = state;
+	}
+
+	function ShowHideDetail()
+	{
+		var membersearch = document.getElementById('membersearch');
+
+		if (membersearch.style.display == "") {
+			membersearch.style.display = "none";
+		} else {
+			membersearch.style.display = "";
+		}
+	}
+	
+	function CheckTel1()
+	{
+		if (document.search.tel1.value.length >= 4)
+			document.search.tel2.focus();
+	}
+
+	function CheckTel2()
+	{
+		if (document.search.tel2.value.length >= 3)
+			document.search.tel3.focus();
+	}
+
+</script>
+
+<table width="600" align="center" border="0">
+	<tr>
+		<td align="left"><{ $options }></td>
+	</tr>
+</table>
+
+<{ if $search.visable == 1}>
+
+<div id="membersearch">
+	<form method="post" name="search" action="./member.act.php?act=search">
+	<table width="600" align="center" border="1" class="datatable">
+		<tr bgcolor="#CCCCCC">
+			<th colspan="2" align="center">
+				會員篩選選項
+			</th>
+		</tr>
+		<tr>
+			<td width="100" align="center">
+				登入帳號
+			</td>
+			<td width="500" align="left">
+				<input type="text" name="username" size="20" class="input" value="<{ $key }>">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				真實姓名
+			</td>
+			<td align="left">
+				<input type="text" name="realname" class="input" value="<{ $key }>">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				暱稱
+			</td>
+			<td align="left">
+				<input type="text" name="nickname" class="input" value="<{ $key }>">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				性別
+			</td>
+			<td align="left">
+				<input type="radio" name="sex" value="不限" checked>不限
+				<input type="radio" name="sex" value="男">男
+				<input type="radio" name="sex" value="女">女
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				生日
+			</td>
+			<td align="left">
+				<select name="birth_year">
+					<{ $search.birth_year }>
+				</select>
+				年
+				<select name="birth_month">
+					<{ $search.birth_month }>
+				</select>
+				月
+				<select name="birth_day">
+					<{ $search.birth_day }>
+				</select>
+				日
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				年齡
+			</td>
+			<td align="left">
+				<input type="text" name="age_lb" size="3" class="input" value="<{ $key }>">
+				歲
+				至
+				<input type="text" name="age_ub" size="3" class="input" value="<{ $key }>">
+				歲
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				電子信箱
+			</td>
+			<td align="left">
+				<input type="text" name="email" size="30" class="input" value="<{ $key }>">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				MSN
+			</td>
+			<td align="left">
+				<input type="text" name="msn" size="30" class="input" value="<{ $key }>">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				手機號碼
+			</td>
+			<td align="left">
+				<input name="tel1" type="text" maxlength="4" size="4" class="input" onKeyUp="javascript:CheckTel1();">
+				-
+				<input name="tel2" type="text" maxlength="3" size="3" class="input" onKeyUp="javascript:CheckTel2();">
+				-
+				<input name="tel3" type="text" maxlength="3" size="3" class="input">			
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				星座
+			</td>
+			<td align="left">
+				<input name="constellation[]" type="checkbox" value="牡羊座">牡羊座
+				<input name="constellation[]" type="checkbox" value="金牛座">金牛座
+				<input name="constellation[]" type="checkbox" value="雙子座">雙子座
+				<input name="constellation[]" type="checkbox" value="巨蟹座">巨蟹座
+				<input name="constellation[]" type="checkbox" value="獅子座">獅子座
+				<input name="constellation[]" type="checkbox" value="處女座">處女座
+
+				<br/>
+
+				<input name="constellation[]" type="checkbox" value="天秤座">天秤座
+				<input name="constellation[]" type="checkbox" value="天蠍座">天蠍座
+				<input name="constellation[]" type="checkbox" value="射手座">射手座
+				<input name="constellation[]" type="checkbox" value="魔羯座">魔羯座
+				<input name="constellation[]" type="checkbox" value="水瓶座">水瓶座
+				<input name="constellation[]" type="checkbox" value="雙魚座">雙魚座
+
+				<a href="javascript://" OnClick="SetCheckBoxState('constellation[]', false);"><font color="blue">重選</font></a>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				教育程度
+			</td>
+			<td align="left">
+				<input name="education[]" type="checkbox" value="國小">國小
+				<input name="education[]" type="checkbox" value="國中">國中
+				<input name="education[]" type="checkbox" value="高中職">高中職
+				<input name="education[]" type="checkbox" value="四技二專">四技二專
+				<input name="education[]" type="checkbox" value="大學">大學
+				<input name="education[]" type="checkbox" value="碩士">碩士
+				<input name="education[]" type="checkbox" value="博士">博士
+
+				<a href="javascript://" OnClick="SetCheckBoxState('education[]', false);"><font color="blue">重選</font></a>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				最高學歷
+			</td>
+			<td align="left">
+				<input type="text" name="top_education" class="input" value="<{ $key }>">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				興趣
+			</td>
+			<td align="left">
+				<input name="interest[]" type="checkbox" value="閱讀寫作">閱讀寫作
+				<input name="interest[]" type="checkbox" value="逛街購物">逛街購物
+				<input name="interest[]" type="checkbox" value="電腦網路">電腦網路
+				<input name="interest[]" type="checkbox" value="聊天哈拉">聊天哈拉
+				<input name="interest[]" type="checkbox" value="音樂欣賞">音樂欣賞
+
+				<br/>
+
+				<input name="interest[]" type="checkbox" value="登山健行">登山健行
+				<input name="interest[]" type="checkbox" value="電玩對戰">電玩對戰
+				<input name="interest[]" type="checkbox" value="星象命理">星象命理
+				<input name="interest[]" type="checkbox" value="電視電影">電視電影
+				<input name="interest[]" type="checkbox" value="運動釣魚">運動釣魚
+
+				<br/>
+
+				<input name="interest[]" type="checkbox" value="下棋彈琴">下棋彈琴
+				<input name="interest[]" type="checkbox" value="塑身美容">塑身美容
+				<input name="interest[]" type="checkbox" value="動畫漫畫">動畫漫畫
+				<input name="interest[]" type="checkbox" value="美食烹調">美食烹調
+				<input name="interest[]" type="checkbox" value="語言學習">語言學習
+
+				<br/>
+
+				<input name="interest[]" type="checkbox" value="投資理財">投資理財
+				<input name="interest[]" type="checkbox" value="攝影繪畫">攝影繪畫
+				<input name="interest[]" type="checkbox" value="唱歌跳舞">唱歌跳舞
+				<input name="interest[]" type="checkbox" value="兜風閒晃">兜風閒晃
+				<input name="interest[]" type="checkbox" value="遊山玩水">遊山玩水
+
+				<br/>
+
+				<input name="interest[]" type="checkbox" value="吃喝玩樂">吃喝玩樂
+				<input name="interest[]" type="checkbox" value="古董收藏">古董收藏
+				<input name="interest[]" type="checkbox" value="發呆睡覺">發呆睡覺
+				<input name="interest[]" type="checkbox" value="占星算命">占星算命
+				<input name="interest[]" type="checkbox" value="園藝花卉">園藝花卉
+
+				<br/>
+
+				<input name="interest[]" type="checkbox" value="豢養寵物">豢養寵物
+				<input name="interest[]" type="checkbox" value="其他"    >其他興趣
+
+				<a href="javascript://" OnClick="SetCheckBoxState('interest[]', false);"><font color="blue">重選</font></a>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				職業類別
+			</td>
+			<td align="left">
+				<input name="career[]" type="checkbox" value="批發/零售/傳直銷業">批發/零售/傳直銷業
+				<input name="career[]" type="checkbox" value="文教業">文教業
+				<input name="career[]" type="checkbox" value="大眾傳播業">大眾傳播業
+				<input name="career[]" type="checkbox" value="休閒/旅遊/運動業">休閒/旅遊/運動業
+
+				<br/>
+
+				<input name="career[]" type="checkbox" value="軟體/半導體/電子/資訊業">軟體/半導體/電子/資訊業
+				<input name="career[]" type="checkbox" value="一般服務業">一般服務業
+				<input name="career[]" type="checkbox" value="一般製造業">一般製造業
+
+				<br/>
+
+				<input name="career[]" type="checkbox" value="農林漁牧/水電資源業">農林漁牧/水電資源業
+				<input name="career[]" type="checkbox" value="運輸物流及倉儲">運輸物流及倉儲
+				<input name="career[]" type="checkbox" value="社福/政治/政府/宗教業">社福/政治/政府/宗教業
+
+				<br/>
+
+				<input name="career[]" type="checkbox" value="金融/投顧/保險業">金融/投顧/保險業
+				<input name="career[]" type="checkbox" value="會計/法律/研發/顧問業">會計/法律/研發/顧問業
+				<input name="career[]" type="checkbox" value="建築營造及不動產相關業">建築營造及不動產相關業
+
+				<br/>
+
+				<input name="career[]" type="checkbox" value="醫療保健/環境衛生業">醫療保健/環境衛生業
+				<input name="career[]" type="checkbox" value="土石採取/礦業">土石採取/礦業
+				<input name="career[]" type="checkbox" value="家管">家管
+				<input name="career[]" type="checkbox" value="待業中">待業中
+				<input name="career[]" type="checkbox" value="其他">其他
+
+				<a href="javascript://" OnClick="SetCheckBoxState('career[]', false);"><font color="blue">重選</font></a>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				居住地點
+			</td>
+			<td align="left">
+				<input name="inhabit[]" type="checkbox" value="台北縣市" >台北縣市
+				<input name="inhabit[]" type="checkbox" value="高雄縣市" >高雄縣市
+				<input name="inhabit[]" type="checkbox" value="新竹縣市" >新竹縣市
+				<input name="inhabit[]" type="checkbox" value="台中縣市" >台中縣市
+				<input name="inhabit[]" type="checkbox" value="桃園縣" >桃園縣
+				<input name="inhabit[]" type="checkbox" value="基隆市" >基隆市
+				<input name="inhabit[]" type="checkbox" value="宜蘭縣" >宜蘭縣
+
+				<br />
+
+				<input name="inhabit[]" type="checkbox" value="台南縣市" >台南縣市
+				<input name="inhabit[]" type="checkbox" value="雲林縣" >雲林縣
+				<input name="inhabit[]" type="checkbox" value="嘉義縣市" >嘉義縣市
+				<input name="inhabit[]" type="checkbox" value="彰化縣" >彰化縣
+				<input name="inhabit[]" type="checkbox" value="苗栗縣" >苗栗縣
+				<input name="inhabit[]" type="checkbox" value="南投縣" >南投縣
+				<input name="inhabit[]" type="checkbox" value="屏東縣" >屏東縣
+
+				<br />
+
+				<input name="inhabit[]" type="checkbox" value="花蓮縣" >花蓮縣
+				<input name="inhabit[]" type="checkbox" value="台東縣" >台東縣
+				<input name="inhabit[]" type="checkbox" value="澎湖縣" >澎湖縣
+				<input name="inhabit[]" type="checkbox" value="金門縣" >金門縣
+				<input name="inhabit[]" type="checkbox" value="連江縣" >連江縣
+				<input name="inhabit[]" type="checkbox" value="其他"   >其他
+
+				<a href="javascript://" OnClick="SetCheckBoxState('inhabit[]', false);"><font color="blue">重選</font></a>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				驗證狀態
+			</td>
+			<td align="left">
+				<input type="radio" name="status" value="不限" checked>不限
+				<input type="radio" name="status" value="Validate">已驗證
+				<input type="radio" name="status" value="Invalidate">未驗證
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				會員權限
+			</td>
+			<td align="left">
+				<input name="authority[]" type="checkbox" value="User">使用者
+				<input name="authority[]" type="checkbox" value="EO">EO
+				<input name="authority[]" type="checkbox" value="Admin">管理員
+
+				<a href="javascript://" OnClick="SetCheckBoxState('authority[]', false);"><font color="blue">重選</font></a>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				帳號狀態
+			</td>
+			<td align="left">
+				<input type="radio" name="blackstatus" value="不限" checked>不限
+				<input type="radio" name="blackstatus" value="有案底">有案底
+				<input type="radio" name="blackstatus" value="停權中">停權中
+			</td>
+		</tr>
+		<tr bgcolor="#CCCCCC">
+			<td colspan="2" align="right">
+			全部選擇/全部不選擇/未填寫的項目表示不加入篩選的條件中
+			</td>
+		</tr>
+	</table>
+	<br />
+	<table width="600" align="center" border="0">
+		<tr>
+			<td align="center">
+				篩選功能
+			</td>
+			<td align="left">
+				<input type="radio" name="action" value="list" checked>列出篩選會員
+				<input type="radio" name="action" value="sendmail">寄送信件
+				<input type="radio" name="action" value="message">寄送簡訊
+				<input type="radio" name="action" value="exportemail">匯出Email
+				<input type="radio" name="action" value="exportphone">匯出手機號碼
+			</td>
+		</tr>
+	</table>
+
+	<br/>
+	<center>
+		<input class="button" type="submit" name="Submit" value="送出篩選選項">
+		<input class="button" type="reset" name="Submit" value="重新設定條件">
+	</center>
+	</form>
+</div>
+<{ /if }>
+
+<br/>
+
+<{ if $list_count != 0 }>
+<table width="600" border="1" align="center" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th align="center" width="100">帳號名稱</th>
+		<th align="center" width="100">姓名</th>
+		<th align="center" width="100">暱稱</th>
+		<th align="center" width="40">性別</th>
+		<th align="center" width="40">年齡</th>
+		<th align="center" width="80">權限</th>
+		<th align="center" width="140">功能選項</th>
+	</tr>
+
+	<{section name=key loop=$memberlist}>
+	<tr>
+		<td align="left"><{$memberlist[key].username}></td>
+		<td align="left"><{$memberlist[key].realname}></td>
+		<td align="left"><{$memberlist[key].nickname}></td>
+		<td align="center"><{$memberlist[key].sex}></td>
+		<td align="center"><{$memberlist[key].age}></td>
+		<td align="center"><{$memberlist[key].authority}></td>
+		<td align="center">
+			<{$memberlist[key].detail}>
+			<{$memberlist[key].del}>
+			<{$memberlist[key].status}>
+		</td>
+	</tr>
+	<{/section}>
+	<tr>
+		<td colspan="7" align="right" bgcolor="#CCCCCC">除非必要否則請勿使用刪除會員的功能。</td>
+	</tr>
+</table>
+
+	<{include file="page_foot.html"}>
+
+<{else}>
+	<center>
+		找不到相符的會員名單
+	</center>
+<{/if}>

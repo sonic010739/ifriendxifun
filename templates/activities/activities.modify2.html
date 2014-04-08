@@ -1,0 +1,352 @@
+<script src="lib/dynCalendar/browserSniffer.js" type="text/javascript" language="javascript"></script>
+<script src="lib/dynCalendar/dynCalendar.js" type="text/javascript" language="javascript"></script>
+
+<script type="text/javascript">
+	function calendarCallback(date, month, year)
+	{	
+		var select = new Date( year, month-1, date);
+		var select2 = new Date( year, month-1, date-2);
+		
+		if (String(month).length == 1) {
+			month = '0' + month;
+		}
+
+		if (String(date).length == 1) {
+			date = '0' + date;
+		}
+
+		date = year+ '-' + month + '-' + date;
+		document.actmodify.act_date.value = date;
+		
+		join_deadline  = '';
+		join_deadline += select2.getFullYear() + '-';
+
+		if (String((select2.getMonth() + 1)).length == 1)
+		{
+			join_deadline += '0' + (select2.getMonth() + 1) + '-';
+		}
+		else
+		{
+			join_deadline += (select2.getMonth() + 1) + '-';
+		}
+
+		if (String(select2.getDate()).length == 1)
+		{
+			join_deadline += '0' + select2.getDate();
+		}
+		else
+		{
+			join_deadline += select2.getDate();
+		}
+		
+		document.actmodify.join_deadline.value = join_deadline;
+	}
+
+	function calendarCallback2(date, month, year)
+	{
+		if (String(month).length == 1) {
+			month = '0' + month;
+		}
+
+		if (String(date).length == 1) {
+			date = '0' + date;
+		}
+
+		date = year+ '-' + month + '-' + date;
+		document.actmodify.join_deadline.value = date;
+	}
+</script>
+
+
+<!-- TinyMCE -->
+<script type="text/javascript" src="lib/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		// General options
+		mode : "textareas",
+		theme : "advanced",
+		language : "tw",
+		plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+
+		// Theme options
+		theme_advanced_buttons1 : "bold, italic, underline, strikethrough, |, forecolor, backcolor, |, justifyleft,justifycenter,justifyright,justifyfull,fontselect,fontsizeselect",
+		theme_advanced_buttons2 : "cut,copy,paste,|,search,replace, |, undo, redo, |, bullist, numlist, |, outdent, indent, blockquote, |, link,unlink,anchor,image,cleanup",
+		theme_advanced_buttons3 : "insertdate,inserttime,preview,|,hr, sub, sup, |, charmap, media, |, help,code,",
+		theme_advanced_buttons4 : "",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "none",
+		theme_advanced_resizing : true,
+
+		// Example content CSS (should be your site CSS)
+		content_css : "style.css",
+
+		// Drop lists for link/image/media/template dialogs
+		template_external_list_url : "lists/template_list.js",
+		external_link_list_url : "lists/link_list.js",
+		external_image_list_url : "lists/image_list.js",
+		media_external_list_url : "lists/media_list.js",
+
+		// Replace values for the template plugin
+		template_replace_values : {
+			username : "iF",
+			staffid : "sonic"
+		},
+
+		// use <br / > instead of use p
+		force_br_newlines : true,
+		force_p_newlines : false,
+
+		// turn off the convert_urls and relative_urls
+		convert_urls : false,
+		relative_urls : false
+	});
+</script>
+<!-- /TinyMCE -->
+
+<form name="actmodify" method="post" action="./activities.act.php?act=modify2">
+<input name="aid" type="hidden" size="10" class="input" value="<{ $activitiedata.aid }>">
+
+<table width="600" align="center" border="1" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">修改活動</th>
+</tr>
+<tr>
+	<td width="150" align="center">活動名稱</td>
+	<td>
+		<input name="name" type="text" size="55" class="input" value="<{ $activitiedata.name }>">
+		<br/>
+		<font color="gray">請填寫活動名稱</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動日期與時間</td>
+	<td>
+		<input type="text" name="act_date" size="20" class="input" value="<{ $activitiedata.act_date }>" readOnly>
+		<script language="JavaScript" type="text/javascript">
+			<!--
+			fooCalendar = new dynCalendar('fooCalendar', 'calendarCallback', 'lib/dynCalendar/images/');
+			//-->
+		</script>
+
+		&nbsp;&nbsp;
+		<select name="act_time_hour">
+			<{ $act_time_hour }>
+		</select>
+		:
+		<select name="act_time_minute">
+			<{ $act_time_minute }>
+		</select>
+
+		<br/>
+		<font color="gray">請選擇活動日期與活動開始時間</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>報名截止日期</td>
+	<td>
+		<input type="text" name="join_deadline" style="width: 100px" class="input" value="<{ $activitiedata.join_deadline }>" readOnly>
+		<script language="JavaScript" type="text/javascript">
+			<!--
+			fooCalendar2 = new dynCalendar('fooCalendar2', 'calendarCallback2', 'lib/dynCalendar/images/');
+			//-->
+		</script>
+		<br/>
+		<font color="gray">請選擇活動報名截止日期</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動場地</td>
+	<td>
+		<select name="place">
+			<{ $activitiedata.place }>
+		</select>
+		<br/>
+		<font color="gray">請選擇活動舉辦的場地</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動主題</td>
+	<td>
+		<select name="topic">
+			<{ $activitiedata.topic }>
+		</select>
+		<br/>
+		<font color="gray">請選擇活動的主題</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動族群</td>
+	<td>
+		<select name="group">
+			<{ $activitiedata.group }>
+		</select>
+		<br/>
+		<font color="gray">請選擇活動的族群</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動人數限制</td>
+	<td>
+		<input type="radio" name="sex_limit" value="type1" <{ $activitiedata.sex_limit_type1 }>>
+		限制男女人數，
+		男
+		<input name="male_limit" type="text" size="3" maxlength="3" class="input" value="<{ $activitiedata.male_limit }>">
+		人，女
+		<input name="female_limit" type="text" size="3" maxlength="3" class="input" value="<{ $activitiedata.female_limit }>">
+		人
+		<br/>
+
+		<input type="radio" name="sex_limit" value="type2" <{ $activitiedata.sex_limit_type2 }>>
+		不限性別，
+		共
+		<input name="people_limit" type="text" size="4" maxlength="4" class="input" value="<{ $activitiedata.total_limit }>">
+		人
+		<br/>
+
+		<input type="radio" name="sex_limit" value="type3" <{ $activitiedata.sex_limit_type3 }>>
+		不限人數及性別
+		<br/>
+
+		<font color="gray">請選擇填寫活動人數限制及性別限制</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>年齡限制</td>
+	<td>
+		<input type="radio" name="age_limit" value="type1" <{ $activitiedata.age_limit_type1 }>>
+		男女年齡限制
+		<input name="age_lb" type="text" size="2" maxlength="2" class="input" value="<{ $activitiedata.age_lb }>"> 歲
+		至
+		<input name="age_ub" type="text" size="2" maxlength="2" class="input" value="<{ $activitiedata.age_ub }>"> 歲
+		<br/>
+
+		<input type="radio" name="age_limit" value="type2" <{ $activitiedata.age_limit_type2 }>>
+		男性年齡限制
+		<input name="male_age_lb" type="text" size="2" maxlength="2" class="input" value="<{ $activitiedata.male_age_lb }>"> 歲
+		至
+		<input name="male_age_ub" type="text" size="2" maxlength="2" class="input" value="<{ $activitiedata.male_age_ub }>"> 歲
+		，
+		女性年齡限制
+		<input name="female_age_lb" type="text" size="2" maxlength="2" class="input" value="<{ $activitiedata.female_age_lb }>"> 歲
+		至
+		<input name="female_age_ub" type="text" size="2" maxlength="2" class="input" value="<{ $activitiedata.female_age_ub }>"> 歲
+		<br/>
+
+		<input type="radio" name="age_limit" value="type3" <{ $activitiedata.age_limit_type3 }>>
+		不限制年齡
+		<br/>
+		<font color="gray">請選擇填寫活動年齡限制，不可低於18歲。</font>
+	</td>
+</tr>
+
+<tr>
+	<td width="150" align="center">活動費用</td>
+	<td>
+		<input type="radio" name="charge_limit" value="type1" <{ $activitiedata.charge_limit_type1 }>>
+		男女均一價，
+		<input name="charge" type="text" size="6" maxlength="5" class="input" value="<{ $activitiedata.charge }>">
+		元
+		<br/>
+
+		<input type="radio" name="charge_limit" value="type2" <{ $activitiedata.charge_limit_type2 }>>
+		依性別收費，男
+		<input name="male_charge" type="text" size="6" maxlength="5" class="input" value="<{ $activitiedata.male_charge }>">
+		元，女
+		<input name="female_charge" type="text" size="6" maxlength="5" class="input" value="<{ $activitiedata.female_charge }>">
+		元
+		<br/>
+
+		<font color="gray">請填寫活動參加費用，介於新台幣30~20000之間。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動優惠折扣</td>
+	<td>
+		<input type="radio" name="use_discount" value="YES" <{ $activitiedata.use_discount_YES }>>適用
+		<input type="radio" name="use_discount" value="NO"  <{ $activitiedata.use_discount_NO }>>不適用
+		<br/>
+		<font color="gray">請選擇是否可以使用活動優惠折扣。</font>
+		<br/>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動抵用卷</td>
+	<td>
+		<input type="radio" name="use_coupon" value="YES" <{ $activitiedata.use_coupon_YES }>>適用
+		<input type="radio" name="use_coupon" value="NO"  <{ $activitiedata.use_coupon_NO }>>不適用
+		<br/>
+		<font color="gray">請選擇是否可以使用活動優惠卷。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動配對</td>
+	<td>
+		<input type="radio" name="use_match" value="YES" <{ $activitiedata.use_match_YES }>>使用
+		<input type="radio" name="use_match" value="NO"  <{ $activitiedata.use_match_NO }>>不使用
+		<br/>
+		<font color="gray">請選擇是否使用活動配對。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動配對給予的資料</td>
+	<td>
+		<input type="checkbox" name="match_type[]" value="email" <{ $activitiedata.match_type_email }>><font color="red">EMAIL</font>
+		<input type="checkbox" name="match_type[]" value="msn"  <{ $activitiedata.match_type_msn }>><font color="green">MSN</font>
+		<input type="checkbox" name="match_type[]" value="tel"  <{ $activitiedata.match_type_tel }>><font color="blue">手機號碼</font>
+		<br/>
+		<font color="gray">請選擇要給予的配對資料。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">聯繫資料</td>
+	<td>
+		<input type="radio" name="use_newmatch" value="YES" <{ $activitiedata.use_newmatch_YES }>>使用
+		<input type="radio" name="use_newmatch" value="NO" <{ $activitiedata.use_newmatch_NO }>>不使用
+		<br/>
+		<font color="gray">請選擇是否使聯繫資料。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動說明</td>
+	<td>
+		<textarea name="decription" style="width: 450px;" rows="30" warp="hard" class="input"><{ $activitiedata.decription }></textarea>
+		<font color="gray">請填寫活動的相關說明。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動報名人數</td>
+	<td>
+		男 <{ $activitiedata.males }> 人 / 女 <{ $activitiedata.females }> 人   [<{ $activitiedata.ReCount }>]
+		<br/>
+		<font color="gray">目前活動的報名人數，若有錯誤誤請點選「重新統計」。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動EO</td>
+	<td>
+		<select name="EO">
+			<{ $activitiedata.EO }>
+		</select>
+		<br/>
+		<font color="gray">請選擇舉辦活動的EO。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動狀態</td>
+	<td>
+		<select name="status">
+			<{ $activitiedata.status }>
+		</select>
+		<br/>
+		<font color="gray">請設定活動目前的狀態。</font>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="Submit" value="確定送出" class=button>
+		<input type="reset" name="Submit" value="重新填寫" class=button>
+	</td>
+</tr>
+</table>
+</form>

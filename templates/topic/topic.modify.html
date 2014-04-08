@@ -1,0 +1,29 @@
+<br/>
+
+<form name="topic" method="post" onSubmit=""  action="./topic.act.php?act=modify">
+<table width="600px" border = "1" align="center" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">
+		修改主題資料
+	</th>
+</tr>
+<tr>
+	<td width="150px" align="center">主題編號</td>
+	<td>
+		<input name="tid" type="text" size="10" class="input" readOnly value="<{ $topicdata.0}>">
+	</td>
+</tr>
+<tr>
+	<td width="150px" align="center">主題名稱</td>
+	<td>
+		<input name="tname" type="text" size="50" class="input" value="<{ $topicdata.1}>">
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="Submit" value="送出修改" class=button>
+		<input type="reset" name="Submit" value="重新填寫" class=button>
+	</td>
+</tr>
+</table>
+</form>

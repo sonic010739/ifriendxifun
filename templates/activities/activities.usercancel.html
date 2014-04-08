@@ -1,0 +1,39 @@
+<center>
+	<b>使用者取消</b>
+</center>	
+
+<br/>
+
+<table width="600" align="center" border="1" class="datatable">
+<tr>
+	<td align="center" colspan="2">取消活動填寫原因</td>
+</tr>
+<tr>
+	<td width="150" align="center">活動名稱</td>
+	<td><a href="./index.php?act=activities&amp;sel=detail&amp;aid=<{ $memberjoindata.aid }>"><{ $memberjoindata.name }></a>
+		</td>
+</tr>
+<tr>
+	<td align="center">使用者名稱</td>
+	<td><a href="./index.php?act=member&amp;sel=detail&amp;uid=<{ $memberjoindata.uid }>"><{ $memberjoindata.username }></a></td>
+</tr>
+<tr>
+	<td align="center">繳費方式</td>
+	<td><{ $memberjoindata.charge_type }> 繳費狀態:<{ $memberjoindata.charge_status }></td>
+</tr>
+<tr>
+	<td align="center">取消原因</td>
+	<td>
+	<form name="usercancel" method="post" action="./activities.join.act.php?act=usercancel">
+	<input name="aid" type="hidden" value="<{ $memberjoindata.aid }>">
+	<input name="uid" type="hidden" value="<{ $memberjoindata.uid }>">
+	<textarea name="reason" cols="52" rows="7" class="input"></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="send" value="確定送出" class="button">
+		<input type="reset" name="reset" value="重新填寫" class="button">
+	</td>
+</tr>
+</table>

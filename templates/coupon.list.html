@@ -1,0 +1,51 @@
+<form method="post" name="filterform" action="./coupon.act.php?act=search">
+<table align="center" width="600" border="0">
+<tr>
+	<td align="left">
+		
+		所有者
+		<input name="owner" type="text" size="12" maxlength="12" class="input" value="<{ $owner }>">
+		&nbsp;
+		
+		給予者
+		<input name="giver" type="text" size="12" maxlength="12" class="input" value="<{ $giver }>">		
+		&nbsp;
+		
+		使用狀態		
+		<{ html_options name=status options=$statuslist selected=$status }>		
+		&nbsp;
+		<input type="submit" name="Submit" value="篩選" class="button">		
+	</td>
+</tr>
+</table>
+</form>
+
+<{ if $coupon_count != 0 }>
+<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th align="center" width="90">所有者</th>
+		<th align="center" width="80">給予者</th>
+		<th align="center" width="200">給予原因</th>
+		<th align="center" width="120">取得時間</th>		
+		<th align="center" width="70">使用狀態</th>
+		<th align="center" width="40">檢視</th>	
+	</tr>
+	
+	<{section name=key loop=$couponlist}>	
+	<tr>
+		<td align="left"  ><{ $couponlist[key].username }></td>
+		<td align="left"  ><{ $couponlist[key].givename }></td>
+		<td align="left"  ><{ $couponlist[key].reason }></td>
+		<td align="center"><{ $couponlist[key].give_time }></td>						
+		<td align="center"><{ $couponlist[key].status }></td>
+		<td align="center"><{ $couponlist[key].detail }></td>
+	</tr>
+	<{/section}>
+	
+</table>
+
+	<{include file="page_foot.html"}>
+
+<{ else }>
+	<center>無優惠卷資料資料</center>
+<{/if}>

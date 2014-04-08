@@ -1,0 +1,37 @@
+<center>
+	<b>優惠卷資料列表</b>
+</center>
+
+<br/>
+<br/>
+
+<form name="givecoupon" method="post" action="./coupon.act.php?act=give">
+<table width="600" align="center" border="1" class="datatable">
+<tr>
+	<td align="center" colspan="2">優惠卷給予</td>
+</tr>
+<tr>
+	<td align="center" width="150">被給予者</td>
+	<td>
+		<input name="uid" type="hidden" value="<{ $data.uid }>">
+		<{ $data.username }>		
+	</td>
+</tr>
+<tr>
+	<td align="center">優惠卷類型</td>
+	<td>活動抵用卷</td>
+</tr>
+<tr>
+	<td align="center">給予的原因</td>
+	<td>
+		<textarea name="reason" cols="52" rows="7" class="input">這在這裡留下給予優惠卷的原因</textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="send" value="確定送出" class=button>
+		<input type="reset" name="reset" value="重新填寫" class=button>
+	</td>
+</tr>
+</table>
+</form>

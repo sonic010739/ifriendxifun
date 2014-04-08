@@ -1,0 +1,485 @@
+	<center>
+		<b>統計資料</b>
+	<center>
+
+	<br />
+
+	<script type="text/javascript">
+		function loadStatisTab(obj,n)
+		{
+			var tabs = 3;
+			var tabsF = document.getElementById('StatisTab').getElementsByTagName('li');
+
+			for (i = 1; i <= tabs; i++)
+			{
+				tabsF[i-1].setAttribute('id',null);
+				eval('document.getElementById(\'Statis' + i + '\').style.display = \'none\'');
+			}
+
+			eval('document.getElementById(\'Statis' + n + '\').style.display = \'inline\'');
+			obj.parentNode.setAttribute('id','current');
+		}
+	</script>
+
+	<div id="tabpage2">
+		<div id="StatisTab" class="tabsF">
+			<ul>
+				<li id="current">
+					<a style="width: 80px" href="javascript://" onClick="loadStatisTab(this, 1);">
+						<span>人數</span>
+					</a>
+				</li>
+				<li>
+					<a style="width: 80px" href="javascript://" onClick="loadStatisTab(this, 2);">
+						<span>活動</span>
+					</a>
+				</li>
+				<li>
+					<a style="width: 80px" href="javascript://" onClick="loadStatisTab(this, 3);">
+						<span>會員</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="tabsC2">
+			<div id="Statis1" style="display: inline;">
+				<table align="center" width="650" border="1" class="datatable">
+					<tr>
+						<td align="right" width="150">
+							會員總數
+							<br />
+							<a href="member.act.php?act=ExportMail">匯出所有會員email</a>
+						</td>
+						<td align="right" width="420"><b><{ $statistics.totalmember }></b> 人</td>
+						<td align="right" width="80">100%</td>
+					</tr>
+					<tr>
+						<td align="center" colspan="3">認證狀況</td>
+					</tr>
+					<tr>
+						<td align="right">已認證</td>
+						<td align="right"><b><{ $statistics.Validate }></b> 人</td>
+						<td align="right"><{ $statistics.Validate_percentage }></td>
+					</tr>
+					<tr>
+						<td align="right">未認證</td>
+						<td align="right"><b><{ $statistics.Invalidate }></b> 人</td>
+						<td align="right"><{ $statistics.Invalidate_percentage }></td>
+					</tr>
+					<tr>
+						<td align="center" colspan="3">性別分佈</td>
+					</tr>
+					<tr>
+						<td align="right">男性會員數</td>
+						<td align="right"><b><{ $statistics.males }></b> 人</td>
+						<td align="right"><{ $statistics.males_percentage }></td>
+					</tr>
+					<tr>
+						<td align="right">女性會員數</td>
+						<td align="right"><b><{ $statistics.females }></b> 人</td>
+						<td align="right"><{ $statistics.females_percentage }></td>
+					</tr>
+					<tr>
+						<td align="center" colspan="3">權限分佈</td>
+					</tr>
+					<tr>
+						<td align="right">管理員</td>
+						<td align="right"><b><{ $statistics.Admin }></b> 人</td>
+						<td align="right"><{ $statistics.Admin_percentage }></td>
+					</tr>
+					<tr>
+						<td align="right">EO</td>
+						<td align="right"><b><{ $statistics.EO }></b> 人</td>
+						<td align="right"><{ $statistics.EO_percentage }></td>
+					</tr>
+					<tr>
+						<td align="right">使用者</td>
+						<td align="right"><b><{ $statistics.User }></b> 人</td>
+						<td align="right"><{ $statistics.User_percentage }></td>
+					</tr>
+				</table>
+			</div>
+			<div id="Statis2" style="display: none;">
+				<table width="650" align="center" border="1" class="datatable">
+				<tr>
+					<th align="center" width="200">
+						活動名稱
+					</th>
+					<th align="center" width="100">
+						活動日期
+					</th>
+					<th align="center" width="60">
+						昨日累積報名人數
+					</th>
+					<th align="center" width="60">
+						目前報名人數
+					</th>
+					<th align="center" width="60">
+						新增報名人數
+					</th>
+					<th align="center" width="60">
+						目前繳費人數
+					</th>
+					<th align="center" width="60">
+						未繳費人數
+					</th>
+					<th align="center" width="70">
+						目前繳費金額
+					</th>
+				</tr>
+				<{ section name=key loop=$act_data }>
+				<tr>
+					<td align="left"><{ $act_data[key].name }></td>
+					<td align="center"><{ $act_data[key].act_date }></td>
+					<td align="left">					
+						男: <{ $act_data[key].join_males }><br />
+						女: <{ $act_data[key].join_females }>
+					</td>
+					<td align="left">
+						男: <{ $act_data[key].males }><br />
+						女: <{ $act_data[key].females }>
+					</td>
+					<td align="left">
+						男: <{ $act_data[key].today_join_males }><br />
+						女: <{ $act_data[key].today_join_females }>
+					</td>
+					<td align="left">
+						男: <{ $act_data[key].paid_males }><br />
+						女: <{ $act_data[key].paid_females }>
+					</td>
+					<td align="left">
+						男: <{ $act_data[key].unpay_males }><br />
+						女: <{ $act_data[key].unpay_females }>
+					</td>
+					<td align="right">
+						<{ $act_data[key].paid_amount }>元
+					</td>
+				</tr>
+				<{ /section }>
+				</table>
+			</div>
+			<div id="Statis3" style="display: none;">
+				<table width="650" align="center" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td width="325" valign="top">
+						<table align="center" width="325" border="1" class="datatable">
+						<tr>
+							<th align="center" colspan="3">學歷分佈</th>
+						</tr>
+						<tr>
+							<td align="right" width="100">博士</td>
+							<td align="right" width="165"><b><{ $statistics.phd }></b> 人</td>
+							<td align="right" width="60"><{ $statistics.phd_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">碩士</td>
+							<td align="right"><b><{ $statistics.master }></b> 人</td>
+							<td align="right"><{ $statistics.master_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">大學</td>
+							<td align="right"><b><{ $statistics.university }></b> 人</td>
+							<td align="right"><{ $statistics.university_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">高中職</td>
+							<td align="right"><b><{ $statistics.senior }></b> 人</td>
+							<td align="right"><{ $statistics.senior_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">四技二專</td>
+							<td align="right"><b><{ $statistics.training }></b> 人</td>
+							<td align="right"><{ $statistics.training_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">國中</td>
+							<td align="right"><b><{ $statistics.junior }></b> 人</td>
+							<td align="right"><{ $statistics.junior_percentage }></td>
+						</tr>
+					</table>
+					<br />
+					<table align="center" width="325" border="1" class="datatable">
+						<tr>
+							<th align="center" colspan="3">星座分佈</th>
+						</tr>
+						<tr>
+							<td align="right" width="100">牡羊座</td>
+							<td align="right" width="165"><b><{ $statistics.aries }></b> 人</td>
+							<td align="right" width="60"><{ $statistics.aries_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">金牛座</td>
+							<td align="right"><b><{ $statistics.taurus }></b> 人</td>
+							<td align="right"><{ $statistics.taurus_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">雙子座</td>
+							<td align="right"><b><{ $statistics.genini }></b> 人</td>
+							<td align="right"><{ $statistics.genini_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">巨蟹座</td>
+							<td align="right"><b><{ $statistics.cancer }></b> 人</td>
+							<td align="right"><{ $statistics.cancer_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">獅子座</td>
+							<td align="right"><b><{ $statistics.leo }></b> 人</td>
+							<td align="right"><{ $statistics.leo_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">處女座</td>
+							<td align="right"><b><{ $statistics.virgo }></b> 人</td>
+							<td align="right"><{ $statistics.virgo_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">天秤座</td>
+							<td align="right"><b><{ $statistics.libra }></b> 人</td>
+							<td align="right"><{ $statistics.libra_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">天蠍座</td>
+							<td align="right"><b><{ $statistics.scorpio }></b> 人</td>
+							<td align="right"><{ $statistics.scorpio_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">射手座</td>
+							<td align="right"><b><{ $statistics.sagittarius }></b> 人</td>
+							<td align="right"><{ $statistics.sagittarius_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">魔羯座</td>
+							<td align="right"><b><{ $statistics.capricorn }></b> 人</td>
+							<td align="right"><{ $statistics.capricorn_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">水瓶座</td>
+							<td align="right"><b><{ $statistics.aquarius }></b> 人</td>
+							<td align="right"><{ $statistics.aquarius_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">雙魚座</td>
+							<td align="right"><b><{ $statistics.pisces }><b> 人</td>
+							<td align="right"><{ $statistics.pisces_percentage }></td>
+						</tr>
+						</table>
+						
+						<br />
+						
+						<table align="center" width="325" border="1" class="datatable">
+						<tr>
+							<th align="center" colspan="3">星座象限分佈</th>
+						</tr>
+						<tr>
+							<td align="right" width="100">水象星座</td>
+							<td align="right" width="165"><b><{ $statistics.water }></b> 人</td>
+							<td align="right" width="60"><{ $statistics.water_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">火象星座</td>
+							<td align="right"><b><{ $statistics.fire }></b> 人</td>
+							<td align="right"><{ $statistics.fire_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">風象星座</td>
+							<td align="right"><b><{ $statistics.wind }></b> 人</td>
+							<td align="right"><{ $statistics.wind_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">土象星座</td>
+							<td align="right"><b><{ $statistics.soil }></b> 人</td>
+							<td align="right"><{ $statistics.soil_percentage }></td>
+						</tr>
+						</table>
+						
+						<br />
+						
+						<table align="center" width="325" border="1" class="datatable">
+						<tr>
+							<th align="center" colspan="3">年齡分佈</th>
+						</tr>
+						<tr>
+							<td align="right" width="100">16 ~ 20歲</td>
+							<td align="right" width="165"><b><{ $statistics.age_1 }></b> 人</td>
+							<td align="right" width="60"><{ $statistics.age_1_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">21 ~ 25歲</td>
+							<td align="right"><b><{ $statistics.age_2 }></b> 人</td>
+							<td align="right"><{ $statistics.age_2_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">26 ~ 30歲</td>
+							<td align="right"><b><{ $statistics.age_3 }></b> 人</td>
+							<td align="right"><{ $statistics.age_3_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">31 ~ 35歲</td>
+							<td align="right"><b><{ $statistics.age_4 }></b> 人</td>
+							<td align="right"><{ $statistics.age_4_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">35 ~ 40歲</td>
+							<td align="right"><b><{ $statistics.age_5 }></b> 人</td>
+							<td align="right"><{ $statistics.age_5_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">41 ~ 45歲</td>
+							<td align="right"><b><{ $statistics.age_6 }></b> 人</td>
+							<td align="right"><{ $statistics.age_6_percentage }></td>
+						</tr><tr>
+							<td align="right">45歲以上</td>
+							<td align="right"><b><{ $statistics.age_7 }></b> 人</td>
+							<td align="right"><{ $statistics.age_7_percentage }></td>
+						</tr>
+						</table>
+					</td>
+					<td width="325" valign="top">
+						<table align="center" width="325" border="1" class="datatable">
+						<tr>
+							<th align="center" colspan="3">興趣分佈</th>
+						</tr>
+						<tr>
+							<td align="right" width="100">閱讀寫作</td>
+							<td align="right" width="165"><b><{ $statistics.interest_0 }></b> 人</td>
+							<td align="right" width="60"><{ $statistics.interest_0_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">逛街購物</td>
+							<td align="right"><b><{ $statistics.interest_1 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_1_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">電腦網路</td>
+							<td align="right"><b><{ $statistics.interest_2 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_2_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">聊天哈啦</td>
+							<td align="right"><b><{ $statistics.interest_3 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_3_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">音樂欣賞</td>
+							<td align="right"><b><{ $statistics.interest_4 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_4_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">登山健行</td>
+							<td align="right"><b><{ $statistics.interest_5 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_5_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">電玩對戰</td>
+							<td align="right"><b><{ $statistics.interest_6 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_6_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">星象命理</td>
+							<td align="right"><b><{ $statistics.interest_7 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_7_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">電視電影</td>
+							<td align="right"><b><{ $statistics.interest_8 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_8_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">運動釣魚</td>
+							<td align="right"><b><{ $statistics.interest_9 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_9_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">下棋彈琴</td>
+							<td align="right"><b><{ $statistics.interest_10 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_10_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">塑身美容</td>
+							<td align="right"><b><{ $statistics.interest_11 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_11_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">動畫漫畫</td>
+							<td align="right"><b><{ $statistics.interest_12 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_12_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">美食烹調</td>
+							<td align="right"><b><{ $statistics.interest_13 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_13_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">語言學習</td>
+							<td align="right"><b><{ $statistics.interest_14 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_14_percentage }></td>
+						</tr>						
+						<tr>
+							<td align="right">投資理財</td>
+							<td align="right"><b><{ $statistics.interest_15 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_15_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">攝影繪畫</td>
+							<td align="right"><b><{ $statistics.interest_16 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_16_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">唱歌跳舞</td>
+							<td align="right"><b><{ $statistics.interest_17 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_17_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">兜風閒晃</td>
+							<td align="right"><b><{ $statistics.interest_18 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_18_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">遊山玩水</td>
+							<td align="right"><b><{ $statistics.interest_19 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_19_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">吃喝玩樂</td>
+							<td align="right"><b><{ $statistics.interest_20 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_20_percentage }></td>
+						</tr>
+						
+						<tr>
+							<td align="right">古董收藏</td>
+							<td align="right"><b><{ $statistics.interest_21 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_21_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">發呆睡覺</td>
+							<td align="right"><b><{ $statistics.interest_22 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_22_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">占星算命</td>
+							<td align="right"><b><{ $statistics.interest_23 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_23_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">園藝花卉</td>
+							<td align="right"><b><{ $statistics.interest_24 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_24_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">豢養寵物</td>
+							<td align="right"><b><{ $statistics.interest_25 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_25_percentage }></td>
+						</tr>
+						<tr>
+							<td align="right">其他</td>
+							<td align="right"><b><{ $statistics.interest_26 }></b> 人</td>
+							<td align="right"><{ $statistics.interest_26_percentage }></td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,56 @@
+<br/>
+<br/>
+
+<script type="text/javascript">
+	function checkaccuse(accuse)
+	{
+		if (accuse.reason.value == "")
+		{
+			alert("未填寫提報黑名單的原因!");
+			return false;
+		}
+		
+		if (confirm("確定要送出提報黑名單申請?")){
+			return true;
+		} else {
+			return false;
+		}
+	}
+</script>
+<form name="accuse" method="post" action="./member.act.php?act=accuseblack" onSubmit="return checkaccuse(this);">	
+
+<input name="uid" type="hidden" value="<{ $accusedata.uid }>" >	
+<input name="accuse_id" type="hidden" value="<{ $accusedata.accuseid }>" >
+<input name="aid" type="hidden" value="<{ $accusedata.aid }>" >
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th colspan="2" align="center">提報為黑名單</th>
+	</tr>
+	<tr>
+		<td align="center" width="150">被提報者</td>
+		<td><{ $accusedata.username }></td>
+	</tr>
+	<tr>
+		<td align="center">提報者</td>
+		<td><{ $accusedata.accusename }></td>
+	</tr>
+	<tr>
+		<td align="center">活動名稱</td>
+		<td><{ $accusedata.act_name }></td>
+	</tr>
+	<tr>
+		<td align="center">提報原因</td>
+		<td>
+			<textarea name="reason" style="width: 420px;" rows="10" class="input"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="submit" name="send" value="確定送出" class=button>
+			<input type="reset" name="reset" value="重新填寫" class=button>
+		</td>
+	</tr>
+</table>
+
+</form>

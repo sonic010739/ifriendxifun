@@ -1,0 +1,45 @@
+
+<table width="600" align="center" border="0">
+	<tr>
+		<td align="left"><{ $options }></td>
+	</tr>
+</table>
+
+<br/>
+
+<{ if $list_count != 0 }>
+<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th width="100" align="center">被提報者</th>
+		<th width="70" align="center">審核結果</th>
+		<th width="80" align="center">停權狀態</th>
+		<th width="100" align="center">開始時間</th>
+		<th width="100" align="center">到期時間</th>
+		<th width="70" align="center">停權天數</th>
+				<th width="80" align="center">詳細資料</th>
+	</tr>
+
+	<{section name=key loop=$blacklistdata}>	
+	<tr>
+		<td align="left"  ><{ $blacklistdata[key].username }></td>
+		<td align="center"><{ $blacklistdata[key].result }></td>
+		<td align="center"><{ $blacklistdata[key].lock }></td>
+		<td align="center"><{ $blacklistdata[key].start_date }></td>
+		<td align="center"><{ $blacklistdata[key].end_date }></td>		
+		<td align="center"><{ $blacklistdata[key].days }></td>
+		<td align="center"><{ $blacklistdata[key].detail }></td>		
+	</tr>
+	<{/section}>
+	
+	<tr  bgcolor="#CCCCCC">
+		<td align="right" colspan="7"><font color="gray">點選被提報者名稱可以檢視詳細資料</font></td>	
+	</tr>
+</table>
+
+	<{include file="page_foot.html"}>
+		
+<{else}>
+	<center>
+		無資料
+	</center>
+<{/if}>

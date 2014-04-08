@@ -1,0 +1,361 @@
+<script src="lib/dynCalendar/browserSniffer.js" type="text/javascript" language="javascript"></script>
+<script src="lib/dynCalendar/dynCalendar.js" type="text/javascript" language="javascript"></script>
+
+<script type="text/javascript">
+	function calendarCallback(date, month, year)
+	{
+		if (String(month).length == 1) {
+			month = '0' + month;
+		}
+
+		if (String(date).length == 1) {
+			date = '0' + date;
+		}
+
+		var today = new Date();		// 今天的日期
+		var date2 = new Date( today.getFullYear(), today.getMonth(), today.getDate() + 15); 	// 15天後的日期
+		var select = new Date( year, month-1, date);
+		var select2 = new Date( year, month-1, date-2);
+
+		var str = date2.getFullYear() + "年" + (date2.getMonth() + 1) + "月" + date2.getDate() +"日";
+
+		if (select <= today)
+		{
+			alert('無法設定於過去的時間，請從'+ str +'開始選擇');
+		}
+		else if (select < date2)
+		{
+			alert('請從'+ str +'開始選擇');
+		}
+		else
+		{
+			act_date = year+ '-' + month + '-' + date;
+
+			join_deadline  = '';
+			join_deadline += select2.getFullYear() + '-';
+
+			if (String((select2.getMonth() + 1)).length == 1)
+			{
+				join_deadline += '0' + (select2.getMonth() + 1) + '-';
+			}
+			else
+			{
+				join_deadline += (select2.getMonth() + 1) + '-';
+			}
+
+			if (String(select2.getDate()).length == 1)
+			{
+				join_deadline += '0' + select2.getDate();
+			}
+			else
+			{
+				join_deadline += select2.getDate();
+			}
+
+			document.activitiesadd.act_year.value = year;
+			document.activitiesadd.act_month.value = month;
+			document.activitiesadd.act_day.value = date;
+
+			document.activitiesadd.act_date.value = act_date;
+			document.activitiesadd.join_deadline.value = join_deadline;
+		}
+	}
+
+	function calendarCallback2(date, month, year)
+	{
+		if (String(month).length == 1) {
+			month = '0' + month;
+		}
+
+		if (String(date).length == 1) {
+			date = '0' + date;
+		}
+
+		var act_date = new Date( document.activitiesadd.act_year.value, document.activitiesadd.act_month.value-1, document.activitiesadd.act_day.value-1);
+		var select = new Date( year, month-1, date);
+
+		if (select > act_date)
+		{
+			alert('報名截止日期最晚必須設定在活動開始前一天');
+		}
+		else
+		{
+			date = year+ '-' + month + '-' + date;
+			document.activitiesadd.join_deadline.value = date;
+		}
+	}
+</script>
+
+
+<!-- TinyMCE -->
+<script type="text/javascript" src="lib/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		// General options
+		mode : "textareas",
+		theme : "advanced",
+		language : "tw",
+		plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+
+		// Theme options
+		theme_advanced_buttons1 : "bold, italic, underline, strikethrough, |, forecolor, backcolor, |, justifyleft,justifycenter,justifyright,justifyfull,fontselect,fontsizeselect",
+		theme_advanced_buttons2 : "cut,copy,paste,|,search,replace, |, undo, redo, |, bullist, numlist, |, outdent, indent, blockquote, |, link,unlink,anchor,image,cleanup",
+		theme_advanced_buttons3 : "insertdate,inserttime,preview,|,hr, sub, sup, |, charmap, media, |, help,code,",
+		theme_advanced_buttons4 : "",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "none",
+		theme_advanced_resizing : true,
+
+		// Example content CSS (should be your site CSS)
+		content_css : "style.css",
+
+		// Drop lists for link/image/media/template dialogs
+		template_external_list_url : "lists/template_list.js",
+		external_link_list_url : "lists/link_list.js",
+		external_image_list_url : "lists/image_list.js",
+		media_external_list_url : "lists/media_list.js",
+
+		// Replace values for the template plugin
+		template_replace_values : {
+			username : "iF",
+			staffid : "sonic"
+		},
+
+		// use <br / > instead of use p
+		force_br_newlines : true,
+		force_p_newlines : false,
+
+		// turn off the convert_urls and relative_urls
+		convert_urls : false,
+		relative_urls : false
+	});
+</script>
+<!-- /TinyMCE -->
+
+
+<script src="./javascript/activities.js" type="text/javascript"></script>
+<form name="activitiesadd" method="post" onSubmit="return checkactadd(this);"  action="./activities.act.php?act=add">
+<table width="600" align="center" border="1" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">新增活動</th>
+</tr>
+<tr>
+	<td width="150" align="center">活動名稱</td>
+	<td>
+		<input name="name" type="text" style="width: 400px" class="input">
+		<br/>
+		<font color="gray">請填寫活動名稱，活動名稱最多30個字</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動日期與時間</td>
+	<td>
+		<input type="hidden" name="act_year">
+		<input type="hidden" name="act_month">
+		<input type="hidden" name="act_day">
+		<input type="text" name="act_date" style="width: 100px" class="input" value="" readOnly>
+		<script language="JavaScript" type="text/javascript">
+			<!--
+			fooCalendar = new dynCalendar('fooCalendar', 'calendarCallback', 'lib/dynCalendar/images/');
+			//-->
+		</script>
+
+		&nbsp;&nbsp;
+		<select name="act_time_hour">
+			<option value="-1" selected>請選擇</option>
+			<option value="00">00</option><option value="01">01</option><option value="02">02</option>
+			<option value="03">03</option><option value="04">04</option><option value="05">05</option>
+			<option value="06">06</option><option value="07">07</option><option value="08">08</option>
+			<option value="09">09</option><option value="10">10</option><option value="11">11</option>
+			<option value="12">12</option><option value="13">13</option><option value="14">14</option>
+			<option value="15">15</option><option value="16">16</option><option value="17">17</option>
+			<option value="18">18</option><option value="19">19</option><option value="20">20</option>
+			<option value="21">21</option><option value="22">22</option><option value="23">23</option>
+		</select>
+		:
+		<select name="act_time_minute">
+			<option value="-1" selected>請選擇</option>
+			<option value="00">00</option><option value="05">05</option>
+			<option value="10">10</option><option value="15">15</option>
+			<option value="20">20</option><option value="25">25</option>
+			<option value="30">30</option><option value="35">35</option>
+			<option value="40">40</option><option value="45">45</option>
+			<option value="50">50</option><option value="55">55</option>
+		</select>
+		<br/>
+		<font color="gray">請選擇活動日期與活動開始時間，只能設定至少15天後開始的活動</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>報名截止日期</td>
+	<td>
+		<input type="text" name="join_deadline" style="width: 100px" class="input" value="" readOnly>
+		<script language="JavaScript" type="text/javascript">
+			<!--
+			fooCalendar2 = new dynCalendar('fooCalendar2', 'calendarCallback2', 'lib/dynCalendar/images/');
+			//-->
+		</script>
+		<br/>
+		<font color="gray">請選擇活動報名截止日期</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動場地</td>
+	<td>
+		<select name="place" OnChange="Showplacelink()">
+			<option value="-1" selected>請選擇</option>
+			<{ $placedata }>
+		</select>
+		<span id="placelink"></span>
+		<br/>
+		<font color="gray">請選擇活動舉辦的場地</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動主題</td>
+	<td>
+		<select name="topic">
+			<option value="-1" selected>請選擇</option>
+			<{ $topicdata }>
+		</select>
+		<br/>
+		<font color="gray">請選擇活動的主題</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動族群</td>
+	<td>
+		<select name="group">
+			<option value="-1" selected>請選擇</option>
+			<{ $groupdata }>
+		</select>
+		<br/>
+		<font color="gray">請選擇活動的族群</font>
+	</td>
+</tr>
+<tr>
+	<td align=center>活動人數限制</td>
+	<td>
+		<input type="radio" name="sex_limit" value="type1">
+		限制男女人數，
+		男
+		<input name="male_limit" type="text" size="3" maxlength="3" class="input">
+		人，女
+		<input name="female_limit" type="text" size="3" maxlength="3" class="input">
+		人
+		<br/>
+
+		<input type="radio" name="sex_limit" value="type2">
+		不限性別，
+		共
+		<input name="people_limit" type="text" size="4" maxlength="4" class="input">
+		人
+		<br/>
+
+		<input type="radio" name="sex_limit" value="type3">
+		不限人數及性別
+		<br/>
+		<font color="gray">請選擇填寫活動人數限制及性別限制</font>
+
+	</td>
+</tr>
+<tr>
+	<td align=center>年齡限制</td>
+	<td>
+		<input type="radio" name="age_limit" value="type1">
+		男女年齡限制
+		<input name="age_lb" type="text" size="2" maxlength="2" class="input">歲
+		至
+		<input name="age_ub" type="text" size="2" maxlength="2" class="input">歲
+		<br/>
+
+		<input type="radio" name="age_limit" value="type2">
+		男性年齡限制
+		<input name="male_age_lb" type="text" size="2" maxlength="2" class="input">歲
+		至
+		<input name="male_age_ub" type="text" size="2" maxlength="2" class="input">歲
+		，
+		女性年齡限制
+		<input name="female_age_lb" type="text" size="2" maxlength="2" class="input">歲
+		至
+		<input name="female_age_ub" type="text" size="2" maxlength="2" class="input">歲
+		<br/>
+
+		<input type="radio" name="age_limit" value="type3">
+		不限制年齡
+		<br/>
+		<font color="gray">請選擇填寫活動年齡限制，不可低於18歲。</font>
+	</td>
+</tr>
+<tr>
+	<td width="150" align="center">活動費用</td>
+	<td>
+		<input type="radio" name="charge_limit" value="type1">
+		男女均一價，
+		<input name="charge" type="text" size="6" maxlength="5" class="input">
+		元
+		<br/>
+
+		<input type="radio" name="charge_limit" value="type2">
+		依性別收費，男
+		<input name="male_charge" type="text" size="6" maxlength="5" class="input">
+		元，女
+		<input name="female_charge" type="text" size="6" maxlength="5" class="input">
+		元
+		<br/>
+
+		<font color="gray">請填寫活動參加費用，介於新台幣30~20000之間。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動優惠折扣</td>
+	<td>
+		<input type="radio" name="use_discount" value="YES">適用
+		<input type="radio" name="use_discount" value="NO" checked>不適用
+		<br/>
+		<font color="gray">請選擇是否可以使用活動優惠折扣。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動優惠卷</td>
+	<td>
+		<input type="radio" name="use_coupon" value="YES">適用
+		<input type="radio" name="use_coupon" value="NO" checked>不適用
+		<br/>
+		<font color="gray">請選擇是否可以使用活動優惠卷。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動配對</td>
+	<td>
+		<input type="radio" name="use_match" value="YES" checked>使用
+		<input type="radio" name="use_match" value="NO" checked>不使用
+		<br/>
+		<font color="gray">請選擇是否使用活動配對。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">聯繫資料</td>
+	<td>
+		<input type="radio" name="use_newmatch" value="YES" checked>使用
+		<input type="radio" name="use_newmatch" value="NO" checked>不使用
+		<br/>
+		<font color="gray">請選擇是否使用聯繫資料。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動說明</td>
+	<td>
+		<textarea name="decription" rows="30" class="input" warp="hard" style="width: 450px;"></textarea>
+		<font color="gray">請填寫活動的相關說明。</font>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="Submit" value="確定送出" class=button>
+		<input type="reset" name="reset" value="重新填寫" class=button>
+	</td>
+</tr>
+</table>
+</form>

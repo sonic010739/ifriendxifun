@@ -1,0 +1,41 @@
+	<div id="response">
+		<a href="./index.php?act=forum&amp;sel=reply&amp;fid=<{$forumdata[0].0}>">回覆此篇文章</a>
+	</div>
+	
+	<div id="forum">
+	<div id="post_title"><{$forumdata[0].1}></div>
+		<{section name=key loop=$forumdata}>	
+		<div class="post_detail">
+		
+			<div class="user_icon">無圖示</div>
+			
+			<div class="user_info">
+				<b><{$forumdata[key].4}></b>
+				<br/>
+				<br/>
+				發表時間: <{$forumdata[key].8}> 
+				<br/>
+				發表位置: <{$forumdata[key].9}> 
+				<br/>
+				文章編號: <{$forumdata[key].2}>
+				<br/>
+			</div>
+			<div class="user_func">
+				<div class="post_func"><{$forumdata[key].10}> </div>
+				<div class="post_info"><{$forumdata[key].11}></div>
+			</div>
+			<div class="post_content">
+				<{$forumdata[key].5}>
+				<div class="post_sig">
+					<{$forumdata[key].6}><br/>
+				</div>
+			</div>
+		</div>
+		<{/section}>
+	</div>
+	
+	<div id="response">
+		<a href="./index.php?act=forum&amp;sel=reply&amp;fid=<{$forumdata[0].0}>">回覆此篇文章</a>
+	</div>
+	
+	<{include file="page_foot.html"}>

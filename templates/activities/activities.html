@@ -1,0 +1,17 @@
+	<div id="submenu">
+		<a href="./index.php?act=activities&sel=list">活動列表</a>
+	<{if $login ==1 }>
+		 |
+		<a href="./index.php?act=activities&amp;sel=myactivities">我的活動紀錄</a>
+	<{/if}>		
+		<br/>
+		
+	<{if $EO == 1 }>
+		<a href="./index.php?act=activities&amp;sel=add">新增活動</a> 
+		|
+		<a href="./index.php?act=activitiesjoin&amp;sel=verifylist">活動取消審核</a>
+		<br/>
+	<{/if}>	
+	</div>
+
+	<{ include file=$activitiespage }>

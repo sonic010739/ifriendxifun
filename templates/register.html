@@ -1,0 +1,310 @@
+<script language="javascript" src = "./javascript/register.js" type="text/javascript" ></script>
+<form  name="NewReg" method="post" onSubmit="return checkNewReg(this)" action="./register.act.php?act=register">
+<input name="regcode" type="hidden" value="<{ $regcode }>">
+
+
+<table width="600" border="1" align="center" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">
+		註冊新帳號 - 填寫資料 <font color="red">標示星號的欄位為必填</font>
+	</th>
+</tr>
+<tr>
+	<td width="150" align="center"><font color="red">*</font>登入帳號</td>
+	<td>
+		<input name="username" type="text" style="width: 100px" maxlength="12" class="input" OnChange="javascript:CheckUsername();">
+		<input name="username_check" type="hidden" value="">
+		<span id="username_result"></span>
+		<br/>
+		<font color="gray">登入所使用的帳號，請使用小寫英文或數字，必須以英文開頭，並在 6 ~ 12 個字元之間。</font>
+		<a href="javascript://" onClick="CheckUsername();">檢查</a>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>輸入密碼</td>
+	<td>
+		<input name="password" type="password" style="width: 100px" maxlength="12" class="input">
+		<br/>
+		<font color="gray">登入所使用的密碼，請使用英文或數字，並在 6 ~ 12 個字元之間</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>確認密碼</td>
+	<td>
+		<input name="confirmpassword" type="password" style="width: 100px" maxlength="12" class="input">
+		<br/>
+		<font color="gray">請再次輸入剛剛的密碼，大小寫視為不同</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>密碼提示</td>
+	<td>
+		<input name="passwordhint" type="text" style="width: 425px" class="input">
+		<br/>
+		<font color="gray">避免您將來忘記您的密碼，請填寫密碼提示</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>電子信箱</td>
+	<td>
+		<input name="email" type="text" style="width: 425px" class="input" OnChange="javascript:CheckEmail();">
+		<br/>
+		<input name="email_check" type="hidden" value="">
+		<span id="email_result"></span>
+		
+		<font color="gray">請填有效的電子信箱，會員註冊認證用。</font>
+		<a href="javascript://" onClick="CheckEmail();">檢查</a>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>電子信箱</td>
+	<td>
+		<input name="email2" type="text" style="width: 425px" class="input" OnChange="javascript:CheckEmail2();">
+		<br/>
+		<font color="gray">請再次輸入您的電子信箱。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">備用信箱</td>
+	<td>
+		<input name="backupemail" type="text" style="width: 425px" class="input"><br/>
+		<font color="gray">請填備用的電子信箱</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>真實姓名</td>
+	<td>
+		<input name="realname" type="text" style="width: 425px" class="input"><br/>
+		<font color="gray">活動現場需要檢查您的證件證件確保您是本人，請務必填寫您的真實姓名。</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>性別</td>
+	<td>
+		<select name="sex">
+			<option value="-1" selected>請選擇</option><option value="男">男</option><option value="女">女</option>
+		</select>
+		<font color="gray">請選擇您的性別</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>暱稱</td>
+	<td>
+		<input name="nickname" type="text" style="width: 425px" class="input"><br/>		
+		<font color="gray">此暱稱為活動中的名字，建議使用英文名字</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>生日</td>
+	<td>	
+		西元
+		<select name="birth_year" onChange="javascript:CheckBirth();">
+			<{ $birth_year }>
+		</select>
+		年
+		<select name="birth_month" onChange="javascript:CheckBirth();">
+			<{ $birth_month }>
+		</select>
+		月
+		<select name="birth_day" onChange="javascript:CheckBirth();">
+			<{ $birth_day }>
+		</select>
+		日
+		<br/>
+		<font color="gray">請選擇您的出生年月日</font>		
+		<font color="red">*未滿18歲請勿註冊</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>星座</td>
+	<td>
+		<select name="constellation">
+			<option value="-1" selected>請選擇</option>
+			<option value="牡羊座" >牡羊座</option>
+			<option value="金牛座" >金牛座</option>
+			<option value="雙子座" >雙子座</option>
+			<option value="巨蟹座" >巨蟹座</option>
+			<option value="獅子座" >獅子座</option>
+			<option value="處女座" >處女座</option>
+			<option value="天秤座" >天秤座</option>
+			<option value="天蠍座" >天蠍座</option>
+			<option value="射手座" >射手座</option>
+			<option value="魔羯座" >魔羯座</option>
+			<option value="水瓶座" >水瓶座</option>
+			<option value="雙魚座" >雙魚座</option>
+		</select>
+		<font color="gray">請選擇您的星座</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>手機號碼</td>
+	<td>
+		<input name="tel1" type="text" maxlength="4" size="4" class="input" onKeyUp="javascript:CheckTel1();">
+		-
+		<input name="tel2" type="text" maxlength="3" size="3" class="input" onKeyUp="javascript:CheckTel2();">
+		-
+		<input name="tel3" type="text" maxlength="3" size="3" class="input">
+		<br/>
+		<font color="gray">請填寫手機號碼，若報名的活動臨時有變更，將透過此方式立即通知您</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>MSN帳號</td>
+	<td>
+		<input name="msn" type="text" style="width: 425px" class="input"><br/>
+		<font color="gray">請填寫您的MSN帳號</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>教育程度</td>
+	<td>
+		<select name="education">
+			<option value="-1" selected>請選擇</option>
+			<option value="國小" >國小</option>
+			<option value="國中" >國中</option>
+			<option value="高中職" >高中職</option>
+			<option value="四技二專" >四技二專</option>
+			<option value="大學" >大學</option>
+			<option value="碩士" >碩士</option>
+			<option value="博士" >博士</option>
+		</select>
+		<br/>
+		<font color="gray">請選擇您的教育程度</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>最高學歷</td>
+	<td>
+		<input name="top_education" type="text" style="width: 425px" class="input">
+		<br/>
+		<font color="gray">請填寫您畢業的學校</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>職業</td>
+	<td>
+		職業類別 
+		<select name="career" onChange="buildkey();">
+			<option value="-1" selected>請選擇
+			<option value="批發/零售/傳直銷業">批發/零售/傳直銷業
+			<option value="文教業">文教業
+			<option value="大眾傳播業">大眾傳播業
+			<option value="休閒/旅遊/運動業">休閒/旅遊/運動業
+			<option value="軟體/半導體/電子/資訊業">軟體/半導體/電子/資訊業
+			<option value="一般服務業">一般服務業
+			<option value="一般製造業">一般製造業
+			<option value="農林漁牧/水電資源業">農林漁牧/水電資源業
+			<option value="運輸物流及倉儲">運輸物流及倉儲
+			<option value="社福/政治/政府/宗教業">社福/政治/政府/宗教業
+			<option value="金融/投顧/保險業">金融/投顧/保險業
+			<option value="會計/法律/研發/顧問業">會計/法律/研發/顧問業
+			<option value="建築營造及不動產相關業">建築營造及不動產相關業
+			<option value="醫療保健/環境衛生業">醫療保健/環境衛生業
+			<option value="土石採取/礦業">土石採取/礦業
+			<option value="家管">家管
+			<option value="待業中">待業中
+			<option value="其他">其他
+		</select>		
+		<br/>
+
+		職業
+		<select name="career_detail" onChange="buildkey2();">
+			<option value="-1">請先選擇職業類別
+		</select>
+		<input name="career_other" type="text" size="20" maxlength="20" class="input" style="display: none" disabled>
+		<br/>
+		
+		職務
+		<input name="career_title" type="text" size="20" maxlength="20" class="input">
+		<br/>
+		<font color="gray">請選填您目前的職業</font>		
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>興趣</td>
+	<td>
+		<font color="gray">請選擇的您興趣嗜好，最少一項，最多三項</font>
+		<br/>
+		<input name="interest[]" type="checkbox" value="閱讀寫作">閱讀寫作
+		<input name="interest[]" type="checkbox" value="逛街購物">逛街購物 
+		<input name="interest[]" type="checkbox" value="電腦網路">電腦網路 
+		<input name="interest[]" type="checkbox" value="聊天哈拉">聊天哈拉 
+		<input name="interest[]" type="checkbox" value="音樂欣賞">音樂欣賞
+
+		<br/>
+
+		<input name="interest[]" type="checkbox" value="登山健行">登山健行 
+		<input name="interest[]" type="checkbox" value="電玩對戰">電玩對戰 
+		<input name="interest[]" type="checkbox" value="星象命理">星象命理 
+		<input name="interest[]" type="checkbox" value="電視電影">電視電影
+		<input name="interest[]" type="checkbox" value="運動釣魚">運動釣魚 
+
+		<br/>
+
+		<input name="interest[]" type="checkbox" value="下棋彈琴">下棋彈琴 
+		<input name="interest[]" type="checkbox" value="塑身美容">塑身美容 
+		<input name="interest[]" type="checkbox" value="動畫漫畫">動畫漫畫
+		<input name="interest[]" type="checkbox" value="美食烹調">美食烹調 
+		<input name="interest[]" type="checkbox" value="語言學習">語言學習 
+
+		<br/>
+
+		<input name="interest[]" type="checkbox" value="投資理財">投資理財 
+		<input name="interest[]" type="checkbox" value="攝影繪畫">攝影繪畫
+		<input name="interest[]" type="checkbox" value="唱歌跳舞">唱歌跳舞 
+		<input name="interest[]" type="checkbox" value="兜風閒晃">兜風閒晃 
+		<input name="interest[]" type="checkbox" value="遊山玩水">遊山玩水 
+
+		<br/>
+
+		<input name="interest[]" type="checkbox" value="吃喝玩樂">吃喝玩樂
+		<input name="interest[]" type="checkbox" value="古董收藏">古董收藏 
+		<input name="interest[]" type="checkbox" value="發呆睡覺">發呆睡覺 
+		<input name="interest[]" type="checkbox" value="占星算命">占星算命 
+		<input name="interest[]" type="checkbox" value="園藝花卉">園藝花卉
+
+		<br/>
+
+		<input name="interest[]" type="checkbox" value="豢養寵物">豢養寵物 
+		<input name="interest[]" type="checkbox" value="其他" onClick="foo();">其他，請填寫
+		<input name="interest_other" type="text" style="width: 190px" class="input" disabled>		
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>居住地點</td>
+	<td>
+		<select name="inhabit">
+			<option value="-1" selected>請選擇</option>
+			<option value="台北縣市" >台北縣市</option>
+			<option value="高雄縣市" >高雄縣市</option>
+			<option value="新竹縣市" >新竹縣市</option>
+			<option value="台中縣市" >台中縣市</option>
+			<option value="桃園縣" >桃園縣</option>
+			<option value="基隆市" >基隆市</option>
+			<option value="宜蘭縣" >宜蘭縣</option>
+			<option value="台南縣市" >台南縣市</option>
+			<option value="雲林縣" >雲林縣</option>
+			<option value="嘉義縣市" >嘉義縣市</option>
+			<option value="彰化縣" >彰化縣</option>
+			<option value="苗栗縣" >苗栗縣</option>
+			<option value="南投縣" >南投縣</option>
+			<option value="屏東縣" >屏東縣</option>
+			<option value="花蓮縣" >花蓮縣</option>
+			<option value="台東縣" >台東縣</option>
+			<option value="澎湖縣" >澎湖縣</option>
+			<option value="金門縣" >金門縣</option>
+			<option value="連江縣" >連江縣</option>
+			<option value="其他"   >其他</option>
+		</select>
+		<br/>
+		<font color="gray">請選擇您的居住地點</font>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="Submit" value="確定送出" class=button>
+		<input type="reset" name="Submit" value="重新填寫" class=button>
+	</td>
+</tr>
+</table>
+</form>

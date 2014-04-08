@@ -1,0 +1,27 @@
+<form name="questionary" method="post" action="./activities.join.act.php?act=MatchCount">
+<input type="hidden" name="aid" value="<{ $activitiedata.aid }>">
+
+<table width="400" align="center" border="1" class="datatable">
+	<tr>
+		<th align="center" colspan="2">
+			配對填寫 - 選擇人數
+		</th>
+	</tr>
+	<tr>
+		<td align="right" width="150">
+			選擇可填寫的人數
+		</td>
+		<td align="left">
+			<select name="count">
+				<{ $option }>
+			</select>
+		</td>
+	</tr>	
+	<tr>
+		<td align="center" colspan="2">
+			<input type="submit" name="send" value="確定送出" class="button">
+			<input type="reset" name="reset" value="重新填寫" class="button">
+		</td>
+	</tr>
+</table>
+</form>

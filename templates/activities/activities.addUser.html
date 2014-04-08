@@ -1,0 +1,59 @@
+<form name="questionary" method="post" action="./activities.join.act.php?act=addUser">
+<input type="hidden" name="aid" value="<{ $activitiedata.aid }>">
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr>
+		<th align="center" colspan="2">
+			加入會員
+		</th>
+	</tr>
+	
+	<tr>
+		<td align="center" width="150">加入至活動</td>
+		<td align="left"><{ $activitiedata.name }></td>
+	</tr>
+	
+	<tr>
+		<td align="center">會員帳號</td>
+		<td align="left">
+			<input name="username" type="text" size="20" maxlength="12" class="input">
+			<br />
+			<font color="gray">請填寫完整的會員帳號</font>
+		</td>
+	</tr>
+	
+	<tr>
+		<td align="center">活動費用</td>
+		<td align="left"><{ $activitiedata.charge }></td>
+	</tr>
+	
+	<tr>
+		<td align="center">繳費方式</td>
+		<td align="left">
+			<input type="radio" name="charge_method" value="iBon">
+			使用iBon繳費， 並給予折扣
+				<input name="discount" type="text" size="6" maxlength="6" class="input" value="0" style="text-align: right;">
+			元
+			
+			<br />
+			<br />
+			<font color="gray">折扣金額不可超過活動費用，iF系統會自動計算金額和產生iBon繳費代碼並寄送活動繳費提醒信給該位會員</font>
+			
+			<hr />
+			<input type="radio" name="charge_method" value="coupon">
+			使用E-coupon優惠卷
+			
+			<br />
+			<br />
+			<font color="gray">iF系統將會自動給予優惠卷來報名該場活動</font>			
+		</td>
+	</tr>
+	
+	<tr>
+		<td align="center" colspan="2">
+			<input type="submit" name="send" value="確定送出" class="button">
+			<input type="reset" name="reset" value="重新填寫" class="button">
+		</td>
+	</tr>
+</table>
+</form>

@@ -1,0 +1,127 @@
+<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th colspan="2" align="center">
+			報名活動詳細資料
+		</th>
+	</tr>
+	<tr>
+		<td align="center" width="150">活動名稱</td>
+		<td> <{ $act_data.name }> </td>
+	</tr>
+	<tr>
+		<td align="center">會員帳號</td>
+		<td> <{ $joindata.username }> (<{ $joindata.nickname }>)</td>
+	</tr>
+	<tr>
+		<td align="center">真實姓名</td>
+		<td> <{ $joindata.realname }> </td>
+	</tr>
+	<tr>
+		<td align="center">年齡</td>
+		<td> <{ $joindata.age }> 歲</td>
+	</tr>
+	<tr>
+		<td align="center">聯絡電話</td>
+		<td> <{ $joindata.tel }> </td>
+	</tr>
+	<tr>
+		<td align="center">報名狀態</td>
+		<td> <{ $joindata.join_status }> </td>
+	</tr>
+	<tr>
+		<td align="center">報名時間</td>
+		<td> <{ $joindata.join_time }> </td>
+	</tr>
+	<tr>
+		<td align="center">繳費狀態</td>
+		<td>
+			<{ $joindata.charge }> &nbsp; <{ $joindata.charge_detail }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">介紹的會員</td>
+		<td> <{ $joindata.intro_username }> </td>
+	</tr>
+	<tr>
+		<td align="center">推薦朋友數</td>
+		<td> <{ $joindata.intro_count }> 人</td>
+	</tr>
+	<tr>
+		<td align="center">活動中的編號</td>
+		<td> <{ $joindata.no }> </td>
+	</tr>
+	<tr>
+		<td align="center">選擇的會員</td>
+		<td> <{ $joindata.option1 }> </td>
+	</tr>
+	<tr>
+		<td align="center">選擇我的會員</td>
+		<td>
+			<{ if $option2_count > 0 }>
+			<div class="optinfo">
+				<div class="line">
+					<div class="no_t"> 活動編號 </div>
+					<div class="nickname_t"> 會員暱稱 </div>
+					<div class="info_t"> 會員資料 </div>
+				</div>
+				
+				<{section name=key loop=$option2}>
+				<div class="line">
+					<div class="no"> <{ $option2[key].no }> </div>
+					<div class="nickname">  <{ $option2[key].nickname }> </div>
+					<div class="info"> <{ $option2[key].opt_info }></div>
+				</div>
+				<{/section}>
+				
+			</div>	
+			<{ else }>
+				--
+			<{ /if }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">配對成功的會員</td>
+		<td> 
+			<{ if $option3_count > 0 }>
+			<div class="optinfo">
+				
+				<div class="line">
+					<div class="no_t"> 活動編號 </div>
+					<div class="nickname_t"> 暱稱 </div>
+					<div class="info_t"> 會員資料 </div>
+				</div>
+				
+				<{section name=key loop=$option3}>
+				<div class="line">
+					<div class="no"> <{ $option3[key].no }> </div>
+					<div class="nickname"> <{ $option3[key].nickname }> </div>
+					<div class="info"> <{ $option3[key].opt_info }> </div>
+				</div>
+				<{/section}>
+				
+			</div>
+			<{ else }>
+				--
+			<{ /if }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">黑名單記錄</td>
+		<td> <{ $joindata.blackrecord }> </td>
+	</tr>
+	<tr>
+		<td align="center">提報為黑名單</td>
+		<td> <{ $joindata.accuseblack }> </td>
+	</tr>
+
+	<tr>
+		<td align="center">取消報名</td>
+		<td> 
+			<{ $joindata.cancel }>
+			&nbsp;
+			<font color="gray">		
+				EO取消會員報名活動。
+			</font>
+		</td>
+	</tr>
+</table>

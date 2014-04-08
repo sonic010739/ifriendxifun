@@ -1,0 +1,189 @@
+<script src="lib/dynCalendar/browserSniffer.js" type="text/javascript" language="javascript"></script>
+<script src="lib/dynCalendar/dynCalendar.js" type="text/javascript" language="javascript"></script>
+
+<script type="text/javascript">
+	function calendarCallback(date, month, year)
+	{
+		if (String(month).length == 1) {
+			month = '0' + month;
+		}
+
+		if (String(date).length == 1) {
+			date = '0' + date;
+		}
+				
+		document.msgform.year.value = year;
+		document.msgform.month.value = month;
+		document.msgform.day.value = date;
+		date = year + '-' + month + '-' + date;
+		document.msgform.date.value = date;
+	}
+
+	function checkcount()
+	{
+		var limit = 70;		
+		var obj = document.getElementById("RestNumber");
+		
+		if (document.msgform.message.value.length <= limit)
+		{
+			obj.innerHTML  = "已輸入 <b>" + document.msgform.message.value.length + "</b> 個字";
+			obj.innerHTML += "，還可以輸入 <b>" + (limit - document.msgform.message.value.length) + "</b> 個字";
+			
+		}
+		else 
+		{
+			obj.innerHTML  = "已輸入 <b>" + document.msgform.message.value.length + "</b> 個字";
+			obj.innerHTML += "，超過字數限制! 請調整簡訊內容否則無法寄出簡訊";
+		}		
+	}
+	
+	function chkmsgform()
+	{
+		if (document.msgform.sendtime[0].checked)
+		{
+			// nothing
+		}
+		else if (document.msgform.sendtime[1].checked)
+		{
+			if (document.msgform.date.value == "" || document.msgform.hour.value == "-1" || document.msgform.minute.value == "-1")
+			{
+				alert('未指定簡訊寄送時間!');
+				return false;
+			}
+			
+			var now = new Date();
+			var select_date = new Date(document.msgform.year.value, document.msgform.month.value-1, document.msgform.day.value, document.msgform.hour.value, document.msgform.minute.value, 0);
+			var today = new Date( now.getFullYear(), now.getMonth(), now.getDate(),	now.getHours(), now.getMinutes(), now.getSeconds());
+			var date2 = new Date( now.getFullYear(), now.getMonth(), now.getDate() + 3, now.getHours(), now.getMinutes(), now.getSeconds());
+			
+			if (select_date < today)
+			{
+				alert('無法指定過去的時間寄送簡訊!');
+				return false;
+			}
+			else if (select_date > date2)
+			{
+				alert('寄送時間只能設定在未來三天以內!');
+				return false;
+			}
+		}
+		else
+		{
+			alert('未選擇寄送時間!');
+			return false;
+		}
+		
+		if (document.msgform.message.value.length > 70)
+		{
+			alert('簡訊內容不可超過70字!');
+			return false;
+		}
+		else if (document.msgform.message.value.length == 0)
+		{
+			alert('簡訊內容未填寫!');
+			return false;
+		}
+		
+		if (confirm("確定要寄出簡訊"))
+		{
+			alert("準備寄出簡訊!\n若收件人人數較多需等候數分鐘才能全部寄出，請勿對此視窗做任何動作");
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+</script>
+
+<form method="post" name="msgform" action="./member.act.php?act=SendMessage" OnSubmit="return chkmsgform();">
+	<table width="600" border="1" align="center" class="datatable">
+		<tr>
+			<th colspan="2" align="center">寄送簡訊</th>
+		</tr>
+		<tr>
+			<td width="150" align="center">收件者</td>
+			<td >
+				<div style="max-height: 150px; overflow: auto">
+					<{section name=key loop=$memberlist}>				
+						<input name="phones[]" type="checkbox" value="<{ $memberlist[key].tel }>" checked>
+						<{ $memberlist[key].realname }>(<{ $memberlist[key].username }>), <{ $memberlist[key].tel }><br />
+					<{/section}>
+				</div>			
+			</td>
+		</tr>
+		<tr>
+			<td align="center">其他收件者</td>
+			<td >
+				<input name="others" type="text" style="width: 450px;" class="input" />
+				<font color="gray">未在收件者名單的手機號碼，可輸入多個號碼請以逗號","間隔。</font>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">寄送時間</td>
+			<td >
+				<input name="sendtime" type="radio" value="NOW"/>直接寄出 <br />
+				<input name="sendtime" type="radio" value="SETTIME"/>指定寄送時間 
+				&nbsp;&nbsp;
+				<input type="text" name="date" size="20" class="input" style="width: 100px;" readOnly>
+				<input type="hidden" name="year">
+				<input type="hidden" name="month">
+				<input type="hidden" name="day">
+				<script language="JavaScript" type="text/javascript">
+					<!--
+					fooCalendar = new dynCalendar('fooCalendar', 'calendarCallback', 'lib/dynCalendar/images/');
+					//-->
+				</script>
+				&nbsp;
+				<select name="hour">
+					<option value="-1" selected>請選擇</option>
+					<option value="00">00</option><option value="01">01</option><option value="02">02</option>
+					<option value="03">03</option><option value="04">04</option><option value="05">05</option>
+					<option value="06">06</option><option value="07">07</option><option value="08">08</option>
+					<option value="09">09</option><option value="10">10</option><option value="11">11</option>
+					<option value="12">12</option><option value="13">13</option><option value="14">14</option>
+					<option value="15">15</option><option value="16">16</option><option value="17">17</option>
+					<option value="18">18</option><option value="19">19</option><option value="20">20</option>
+					<option value="21">21</option><option value="22">22</option><option value="23">23</option>			
+				</select>
+				:
+				<select name="minute">
+					<option value="-1" selected>請選擇</option>
+					<option value="00">00</option><option value="05">05</option>
+					<option value="10">10</option><option value="15">15</option>
+					<option value="20">20</option><option value="25">25</option>
+					<option value="30">30</option><option value="35">35</option>
+					<option value="40">40</option><option value="45">45</option>
+					<option value="50">50</option><option value="55">55</option>
+				</select>
+				
+				<br />
+				<font color="gray">選擇立刻寄出簡訊或是指定時間寄出</font>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">簡訊內容</td>
+			<td >
+				<textarea name="message" class="input" wrap="hard" style="width: 450px; height: 100px;" onkeypress="checkcount();"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">剩餘字數</td>
+			<td >
+				<div id="RestNumber"></font>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">簡訊系統剩餘點數</td>
+			<td >
+				尚可寄送 <b><{ $sms_point }></b> 封簡訊
+			</td>
+		</tr>
+	</table>
+
+	<br/>
+	<center>
+		<input class="button" type="submit" name="Submit" value="傳送簡訊">		
+		<input class="button" type="reset" name="Submit" value="重新填寫">
+	</center>
+</form>

@@ -1,0 +1,44 @@
+<!--
+/**
+* o------------------------------------------------------------------------------o
+* | This package is dual licensed as GPL and a commercial license.               |
+* | If you use the code commercially (or if you don't want to be restricted by   |
+* | the GPL license), you will need the commercial license. It's only £49 (GBP - |
+* | roughly $98 depending on the exchange rate) and helps me out a lot. Thanks.  |
+* o------------------------------------------------------------------------------o
+*
+* © Copyright Richard Heyes
+*/
+-->
+<html>
+<head>
+
+	<link rel="stylesheet" href="dynCalendar.css" type="text/css" media="screen">
+	<script src="browserSniffer.js" type="text/javascript" language="javascript"></script>
+	<script src="dynCalendar.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript">
+	<!--
+		// Calendar callback. When a date is clicked on the calendar
+		// this function is called so you can do as you want with it
+		function calendarCallback(date, month, year)
+		{
+			date = date + '/' + month + '/' + year;
+			document.forms[0].date.value = date;
+		}
+	// -->
+	</script>
+
+</head>
+<body>
+
+<form>
+	<input type="text" name="date" value="">
+	<script language="JavaScript" type="text/javascript">
+    <!--
+    	fooCalendar = new dynCalendar('fooCalendar', 'calendarCallback', 'images/');
+    //-->
+    </script>
+</form>
+
+</body>
+</html>

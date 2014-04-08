@@ -1,0 +1,92 @@
+<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=<{ $gmap_key }>" type="text/javascript"></script>
+<script src="./javascript/googlemap.js" type="text/javascript"></script>
+
+<form name="place" method="post" onSubmit=""  action="./place.act.php?act=add">
+<table width="600" border = "1" align="center" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">
+		新增場地資料 - <font color="red">請填寫以下欄位的資料 *為必填項目</font>
+	</th>
+</tr>
+<tr>
+	<td width="150" align="center"><font color="red">*</font>場地名稱</td>
+	<td>
+		<input name="name" type="text" style="width: 400px;" class="input">
+		<br/>
+		<font color="gray">請輸入場地名稱</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>場地電話</td>
+	<td>
+		<input name="tel" type="text" style="width: 100px;"  class="input">
+		<br/>
+		<font color="gray">請輸入場地電話</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>場地地址</td>
+	<td>
+		<input name="address" type="text" style="width: 400px;" class="input" onChange="javascript:ShowLatLng();">
+		<a href="javascript://" onClick="javascript:ShowLatLng();">轉換</a>
+		<br/>
+		<font color="gray">請輸入完整的場地地址，若未自動轉換經緯度請點選轉換</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>區域</td>
+	<td>
+		<select name="city">
+			<option value="-1" selected>請選擇</option>
+			<option value="台北縣市" >台北縣市</option>
+			<option value="高雄縣市" >高雄縣市</option>
+			<option value="新竹縣市" >新竹縣市</option>
+			<option value="台中縣市" >台中縣市</option>
+			<option value="桃園縣" >桃園縣</option>
+			<option value="基隆市" >基隆市</option>
+			<option value="宜蘭縣" >宜蘭縣</option>
+			<option value="台南縣市" >台南縣市</option>
+			<option value="雲林縣" >雲林縣</option>
+			<option value="嘉義縣市" >嘉義縣市</option>
+			<option value="彰化縣" >彰化縣</option>
+			<option value="苗栗縣" >苗栗縣</option>
+			<option value="南投縣" >南投縣</option>
+			<option value="屏東縣" >屏東縣</option>
+			<option value="花蓮縣" >花蓮縣</option>
+			<option value="台東縣" >台東縣</option>
+			<option value="澎湖縣" >澎湖縣</option>
+			<option value="金門縣" >金門縣</option>
+			<option value="連江縣" >連江縣</option>
+			<option value="其他"   >其他</option>
+		</select>
+		<br/>
+		<font color="gray">請選擇場地所在的縣市</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">網頁連結</td>
+	<td>
+		<input name="link" type="text" style="width: 400px;" class="input">
+		<br/>
+		<font color="gray">如果該場地有網頁介紹，請輸入網頁連結</font>
+	</td>
+</tr>
+<tr>
+	<td align="center"><font color="red">*</font>場地敘述</td>
+	<td><textarea name="decription" style="width: 440px;" rows="7" class="input"></textarea></td>
+</tr>
+<tr>
+	<td align="center">經度</td>
+	<td><input name="lat" type="text" style="width: 100px;" readOnly="true" class="input">&nbsp;<font color="red">*由程式自動產生</font></td>
+</tr>
+<tr>
+	<td align="center">緯度</td>
+	<td><input name="lng" type="text" style="width: 100px;" readOnly="true" class="input">&nbsp;<font color="red">*由程式自動產生</font></td>
+</tr>
+</table>
+<br/>
+<div align="center">
+	<input type="submit" name="Submit" value="確定送出" class=button onClick="javascript:ShowLatLng();">
+	<input type="reset" name="Submit" value="重新填寫" class=button>
+</div>
+</form>

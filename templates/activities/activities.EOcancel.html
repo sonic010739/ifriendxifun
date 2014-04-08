@@ -1,0 +1,45 @@
+﻿<center>
+	<b>申請取消活動</b>
+</center>
+
+<br/>
+
+<table width="600" align="center" border="1" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th align="center" colspan="2">取消活動填寫原因</th>
+</tr>
+<tr>
+	<td width="150" align="center">活動名稱</td>
+	<td>
+		<a href="./index.php?act=activities&amp;sel=detail&amp;aid=<{ $activitiedata.aid }>"><{ $activitiedata.name }></a>
+	</td>
+</tr>
+<tr>
+	<td align="center">EO名稱</td>
+	<td><a href="./index.php?act=member&amp;sel=detail&amp;uid=<{ $activitiedata.uid }>"><{ $activitiedata.username }></a></td>
+</tr>
+<tr>
+	<td align="center">活動日期</td>
+	<td><{ $activitiedata.act_date }></td>
+</tr>
+<tr>
+	<td align="center">活動參與人數</td>
+	<td>男：<{ $activitiedata.males }>人，女：<{ $activitiedata.females }>人</td>
+</tr>
+
+<tr>
+	<td align="center">取消原因</td>
+	<td>
+	<form name="usercancel" method="post" action="./activities.act.php?act=EOcancel">
+	<input name="aid" type="hidden" value="<{ $activitiedata.aid }>">
+	<input name="uid" type="hidden" value="<{ $activitiedata.uid }>">
+	<textarea name="reason" style="width: 450px;" rows="7" class="input"></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="send" value="確定送出" class="button">
+		<input type="reset" name="reset" value="重新填寫" class="button">
+	</td>
+</tr>
+</table>

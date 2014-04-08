@@ -1,0 +1,748 @@
+<table width="600" align="center" border="1" class="datatable">
+	<tr>
+		<th><{ $activitiedata.name }></th>
+	</tr>
+	<tr>
+		<td><{ $activitiedata.decription }></td>
+	</tr>
+</table>
+
+<br />
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr>
+		<th colspan="2">
+			活動詳情
+		</th>
+	</tr>
+	<tr>
+		<td width="150" align="center">主題</td>
+		<td>
+			<{ $activitiedata.tname }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">名稱</td>
+		<td>
+			<{ $activitiedata.name }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">日期及時間</td>
+		<td>
+			<{ $activitiedata.act_date }>  <{ $activitiedata.act_time }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">區域</td>
+		<td>
+			<{ $activitiedata.placecity }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">地點</td>
+		<td>
+			<b><{ $activitiedata.placename }></b>
+			<a href="./index.php?act=place&amp;sel=detail&amp;pid=<{ $activitiedata.place }>" target="new">點我查詢地點</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">族群</td>
+		<td>
+			<{ $activitiedata.gname }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">報名人數限制</td>
+		<td>
+			<{ $activitiedata.people_limit }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">年齡限制</td>
+		<td>
+			<{ $activitiedata.age_limit }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">報名截止時間</td>
+		<td>
+			<{ $activitiedata.join_deadline }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">報名費用</td>
+		<td>
+			<{ $activitiedata.charge }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">優惠方案</td>
+		<td>
+			<{ $activitiedata.use_discount }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">優惠卷</td>
+		<td>
+			<{ $activitiedata.use_coupon }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">活動配對</td>
+		<td>
+			<{ $activitiedata.use_match }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">聯繫資料</td>
+		<td>
+			<{ $activitiedata.use_newmatch }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">活動EO</td>
+		<td>
+			<{ $activitiedata.username }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">活動狀態</td>
+		<td>
+			<{ $activitiedata.status }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">報名連結</td>
+		<td>
+			<{ $activitiedata.option  }>
+		</td>
+	</tr>
+
+	<{if $managedata.EO == 1 }>
+	<tr bgcolor="#CCCCCC">
+		<td align="center">已報名人數</td>
+		<td>
+			男 <b><{ $activitiedata.males }></b> 人 / 女 <b><{ $activitiedata.females }></b> 人
+		</td>
+	</tr>
+	<{ /if }>
+</table>
+
+
+<{if $managedata.act_owner == 1 }>
+	<br />
+
+	<script type="text/javascript">
+		function loadManageTab(obj,n)
+		{
+			<{ if $managedata.Admin == 1 }>
+				var items = 6;
+			<{ else }>
+				var items = 5;
+			<{ /if }>
+			var tabsF = document.getElementById('ManageTab').getElementsByTagName('li');
+
+			for (i = 1; i <= items; i++)
+			{
+				tabsF[i-1].setAttribute('id',null);
+				eval('document.getElementById(\'Manage' + i + '\').style.display = \'none\'');
+			}
+
+			eval('document.getElementById(\'Manage' + n + '\').style.display = \'inline\'');
+			obj.parentNode.setAttribute('id','current');
+		}
+	</script>
+
+	<div id="tabpage">
+		<div id="ManageTab" class="tabsF">
+			<ul>
+				<li id="current">
+					<a style="width: 80px" href="javascript://" onClick="loadManageTab(this, 1);">
+						<span>活動管理</span>
+					</a>
+				</li>
+				<li>
+					<a style="width: 80px" href="javascript://" onClick="loadManageTab(this, 2);">
+						<span>已報名名單</span>
+					</a>
+				</li>
+				<li>
+					<a style="width: 80px" href="javascript://" onClick="loadManageTab(this, 3);">
+						<span>已取消名單</span>
+					</a>
+				</li>
+				<li>
+					<a style="width: 80px" href="javascript://" onClick="loadManageTab(this, 4);">
+						<span>寄送信件</span>
+					</a>
+				</li>
+				<li>
+					<a style="width: 80px" href="javascript://" onClick="loadManageTab(this, 5);">
+						<span>手機簡訊</span>
+					</a>
+				</li>
+				<{if $managedata.Admin == 1 }>
+				<li>
+					<a style="width: 80px" href="javascript://" onClick="loadManageTab(this, 6);">
+						<span>管理者功能</span>
+					</a>
+				</li>
+				<{ /if }>
+			</ul>
+		</div>
+
+		<div class="tabsC">
+			<div id="Manage1" style="display: inline;">
+				<table width="600" align="center" border="1" class="datatable">
+					<tr>
+						<td align="center" width="150">變更活動狀態</td>
+						<td >
+							<{ $managedata.modify }> |
+							<{ $managedata.proceed }> |
+							<{ $managedata.close }> |
+							<{ $managedata.cancel }>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">配對功能</td>
+						<td >
+								<{ $managedata.signintable }> |								
+								<{ $managedata.revise_member_no }>
+								
+							<{ if $managedata.use_match == 1 }>
+								<br />
+								<{ $managedata.questionary }> |
+								<{ $managedata.matchresult}>
+							<{ /if }>
+							<{ if $managedata.use_newmatch == 1 }>
+								|
+								<{ $managedata.newmatchresult}>
+							<{ /if }>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">已報名人數</td>
+						<td >
+							男 <{ $activitiedata.males }> 人 / 女 <{ $activitiedata.females }> 人   [<{ $managedata.ReCount }>]
+							<br/>
+							<font color="gray">目前活動的報名人數，若有錯誤誤請點選「重新統計」。</font>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">繳費狀態</td>
+						<td >
+							已繳費總金額: <{ $managedata.paid_charge }> 元<br/>
+							已繳費人數: 男 <{ $managedata.paid_males }> 人 / 女 <{ $managedata.paid_females }> 人<br/>
+							未繳費人數: 男 <{ $managedata.Unpay_males }> 人 / 女 <{ $managedata.Unpay_females }> 人<br/>
+							優惠卷人數:	 男 <{ $managedata.coupon_males }> 人 / 女 <{ $managedata.coupon_females }> 人
+						</td>
+					</tr>
+					<tr>
+						<td align="center">取消活動審核</td>
+						<td >
+							<{ $managedata.cancelapply }>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="Manage2" style="display: none;">
+				<{ if $act_join != 0 }>
+				<table width="600" align="center" border="1" class="datatable">
+					<tr bgcolor="#CCCCCC">
+						<th align="center" width="60">繳費</th>
+						<th align="center" width="80">編號</th>
+						<th align="center" width="40">性別</th>
+						<th align="center" width="100">帳號</th>
+						<th align="center" width="100">暱稱</th>
+						<th align="center" width="60">年齡</th>
+						<th align="center" width="80">參與狀態</th>
+						<th align="center" width="80">詳細資料</th>
+					</tr>
+					<{section name=key loop=$act_joindata}>
+					<tr>
+						<td align="center"><{ $act_joindata[key].charge }></td>
+						<td align="center"><{ $act_joindata[key].no }></td>
+						<td align="center"><{ $act_joindata[key].sex }></td>
+						<td align="left"  ><{ $act_joindata[key].username }></td>
+						<td align="left"  ><{ $act_joindata[key].nickname }></td>
+						<td align="center"><{ $act_joindata[key].age }></td>
+						<td align="center"><{ $act_joindata[key].join_status }></td>
+						<td align="center"><{ $act_joindata[key].detail }></td>
+					</tr>
+					<{/section}>
+				</table>
+				<{else}>
+				<br/>
+				<center>
+					目前無會員報名活動
+				</center>
+				<{/if}>
+			</div>
+
+			<div id="Manage3" style="display: none;">
+				<{ if $act_cancel != 0 }>
+				<table width="600" align="center" border="1" class="datatable">
+					<tr bgcolor="#CCCCCC">
+						<th align="center" width="60">繳費</th>						
+						<th align="center" width="40">性別</th>
+						<th align="center" width="100">帳號</th>						
+						<th align="center" width="320">取消原因</th>
+						<th align="center" width="80">詳細資料</th>
+					</tr>
+					<{section name=key loop=$act_canceldata}>
+					<tr>
+						<td align="center"><{ $act_canceldata[key].charge }></td>
+						<td align="center"><{ $act_canceldata[key].sex }></td>
+						<td align="left"  ><{ $act_canceldata[key].username }></td>
+						<td align="left"  ><{ $act_canceldata[key].cancel_reason }></td>
+						<td align="center"><{ $act_canceldata[key].detail }></td>
+					</tr>
+					<{/section}>
+				</table>
+				<{else}>
+				<br/>
+				<center>
+					目前無會員取消活動
+				</center>
+				<{/if}>
+			</div>
+
+			<div id="Manage4" style="display: none;">
+				<{if $managedata.sendmail == 1 }>
+				<!-- TinyMCE -->
+				<script type="text/javascript" src="lib/tiny_mce/tiny_mce.js"></script>
+				<script type="text/javascript">
+					tinyMCE.init({
+						// General options
+						theme : "advanced",
+						mode: "exact",
+						elements: "body",
+						language : "tw",
+
+						plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+
+						// Theme options
+						theme_advanced_buttons1 : "bold, italic, underline, strikethrough, |, forecolor, backcolor, |, justifyleft,justifycenter,justifyright,justifyfull,fontselect,fontsizeselect,|,cut,copy,paste,|,search,replace",
+						theme_advanced_buttons2 : "undo, redo,|,bullist, numlist, |, outdent, indent, blockquote, |, link,unlink,anchor,image,cleanup,|,insertdate,inserttime,preview,|hr, sub, sup, |, charmap, help,code",
+						theme_advanced_buttons3 : "",
+						theme_advanced_buttons4 : "",
+						theme_advanced_toolbar_location : "top",
+						theme_advanced_toolbar_align : "left",
+						theme_advanced_statusbar_location : "none",
+						theme_advanced_resizing : true,
+
+						// Example content CSS (should be your site CSS)
+						content_css : "style.css",
+
+						// Drop lists for link/image/media/template dialogs
+						template_external_list_url : "lists/template_list.js",
+						external_link_list_url : "lists/link_list.js",
+						external_image_list_url : "lists/image_list.js",
+						media_external_list_url : "lists/media_list.js",
+
+						// Replace values for the template plugin
+						template_replace_values : {
+							username : "iF",
+							staffid : "sonic"
+						},
+
+						// use <br / > instead of use p
+						force_br_newlines : true,
+						force_p_newlines : false
+					});
+				</script>
+				<!-- /TinyMCE -->
+				<script type="text/javascript">
+					function checkform()
+					{
+						if (document.mailform.subject.value == "")
+						{
+							alert("未填寫信件主旨");
+							document.mailform.subject.focus();
+							return false;
+						}
+
+						if (confirm("確定要寄出信件"))
+						{
+							alert("準備寄出信件!\n若收件人人數較多需等候數分鐘才能全部寄出，請勿對此視窗做任何動作");
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					}
+				</script>
+				<form name="mailform" method="post" enctype="multipart/form-data" action="./activities.act.php?act=SendMail" onSubmit="return checkform()">
+					<input name="aid" type="hidden" value="<{ $activitiedata.aid }>" />
+					<table width="600" border="1" align="center" class="datatable">
+						<tr>
+							<td width="150" align="center">收件者</td>
+							<td >
+								<input name="to" type="radio" value="All">
+								<b>所有參加者</b><br />
+								<input name="to" type="radio" value="Paid">
+								<b>所有已繳費會員及使用優惠卷會員</b><br />
+								<input name="to" type="radio" value="Unpaid">
+								<b>所有尚未繳費的會員</b><br />
+							</td>
+						</tr>
+						<tr>
+							<td align="center">信件主旨</td>
+							<td><input name="subject" type="text" style="width: 440px;" class="input" /></td>
+						</tr>
+						<tr>
+							<td align="center" >附件</td>
+							<td><input name="attach" type="file" style="width: 430px;"/></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<input name="body_prefix" type="hidden" value="iF 會員您好，我是活動EO - <{ $member.nickname }><br />" />
+								iF 會員您好，我是活動EO - <{ $member.nickname }><br />
+								<textarea id="body" name="body" class="input" warp="hard" style="width: 592px; height:400px"></textarea>
+								<hr />
+								<input name="body_suffix" type="hidden" value="以上信件內文由各活動EO自行撰寫後經由iF系統寄出。<br />內文所有涉及之法律責任，將由各EO自行負責。<br />若對活動有所任何疑問請與該活動EO聯絡詢問，勿回覆此信件。<br />" />
+								以上信件內文由各活動EO自行撰寫後經由iF系統寄出。<br />
+								內文所有涉及之法律責任，將由各EO自行負責。<br />
+								若對活動有所任何疑問請與該活動EO聯絡詢問，勿回覆此信件。<br />
+								<hr />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="right">
+								<b>*所有由EO寄出的信件內容均會寄送一份副本至if@ifriendxifun.net</b>
+							</td>
+						</tr>
+					</table>
+					<br />
+					<center>
+						<input class="button" type="submit" name="Submit" value="傳送">
+						<input class="button" type="reset" name="Submit" value="重新填寫">
+					</center>
+				</form>
+				<{else}>
+				<center>
+					<br />
+					<br />
+					已超過活動時間7天以上，無法使用寄送信件功能
+				</center>
+				<{/if}>
+			</div>
+
+			<div id="Manage5" style="display: none;">
+				<{if $managedata.sendmessage == 1 }>
+					<script src="lib/dynCalendar/browserSniffer.js" type="text/javascript" language="javascript"></script>
+					<script src="lib/dynCalendar/dynCalendar.js" type="text/javascript" language="javascript"></script>
+
+					<script type="text/javascript">
+						function calendarCallback(date, month, year)
+						{
+							if (String(month).length == 1) {
+								month = '0' + month;
+							}
+
+							if (String(date).length == 1) {
+								date = '0' + date;
+							}
+
+							document.msgform.year.value = year;
+							document.msgform.month.value = month;
+							document.msgform.day.value = date;
+							date = year + '-' + month + '-' + date;
+							document.msgform.date.value = date;
+						}
+
+						function checkcount()
+						{
+							var limit = 70;
+							var obj = document.getElementById("RestNumber");
+
+							if (document.msgform.message.value.length <= limit)
+							{
+								obj.innerHTML  = "已輸入 <b>" + document.msgform.message.value.length + "</b> 個字";
+								obj.innerHTML += "，還可以輸入 <b>" + (limit - document.msgform.message.value.length) + "</b> 個字";
+
+							}
+							else
+							{
+								obj.innerHTML  = "已輸入 <b>" + document.msgform.message.value.length + "</b> 個字";
+								obj.innerHTML += "，超過字數限制! 請調整簡訊內容否則無法寄出簡訊";
+							}
+						}
+
+						function chkmsgform()
+						{
+							if (document.msgform.sendtime[0].checked)
+							{
+								// nothing
+							}
+							else if (document.msgform.sendtime[1].checked)
+							{
+								if (document.msgform.date.value == "" || document.msgform.hour.value == "-1" || document.msgform.minute.value == "-1")
+								{
+									alert('未指定簡訊寄送時間!');
+									return false;
+								}
+
+								var now = new Date();
+								var select_date = new Date(document.msgform.year.value, document.msgform.month.value-1, document.msgform.day.value, document.msgform.hour.value, document.msgform.minute.value, 0);
+								var today = new Date( now.getFullYear(), now.getMonth(), now.getDate(),	now.getHours(), now.getMinutes(), now.getSeconds());
+								var date2 = new Date( now.getFullYear(), now.getMonth(), now.getDate() + 3, now.getHours(), now.getMinutes(), now.getSeconds());
+
+								if (select_date < today)
+								{
+									alert('無法指定過去的時間寄送簡訊!');
+									return false;
+								}
+								else if (select_date > date2)
+								{
+									alert('寄送時間只能設定在未來三天以內!');
+									return false;
+								}
+							}
+							else
+							{
+								alert('未選擇寄送時間!');
+								return false;
+							}
+
+							if (document.msgform.message.value.length > 70)
+							{
+								alert('簡訊內容不可超過70字!');
+								return false;
+							}
+							else if (document.msgform.message.value.length == 0)
+							{
+								alert('簡訊內容未填寫!');
+								return false;
+							}
+
+							if (confirm("確定要寄出簡訊"))
+							{
+								alert("準備寄出簡訊!\n若收件人人數較多需等候數分鐘才能全部寄出，請勿對此視窗做任何動作");
+								return true;
+							}
+							else
+							{
+								return false;
+							}
+						}
+					</script>
+					<form method="post" name="msgform" OnSubmit="return chkmsgform();" action="./activities.act.php?act=SendMessage">
+						<input name="aid" type="hidden" value="<{ $activitiedata.aid }>" />
+						<table width="600" border="1" align="center" class="datatable">
+							<tr>
+								<td width="150" align="center">收件者</td>
+								<td >
+									<input name="to" type="radio" value="All">
+									<b>所有參加者</b><br />
+									<input name="to" type="radio" value="Paid">
+									<b>所有已繳費會員及使用優惠卷會員</b><br />
+									<input name="to" type="radio" value="Unpaid">
+									<b>所有尚未繳費的會員</b><br />
+								</td>
+							</tr>
+							<tr>
+								<td align="center">寄送時間</td>
+								<td >
+									<input name="sendtime" type="radio" value="NOW"/>直接寄出 <br />
+									<input name="sendtime" type="radio" value="SETTIME"/>指定寄送時間
+									&nbsp;&nbsp;
+									<input type="hidden" name="year">
+									<input type="hidden" name="month">
+									<input type="hidden" name="day">
+									<input type="text" name="date" size="20" class="input" style="width: 100px;" readOnly>
+									<script language="JavaScript" type="text/javascript">
+										<!--
+										fooCalendar = new dynCalendar('fooCalendar', 'calendarCallback', 'lib/dynCalendar/images/');
+										//-->
+									</script>
+									&nbsp;
+									<select name="hour">
+										<option value="-1" selected>請選擇</option>
+										<option value="00">00</option><option value="01">01</option><option value="02">02</option>
+										<option value="03">03</option><option value="04">04</option><option value="05">05</option>
+										<option value="06">06</option><option value="07">07</option><option value="08">08</option>
+										<option value="09">09</option><option value="10">10</option><option value="11">11</option>
+										<option value="12">12</option><option value="13">13</option><option value="14">14</option>
+										<option value="15">15</option><option value="16">16</option><option value="17">17</option>
+										<option value="18">18</option><option value="19">19</option><option value="20">20</option>
+										<option value="21">21</option><option value="22">22</option><option value="23">23</option>
+									</select>
+									:
+									<select name="minute">
+										<option value="-1" selected>請選擇</option>
+										<option value="00">00</option><option value="05">05</option>
+										<option value="10">10</option><option value="15">15</option>
+										<option value="20">20</option><option value="25">25</option>
+										<option value="30">30</option><option value="35">35</option>
+										<option value="40">40</option><option value="45">45</option>
+										<option value="50">50</option><option value="55">55</option>
+									</select>
+
+									<br />
+									<font color="gray">選擇立刻寄出簡訊或是指定時間寄出</font>
+								</td>
+							</tr>
+							<tr>
+								<td align="center">簡訊內容</td>
+								<td >
+									<textarea name="message" class="input" wrap="hard" style="width: 450px; height: 100px;" onkeypress="checkcount();"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td align="center">剩餘字數</td>
+								<td >
+									<div id="RestNumber"></font>
+								</td>
+							</tr>
+							<tr>
+								<td align="right">簡訊系統剩餘點數</td>
+								<td >
+									尚可寄送 <b><{ $sms_point }></b> 封簡訊
+								</td>
+							</tr>
+						</table>
+
+						<br/>
+						<center>
+							<input class="button" type="submit" name="Submit" value="傳送簡訊">
+							<input class="button" type="reset" name="Submit" value="重新填寫">
+						</center>
+					</form>
+				<{else}>
+				<center>
+					<br />
+					<br />
+					已超過活動時間7天以上，無法使用手機簡訊功能
+				</center>
+				<{/if}>
+			</div>
+
+			<div id="Manage6" style="display: none;">
+				<{if $managedata.Admin == 1 }>
+					<table width="600" align="center" border="1" class="datatable">
+					<tr>
+						<td width="150" align="center">修改活動</td>
+						<td >
+							<{ $managedata.modify2 }>
+						</td>
+					</tr>
+					<tr>
+						<td width="150" align="center">邀請會員</td>
+						<td >
+							<{ $managedata.addUser }>
+						</td>
+					</tr>
+					</table>
+				<{/if}>
+			</div>
+		</div>
+	</div>
+<{/if}>
+
+
+<{if $Isjoin == 1 }>
+
+	<br/>
+	<br/>
+
+	<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th colspan="2" align="center">
+			活動報名資料
+		</th>
+	</tr>
+	<tr>
+		<td align="center" width="150">會員帳號</td>
+		<td>
+			<{ $myjoindata.username }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="150">繳費資料</td>
+		<td>
+			繳費類型: <b><{ $myjoindata.charge_type }></b> <br />
+			<{ $myjoindata.charge }>
+
+			<{ if $myjoindata.charge_type == "iBon" }>
+			<br />
+			<font color="gray">若使用超商代收繳費，請務必在繳費期限前完成繳費。</font>
+			<{ /if }>
+		</td>
+	</tr>
+		<tr>
+		<td align="center">報名狀態</td>
+		<td> <{ $myjoindata.join_status }> </td>
+	</tr>
+	<tr>
+		<td align="center">活動報名選項</td>
+		<td> <{ $myjoindata.cancel }> </td>
+	</tr>
+	<{ if $managedata.use_match == 1 }>
+	<tr>
+		<td align="center">活動配對</td>
+		<td>
+			<{ if $option2_count > 0 }>
+				有選擇您的會員及相關資料:<br />
+
+				<div class="optinfo">
+					<div class="line">
+						<div class="no_t"> 活動編號 </div>
+						<div class="nickname_t"> 暱稱 </div>
+						<div class="info_t"> 會員資料 </div>
+					</div>
+
+					<{section name=key loop=$option2}>
+					<div class="line">
+						<div class="no"> <{ $option2[key].no }> </div>
+						<div class="nickname"> <{ $option2[key].nickname }> </div>
+						<div class="info"> <{ $option2[key].opt_info }> </div>
+					</div>
+					<{/section}>
+
+				</div>
+			<{ else }>
+				<{ $myjoindata.option2 }>
+			<{ /if }>
+		</td>
+	</tr>
+	<{ /if }>
+	<{ if $managedata.use_newmatch == 1 }>
+	<tr>
+		<td align="center">聯繫資料</td>
+		<td>
+			<{ $myjoindata.fillout_match }>
+			<{ $myjoindata.match_result }>
+		</td>
+	</tr>
+	<{ /if }>
+	</table>
+<{/if}>
+
+<{ if $mycancel != 0 }>
+
+	<br/>
+	<br/>
+
+	<table width="600" align="center" border="1" class="datatable">
+		<tr>
+			<th align="center" width="60">繳費</th>						
+			<th align="center" width="40">性別</th>
+			<th align="center" width="100">帳號</th>						
+			<th align="center" width="320">取消原因</th>
+			<th align="center" width="80">詳細資料</th>
+		</tr>
+		<{section name=key loop=$mycanceldata}>
+		<tr>
+			<td align="center"><{ $mycanceldata[key].charge }></td>
+			<td align="center"><{ $mycanceldata[key].sex }></td>
+			<td align="left"  ><{ $mycanceldata[key].username }></td>
+			<td align="left"  ><{ $mycanceldata[key].cancel_reason }></td>
+			<td align="center"><{ $mycanceldata[key].detail }></td>
+		</tr>
+		<{/section}>
+	</table>
+<{/if}>

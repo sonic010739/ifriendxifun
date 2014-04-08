@@ -1,0 +1,37 @@
+<form name="upload" method="post" enctype="multipart/form-data" action="upload.act.php?act=upload">
+	<table width="600" border="1" align="center" class="datatable">
+		<tr><th>上傳檔案</th></tr>
+		<tr>
+			<td  align="left">			
+				<input name="image" type="file" size="70" />
+				<input type="submit" name="Submit" value="上傳" class="button">
+			</td>
+		</tr>
+		<tr>
+			<td align="left">
+				請注意 只能上傳類型為JPEG, PNG, GIF, BMP檔，檔案大小不得超過 1024 KB。<br />
+				請避免使用中文檔名				
+			</td>
+		</tr>
+	</table>
+</form>
+
+<br />
+
+<table width="600" border="1" align="center" class="datatable">
+	<tr>
+		<th align="center" width="320">檔案位置</th>
+		<th align="center" width="200">上傳時間</th>
+		<th align="center" width="40">檢視</th>
+		<th align="center" width="40">刪除</th>		
+	</tr>
+	
+	<{section name=key loop=$images}>
+	<tr>
+		<td align="left"><{ $images[key].filename }></td>
+		<td align="left"><{ $images[key].upload_time }></td>
+		<td align="center"><a href="<{ $images[key].link }>" target="_blank">檢視</a></td>
+		<td align="center"><a href="upload.act.php?act=del&amp;serial=<{ $images[key].serial }>">刪除</a></td>
+	</tr>
+	<{/section}>	
+</table>

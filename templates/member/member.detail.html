@@ -1,0 +1,191 @@
+<table width="600" border="1" align="center" class="datatable">
+<tr>
+	<th colspan="2" align="center">會員詳細資料</th>
+</tr>
+<tr>
+	<td width="150" align="center">登入帳號</td>
+	<td><{ $memberdata.username }></td>
+</tr>
+<tr>
+	<td align="center">密碼提示</td>
+	<td><{ $memberdata.passwordhint }></td>
+</tr>
+<tr>
+	<td align="center">電子信箱</td>
+	<td><{ $memberdata.email }></td>
+</tr>
+<tr>
+	<td align="center">備用信箱</td>
+	<td><{ $memberdata.backupemail }></td>
+</tr>
+<tr>
+	<td align="center">真實姓名</td>
+	<td><{ $memberdata.realname }></td>
+</tr>
+<tr>
+	<td align="center">性別</td>
+	<td><{ $memberdata.sex }></td>
+</tr>
+<tr>
+	<td align="center">暱稱</td>
+	<td><{ $memberdata.nickname }></td>
+</tr>
+<tr>
+	<td align="center">生日</td>
+	<td><{ $memberdata.birth_year }>年<{ $memberdata.birth_month }>月<{ $memberdata.birth_day }>日</td>
+</tr>
+<tr>
+	<td align="center">星座</td>
+	<td><{ $memberdata.constellation }></td>
+</tr>
+<tr>
+	<td align="center">電話</td>
+	<td><{ $memberdata.tel }></td>
+</tr>
+<tr>
+	<td align="center">MSN</td>
+	<td><{ $memberdata.msn }></td>
+</tr>
+<tr>
+	<td align="center">教育程度</td>
+	<td><{ $memberdata.education }></td>
+</tr>
+<tr>
+	<td align="center">最高學歷</td>
+	<td><{ $memberdata.top_education }></td>
+</tr>
+<tr>
+	<td align="center">職業類別</td>
+	<td><{ $memberdata.career }></td>
+</tr>
+<tr>
+	<td align="center">職業</td>
+	<td><{ $memberdata.career_detail }></td>
+</tr>
+<tr>
+	<td align="center">職務</td>
+	<td><{ $memberdata.career_title }></td>
+</tr>
+<tr>
+	<td align="center">興趣</td>
+	<td><{ $memberdata.interest }></td>
+</tr>
+<tr>
+	<td align="center">居住地點</td>
+	<td><{ $memberdata.inhabit }></td>
+</tr>
+
+<{ if $admin == 1 }>
+<tr>
+	<td align="center">最後登入時間</td>
+	<td>
+		<{ $memberdata.login_time }>
+	</td>
+</tr>
+<{ /if}>
+
+<tr>
+	<td colspan="2" bgcolor="#CCCCCC" align="center">&nbsp;</td>
+</tr>
+
+<tr>
+	<td align="center">驗證狀態</td>
+	<td><{ $memberdata.status }></td>
+</tr>
+<tr>
+	<td align="center">帳號權限</td>
+	<td><{ $memberdata.authority }></td>
+</tr>
+<tr>
+	<td align="center">帳號狀態</td>
+	<td>
+		<{ $memberdata.black_status }>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" bgcolor="#CCCCCC" align="center">&nbsp;</td>
+</tr>
+<tr>
+	<td align="center">參加活動次數</td>
+	<td>
+		已經報名: <b><{ $memberdata.act_join_curr }></b> 次<br />
+		過去參加: <b><{ $memberdata.act_join_past }></b> 次<br />
+		已經取消: <b><{ $memberdata.act_join_cancel }></b> 次
+	</td>
+</tr>
+<tr>
+	<td align="center">優惠卷張數</td>
+	<td>
+		未使用: <b><{ $memberdata.coupon_unuse }></b> 張<br />
+		已使用: <b><{ $memberdata.coupon_used }></b> 張<br />
+		總共有: <b><{ $memberdata.coupon_total }></b> 張
+	</td>
+</tr>
+<tr>
+	<td align="center">活動繳費次數</td>
+	<td>
+		未繳費: <b><{ $memberdata.charge_unpay }></b> 次<br />
+		已過期: <b><{ $memberdata.charge_unpay_overdue }></b> 次<br />
+		已繳費: <b><{ $memberdata.charge_paid }></b> 次
+	</td>
+</tr>
+
+<{ if $admin == 1 }>
+<tr>
+	<td align="center">總計參加活動繳費</td>
+	<td>
+		<b><{ $memberdata.charge_total_pay }></b>  元
+	</td>
+</tr>
+<{ /if}>
+
+<{ if $admin == 1 or $EO == 1}>
+<tr>
+	<td align="center">舉辦活動次數</td>
+	<td>
+		現在舉辦: <b><{ $memberdata.act_hold_open }></b> 次<br />
+		等待進行: <b><{ $memberdata.act_hold_proceed }></b> 次<br />
+		過去舉辦: <b><{ $memberdata.act_hold_close }></b> 次<br />
+		取消舉辦: <b><{ $memberdata.act_hold_cancel }></b> 次
+	</td>
+</tr>
+<{ /if}>
+
+<{ if $admin == 1 }>
+<tr>
+	<td align="center">總計舉辦活動收入</td>
+	<td>
+		<b><{ $memberdata.act_charge_income }></b> 元
+	</td>
+</tr>
+<{ /if}>
+
+<tr>
+	<td align="center">我介紹的朋友人數</td>
+	<td>
+		<b><{ $memberdata.intro_count }></b> 人
+	</td>
+</tr>
+<tr>
+	<td align="center">透過我報名的人數</td>
+	<td>
+		<b><{ $memberdata.intro_join }></b> 人
+	</td>
+</tr>
+
+<{ if $admin == 1 && $memberdata.manage == 1}>
+<tr>
+	<td colspan="2" bgcolor="#CCCCCC" align="center">&nbsp;</td>
+</tr>
+<tr>
+	<td align="center">權限設定</td>
+	<td><{ $memberdata.auth_opertaion }></td>
+</tr>
+<tr>
+	<td align="center">給予優惠卷</td>
+	<td><{ $memberdata.give_coupon }></td>
+</tr>
+<{ /if}>
+
+
+</table>

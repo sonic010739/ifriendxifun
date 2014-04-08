@@ -1,0 +1,38 @@
+<table width="600" align="center" border="0">
+	<tr>
+		<td align="left"><{ $options }></td>	
+	</tr>
+</table>
+
+<br/>
+<{ if $ibon_count != 0 }>
+	<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th align="center" width="180">活動名稱</th>
+		<th align="center" width="100">活動日期</th>
+		<th align="center" width="80">會員帳號</th>
+		<th align="center" width="50">費用</th>
+		<th align="center" width="110">繳費期限</th>
+		<th align="center" width="80">繳費狀態</th>
+	</tr>
+	
+	<{section name=key loop=$ibonlist}>	
+	<tr>
+		<td align="left"><{ $ibonlist[key].name }></td>
+		<td align="center"><{ $ibonlist[key].act_date }></td>
+		<td align="left"><{ $ibonlist[key].username }></td>
+		<td align="right"><{ $ibonlist[key].fees }></td>
+		<td align="center"><{ $ibonlist[key].ibon_deadline }></td>
+		<td align="center"><{ $ibonlist[key].charge_status }></td>
+	</tr>
+	<{/section}>
+	<tr bgcolor="#CCCCCC">
+		<td align="right" colspan="6">
+			*點選繳費狀態，可以檢視詳細資料
+		</td>
+	</tr>
+	</table>
+	
+	<{include file="page_foot.html"}>
+<{/if}>
+

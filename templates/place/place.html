@@ -1,0 +1,51 @@
+<center>
+	<b>活動場地管理</b>
+</center>
+
+<form name="place" method="post" action="./place.act.php?act=search">
+<table width="600" align="center" border="0">
+<tr>
+	<td>
+		<b>篩選區域</b>
+		&nbsp;
+		<{ html_options name=city options=$citys selected=$sel_city }>	
+		&nbsp;
+		<input type="submit" name="Submit" value="確定" class="button">
+	</td>
+</tr>
+</table>
+</form>
+
+<{ if $list_count != 0 }>
+
+<table width="600" align="center" border="1"  class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th width="100" align="center">區域</th>
+		<th width="240" align="center">場地名稱</th>
+		<th width="160" align="center">場地電話</th>
+		<th width="100"  align="center">功能選項</th>
+	</tr>
+	<{section name=key loop=$placelist}>	
+	<tr>
+		<td align="left"  ><{$placelist[key].placecity}></td>
+		<td align="left"  ><{$placelist[key].placename}></td>		
+		<td align="left"  ><{$placelist[key].placetel}></td>		
+		<td align="center">
+			<{$placelist[key].view}>
+			<{$placelist[key].modify}>
+			<{$placelist[key].del}>
+		</td>	
+	</tr>
+	<{/section}>
+	<tr bgcolor="#CCCCCC">
+		<td colspan="7" align=right><a href="./index.php?act=place&amp;sel=add">新增活動場地資料</a></td>
+	</tr>
+</table>
+
+<{include file="page_foot.html"}>
+
+<{else}>
+	<center>
+		無任何場地資料
+	</center>
+<{/if}>

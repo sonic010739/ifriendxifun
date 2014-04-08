@@ -1,0 +1,36 @@
+	<div id="menuitem">
+	<{if $login == 1 }>
+		<ul>
+			<li><a href="./index.php">活動行事曆</a></li>
+			<li><a href="./index.php?act=activitielist">活動列表</a></li>
+			<li><a href="./index.php?act=member">個人資料</a></li>
+		</ul>
+		
+		<br/>
+		
+		<{if $EO == 1 }>
+		<b>EO權限</b>
+		<ul>
+			<li><a href="./index.php?act=activitieEO">活動系統</a></li>
+			<li><a href="./index.php?act=forum">討論區</a></li>
+		</ul>
+		<br/>
+		<{/if}>
+	
+		<{if $admin == 1 }>
+		<b>系統管理</b>
+		<ul>			
+			<li><a href="./index.php?act=activitiemanage">活動管理</a></li>
+			<li><a href="./index.php?act=membercenter">會員中心</a></li>
+			<li><a href="./index.php?act=membercenter&amp;sel=blacklist">活動黑名單</a></li>
+			<li><a href="./index.php?act=place&amp;sel=list">活動場地資料</a></li>
+			<li><a href="./index.php?act=topic&amp;sel=list">活動主題資料</a></li>
+			<li><a href="./index.php?act=group&amp;sel=list">活動族群資料</a></li>
+			<li><a href="./index.php?act=coupon&amp;sel=list">優惠卷資料</a></li>
+			<li><a href="./index.php?act=ibon&amp;sel=list">iBon繳費資料</a></li>
+			<li><a href="./index.php?act=statistics">統計資料</a></li>
+			<li><a href="./index.php?act=layout">首頁版面設定</a></li>
+		</ul>
+		<{/if}>	
+	<{/if}>	
+	</div>

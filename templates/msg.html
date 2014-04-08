@@ -1,0 +1,17 @@
+﻿<fieldset style="width: 600px; margin-left: auto; margin-right: auto;">
+	<legend style="font-size: 15px;">Message</legend>
+		<div style="padding: 20px;">
+			<{$msg}>
+		</div>		
+		<div style="text-align: center; padding: 10px 20px 2px 20px; border-top: 1px solid #CCCCCC">
+						
+			[<a href="javascript:history.go(-1)">回上一頁</a>]&nbsp;
+			
+			<{ if $name != "" && $link != ""}>
+				[<a href="<{ $link }>"><{ $name }></a>]&nbsp;
+			<{ /if}>
+			
+			[<a href="index.php">回到首頁</a>]&nbsp;
+			
+		</div>					
+</fieldset>

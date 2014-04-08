@@ -1,0 +1,30 @@
+<{if $login == 0 }>
+<div id="login">
+	<br/>
+	<form  name="admin" method="post" action="login.act.php?act=login">
+		<span class="link_w">帳號</span>
+		<input name="username" type="text" size="10" maxlength="12" class="input" value="<{ $Username }>">
+		<br/>
+		<span class="link_w">密碼</span>
+		<input name="password" type="password" size="10" maxlength="12" class="input">
+		<br/>
+		<input type="submit" name="Submit" value="登入" class="button">
+
+		<a href="index.php?act=member&amp;sel=forgotpasswd">忘記密碼</a>
+		|
+		<a href="index.php?act=member&amp;sel=revalidater">重寄驗證信</a>
+	</form>
+</div>
+<{/if}>
+
+
+<{if $login == 1 }>
+<div id="login">
+	<br/>
+	<a href="index.php?act=member&amp;sel=detail"><b><u><{$username}></u></b></a>
+	<a href="login.act.php?act=out">[登出]</a><br/>
+	<br/>
+	權限: <{ $authority }><br/>
+</div>
+<{/if}>
+

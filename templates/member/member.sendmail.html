@@ -1,0 +1,115 @@
+<!-- TinyMCE -->
+<script type="text/javascript" src="lib/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		// General options
+		mode : "textareas",
+		theme : "advanced",
+		language : "tw",
+		plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+
+		// Theme options
+		theme_advanced_buttons1 : "bold, italic, underline, strikethrough, |, forecolor, backcolor, |, justifyleft,justifycenter,justifyright,justifyfull,fontselect,fontsizeselect,|,cut,copy,paste,|,search,replace, |, undo, redo,",
+		theme_advanced_buttons2 : "bullist, numlist, |, outdent, indent, blockquote, |, link,unlink,anchor,image,cleanup,|,insertdate,inserttime,preview,|,hr, sub, sup, |, charmap, media, |, help,code",
+		theme_advanced_buttons3 : "",
+		theme_advanced_buttons4 : "",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "none",
+		theme_advanced_resizing : true,
+
+		// Example content CSS (should be your site CSS)
+		content_css : "style.css",
+
+		// Drop lists for link/image/media/template dialogs
+		template_external_list_url : "lists/template_list.js",
+		external_link_list_url : "lists/link_list.js",
+		external_image_list_url : "lists/image_list.js",
+		media_external_list_url : "lists/media_list.js",
+
+		// Replace values for the template plugin
+		template_replace_values : {
+			username : "iF",
+			staffid : "sonic"
+		},
+
+		// use <br / > instead of use p
+		force_br_newlines : true,
+		force_p_newlines : false,
+
+		// turn off the convert_urls and relative_urls
+		convert_urls : false,
+		relative_urls : false
+	});
+</script>
+<!-- /TinyMCE -->
+<script type="text/javascript">
+	function checkform()
+	{
+		if (document.mailform.subject.value == "")
+		{
+			alert("未填寫信件主旨");
+			document.mailform.subject.focus();
+			return false;
+		}
+
+		if (confirm("確定要寄出信件"))
+		{
+			alert("準備寄出信件!\n若收件人人數較多需等候數分鐘才能全部寄出，請勿對此視窗做任何動作");
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+</script>
+<form name="mailform" method="post" enctype="multipart/form-data" action="./member.act.php?act=SendMail" onSubmit="return checkform()">
+	<table width="650" border="1" align="center" class="datatable">
+		<tr>
+			<th colspan="2" align="center">寄送信件</th>
+		</tr>
+		<tr>
+			<td width="150" align="center">收件者</td>
+			<td >
+				<div style="max-height: 150px; overflow: auto">
+					<{section name=key loop=$memberlist}>
+						<input name="mail[]" type="checkbox" value="<{$memberlist[key].email}>"  <{ $memberlist[key].promote }>>
+						<{$memberlist[key].realname}>(<{$memberlist[key].username}>), <{$memberlist[key].email}><br />
+					<{/section}>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">其他收件者</td>
+			<td >
+				<input name="others" type="text" style="width: 490px;" class="input" />
+				<br />
+				<font color="gray">未在收件者名單的email，可輸入多個email請以逗號","間隔。</font>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">信件主旨</td>
+			<td>
+				<input name="subject" type="text" style="width: 500px;" class="input" />
+			</td>
+		</tr>
+		<tr>
+			<td align="center" >附件</td>
+			<td>
+				<input name="attach" type="file" style="width: 500px;" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<textarea name="body" rows="30" class="input" warp="hard" style="width: 650px;"></textarea>
+			</td>
+		</tr>
+	</table>
+
+	<br/>
+	<center>
+		<input class="button" type="submit" name="Submit" value="傳送">
+		<input class="button" type="reset" name="Submit" value="重新填寫">
+	</center>
+</form>

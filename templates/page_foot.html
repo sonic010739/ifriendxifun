@@ -1,0 +1,18 @@
+﻿<div id="page_foot">
+	<table width="600" align="center">
+		<tr>
+			<td align="center">
+				<div class="page">
+					<span class="l1">
+						<{ section name=page loop=$page }>
+							<a href="<{$page[page].0}>"><{ $page[page].1 }></a>
+						<{/section}>
+					</span>
+					<span class="r1">
+						<{ $totalpage }>		
+					</span>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

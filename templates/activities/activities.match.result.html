@@ -1,0 +1,45 @@
+<center>
+<b>
+	選填給予聯繫資料結果
+</b>
+</center>
+		
+<br/>
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th width="100" align="center">活動編號</th>
+		<th width="100" align="center">暱稱</th>
+		<th width="40" align="center">性別</th>
+		<th width="360" align="center">給予的資料</th>
+	</tr>
+	
+	<{ section name=key loop=$act_matches }>	
+	<{ if $act_matches[key].match_view }>
+	<tr>
+		<td align="center">
+			<{ $act_matches[key].sex_count }>
+		</td>
+		<td align="left">
+			<{ $act_matches[key].nickname }>
+		</td>
+		<td align="center">
+			<{ $act_matches[key].sex }> 
+		</td>
+		<td align="left">
+			<{ if $act_matches[key].match_email != "Reserved" }>
+			<b>Email:</b> &nbsp; <{ $act_matches[key].match_email }> <br />
+			<{ /if }>
+			
+			<{ if $act_matches[key].match_msn != "Reserved" }>
+			<b>MSN:</b> &nbsp; <{ $act_matches[key].match_msn }> <br />
+			<{ /if }>
+			
+			<{ if $act_matches[key].match_tel != "Reserved" }>
+			<b>手機:</b> &nbsp; <{ $act_matches[key].match_tel }> <br />
+			<{ /if }>
+		</td>
+	</tr>
+	<{ /if }>
+	<{/section}>
+</table>

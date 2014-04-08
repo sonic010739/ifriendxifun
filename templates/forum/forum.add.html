@@ -1,0 +1,73 @@
+
+<!-- TinyMCE -->
+<script type="text/javascript" src="lib/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		// General options
+		mode : "textareas",
+		theme : "advanced",
+		language : "tw",
+		plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+
+		// Theme options
+		theme_advanced_buttons1 : "bold, italic, underline, strikethrough, |, forecolor, backcolor, |, justifyleft,justifycenter,justifyright,justifyfull,fontselect,fontsizeselect,cut,copy,paste,|,search,replace",
+		theme_advanced_buttons2 : "undo, redo, |, bullist, numlist, |, outdent, indent, blockquote, |, link,unlink,anchor,image,cleanup,|,insertdate,inserttime,preview,|,hr, sub, sup, |, charmap, media, |, help,code,",
+		theme_advanced_buttons3 : "",
+		theme_advanced_buttons4 : "",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "none",
+		theme_advanced_resizing : true,
+
+		// Example content CSS (should be your site CSS)
+		content_css : "style.css",
+
+		// Drop lists for link/image/media/template dialogs
+		template_external_list_url : "lists/template_list.js",
+		external_link_list_url : "lists/link_list.js",
+		external_image_list_url : "lists/image_list.js",
+		media_external_list_url : "lists/media_list.js",
+
+		// Replace values for the template plugin
+		template_replace_values : {
+			username : "iF",
+			staffid : "sonic"
+		},
+
+		// use <br / > instead of use p
+		force_br_newlines : true,
+		force_p_newlines : false,
+
+		// turn off the convert_urls and relative_urls
+		convert_urls : false,
+		relative_urls : false
+	});
+</script>
+<!-- /TinyMCE -->
+
+<form  name="newtopic" method="post" onSubmit=""  action="./forum.act.php?act=add">
+<input class="input" name="uid" type="hidden" size="80" value="<{$uid}>">
+<table width=600 align="center" border="1" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<td align="center">發表文章</td>
+</tr>
+<tr>
+	<td width="100">文章主題</td>
+</tr>
+<tr>
+	<td ><input class="input" name="topic" type="text" size="80"></td>
+</tr>
+<tr>
+	<td >文章內容</td>
+</tr>
+<tr>
+	<td ><textarea class="input" name="message" rows="30" warp="hard" style="width: 600px;"></textarea></td>
+</tr>
+<tr>
+	<td align="center">
+		<input type="submit" name="Submit" value="確定送出" class="button">
+		<input type="reset" name="Submit" value="重新填寫" class="button">
+	</td>
+</tr>
+</table>
+</form>

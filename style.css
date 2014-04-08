@@ -1,0 +1,678 @@
+body
+{
+	font-family:verdana, arial, helvetica, sans-serif;
+	background-color: #EEEEEE;
+}
+
+html
+{
+    font-size: 13px;
+}
+
+ul
+{
+	padding: 3px;
+	text-align:left
+}
+
+textarea
+{
+	font-size: 13px;
+}
+
+a:link
+{
+	color: #0066FF;
+	text-decoration:none;
+}
+
+a:visited
+{
+	color: #0066FF;
+	text-decoration:none;
+}
+
+a:hover
+{
+	color: #0066FF;
+	text-decoration: underline;
+}
+
+.link_w
+{
+	color: #FFFFFF;
+}
+.link_w a:link
+{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.link_w a:visited
+{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.link_w a:visited
+{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#content
+{
+	width: 980px; 
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;	
+}
+
+#menu
+{
+	height: 100%;
+	padding: 0px 0px 0px 15px;
+	margin-left: auto;
+	padding-bottom: 10px;
+}
+
+#menu ul
+{
+	padding: 0;
+    margin: 0;
+	list-style-type: none;
+}
+
+#menu li
+{
+	padding-left: 15px;
+	font-size: 13px;
+	line-height: 1.6;	
+}
+
+#menu li a:link
+{
+    color: #FFFFFF;
+    text-decoration: none;
+	line-height: 1.6;
+}
+
+#menu li a:visited
+{
+    color: #FFFFFF;
+    text-decoration: none;
+	line-height: 1.6;
+}
+
+#menu li a:hover
+{
+	color: #EEEEEE;
+	text-decoration: underline;
+	line-height: 1.6;
+}
+
+#login
+{	
+	text-align: left;
+	line-height: 1.5;
+}
+
+#login a:link 
+{
+	color: #000000;
+	text-decoration:none;
+}
+
+#login a:visited
+{
+	color: #000000;
+	text-decoration:none;
+}
+
+#login a:hover
+{
+	color: #000000;
+	text-decoration:underline;
+}
+
+#menuitem
+{
+	clear: both;
+	text-align: left;
+	margin-left: auto;
+	padding-top: 10px;
+}
+
+#calendar
+{	
+	width: 637px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 20px;
+	overflow: auto;
+	background-color: #FFFFFF;
+	border-left: 1px solid #000000;
+	border-top: 1px solid #000000;
+}
+
+#calendar .week
+ {
+	float: left;
+	width: 90px; 
+	text-align: center;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 2.0;	
+	border-top: 1px solid #000000;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+#calendar .past
+ {
+	float: left;
+	width: 90px; 
+	height: 80px;
+	font-size: 11px;
+	text-align: left;
+	background-color: #DDDDDD;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+#calendar .days
+ {
+	float: left;
+	width: 90px; 
+	height: 80px;
+	font-size: 11px;
+	text-align: left;
+	color: #191970;
+	background-color: #FFFFFF;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+#calendar .today
+{
+	float: left;
+	width: 90px; 
+	height: 80px;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: left;
+	background-color: #F0FFFF;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	overflow-x:hidden;
+	overflow-y: auto;
+}
+#calendar .pre 
+{
+	float: left;
+	width: 90px; 
+	line-height: 2.0;
+	text-align: center;
+	font-size: 13px;
+}
+#calendar .current 
+{
+	float: left;
+	width: 456px; 
+	line-height: 2.0;
+	text-align:center;
+	vertical-align: bottom;
+	font-size: 13px;
+	font-weight: bold;
+}
+#calendar .next 
+{
+	float: left;
+	width: 90px; 
+	line-height: 2.0;
+	border-right: 1px solid #000000;
+	text-align: center;	
+	font-size: 13px;	
+}
+
+#calendar a:link
+{
+	color: #000000;
+	text-decoration:none;
+}
+
+#calendar a:visited
+{
+	color: #000000;
+	text-decoration:none;
+}
+
+#calendar a:hover
+{
+	color: #000000;
+	text-decoration:underline;
+}
+
+#submenu
+{
+	width: 590px; 
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	margin-left: auto;
+    margin-right: auto;
+	line-height: 2.0;
+	text-align: left;	
+	font-size: 13px;	
+}
+
+#submenu a:link 
+{
+    color: #458b00;
+    text-decoration: none
+}
+
+#submenu a:visited
+{
+    color: #458b00;
+    text-decoration: none
+}
+
+#submenu a:hover
+{
+    color: #458b00;
+    text-decoration: none
+}
+
+
+.fill_in_info
+{
+	width: 200px;
+	color: #ff0000;
+	padding-left: 1px;
+	border:1px solid #206dc6
+}
+
+.input
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	border:1px solid #206dc6
+}
+
+.button
+{
+   cursor: pointer;
+   color: #000000;
+   padding-top: 2px;
+   padding-left: 4px;
+   padding-right: 4px;
+   padding-bottom: 2px;
+   height: 24px;
+   text-align: center;
+   border-collapse: collapse;
+   border-top: 2px groove #ffffff;
+   border-left: 2px groove #ffffff;
+   border-right: 2px groove #999999;
+   border-bottom: 2px groove #999999;
+   background-color: #cccccc;
+}
+
+.page
+{
+	font-size:13px;
+	list-style-type: none;
+	margin: 0
+}
+.page .l1 { float: left}
+.page .r1 { float: right}
+
+
+#forum
+{
+	width: 600px;
+	margin-left: auto;
+    margin-right: auto;	
+	border: 1px solid #206dc6;
+	display: block;
+}
+
+#forum a:link
+{
+	color: #000000;
+	text-decoration:none;
+}
+
+#forum a:visited
+{
+	color: #000000;
+	text-decoration:none;
+}
+
+#forum a:hover
+{
+	color: #000000;
+	text-decoration:underline;
+}
+
+#response
+{
+	width: 600px; 
+	margin: auto;
+	padding-bottom: 3px; 
+	padding-top: 3px;
+	text-align: right
+}
+
+.topic_header
+{
+    clear: both;
+	width: 100%;
+	height: 40px;
+}
+.topic_header_topic
+{
+    font-weight: bold;
+    float: left;
+    width: 45%;
+	text-align: left;
+	margin-left: 10px;
+	line-height: 40px;
+}
+
+.topic_header_reply
+{
+    font-weight: bold;
+    float: left;
+    width: 7%;
+    text-align: center;
+	line-height: 40px;
+}
+
+.topic_header_name
+{
+    font-weight: bold;
+    float: left;
+    width: 22%;
+	text-align: center;
+	line-height: 40px;
+}
+
+.topic_header_last
+{
+    font-weight: bold;
+    float: left;
+    width: 22%;
+    text-align: center;
+	line-height: 40px;
+}
+
+
+.topic_info
+{
+    clear: both;
+    height: 40px;
+	border-top: #206dc6 1px dotted;
+}
+.topic_topic
+{
+    float: left;
+    width: 45%;
+	padding-top: 14px;
+	text-align: left;
+	margin-left: 10px;
+}
+
+.topic_topic .l1 {	float: left	}
+.topic_topic .r1 {	float: right}
+.topic_reply
+{
+    float: left;
+    width: 7%;
+    text-align: center;
+	line-height: 40px;
+}
+
+.topic_name
+{
+    float: left;
+    width: 22%;
+	text-align: center;
+	font-size: 11px;
+	padding-top: 7px;
+}
+
+.topic_last
+{
+    float: left;
+    width: 22%;
+    text-align: center;
+	font-size: 11px;
+	padding-top: 7px;
+}
+
+#post_title
+{
+	width: 584px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	
+	color:#0b509f;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	margin-right: 8px;
+	margin-left: 8px;  
+}
+
+.user_icon
+{
+    float: left;
+    width: 98px;
+	height: 98px;
+    line-height: 100px;
+    margin-right: 10px;
+	color: #666666;
+	border: #cccccc 1px solid;
+    background-color: #eeeeee;
+    text-align: center;
+}
+
+.user_info
+{
+    float: left;
+    text-align: left;
+	width: 215px;
+	overflow: hidden;
+}
+
+.user_func
+{
+    float: right;
+	width: 250px;
+	overflow: hidden;
+}
+
+.post_func
+{
+	clear: both;
+    text-align: right;
+
+}
+
+.post_info
+{
+	float: right;
+    color: #666666;
+    text-align: right;
+}
+
+.post_detail
+{
+    clear: both;
+    width: 584px;
+    padding-top: 8px;
+	margin-right: 8px;
+	margin-left: 8px;  
+	border-top: #206dc6 1px dashed;
+}
+
+.post_sig
+{
+	width: 550px;
+    margin-top: 12px;
+    overflow: hidden;
+    color: #999999;
+    text-align: right;
+	overflow: hidden;
+    display: block;
+	margin-right: 8px;
+	margin-left: 8px;  
+	
+}
+
+.post_content
+{
+	clear: both;
+	width: 584px;
+	text-align: left;
+	overflow: hidden;
+    display: block;
+    padding-top: 20px;
+	padding-bottom: 5px;
+}
+
+.post_bottom
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.datatable 
+{
+	border: 1px solid #000000;
+	border-collapse: collapse;
+}
+.datatable td 
+{
+	line-height: 1.5;
+	border: 1px solid #000000;
+	padding: 3px 3px 3px 3px;
+}
+
+.datatable th 
+{
+	line-height: 1.8;
+	border: 1px solid #000000;
+	padding: 3px 0px 3px 3px;
+	background-color: #DDDDDD;
+}
+
+#page_foot a:link 
+{
+	color: #000000;
+	text-decoration:none;
+}
+
+#page_foot a:visited
+{
+	color: #000000;
+	text-decoration:none;
+}
+
+#page_foot a:hover
+{
+	color: #000000;
+	text-decoration:underline;
+}
+
+.optinfo
+{
+	width: 440px;
+	margin: 5px 0px 5px 0px;
+	padding: 5px 0px 10px 0px;
+	background-color: #FFFFFF;
+}
+
+.optinfo .line
+{
+	width: 440px;
+	clear: both;
+	margin: 2px 0px 0px 0px;
+	border-bottom: 1px dashed #AAAAAA;
+	line-height: 1.8;
+}
+
+.optinfo .no_t
+{
+	float: left;
+	width: 80px;
+	padding: 2px 0px 2px 0px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.optinfo .nickname_t
+{
+	float: left;
+	width: 90px;
+	padding: 2px 0px 2px 0px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.optinfo .info_t
+{
+	float: left;
+	width: 270px;
+	padding: 2px 0px 2px 0px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.optinfo .no
+{
+	float: left;
+	width: 80px;
+	padding: 2px 0px 2px 0px;
+	text-align: center;
+}
+
+.optinfo .nickname
+{
+	float: left;
+	width: 95px;
+	padding: 2px 5px 2px 0px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.optinfo .info
+{
+	float: left;
+	width: 255px;
+	padding: 2px 5px 2px 0px;
+	text-align: left;
+}
+
+#tabpage
+{
+	clear: both;
+	width: 602px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-top: 0px;
+	padding-bottom: 10px;	
+}
+
+#tabpage2
+{
+	clear: both;
+	width: 652px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-top: 0px;
+	padding-bottom: 10px;	
+}

@@ -1,0 +1,63 @@
+<center>
+<b>
+	配對統計結果
+</b>
+</center>
+		
+<br/>
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th width="80" align="center">編號</th>
+		<th width="100" align="center">會員帳號</th>
+		<th width="60" align="center">出席</th>
+		<th width="120" align="center">選擇的編號</th>
+		<th width="120" align="center">有填寫他的編號</th>
+		<th width="120" align="center">配對成功的編號</th>
+	</tr>
+	
+	<{section name=key loop=$memberdata}>	
+	<tr>
+		<td align="center">
+			<{ $memberdata[key].sex_count }>
+		</td>
+		<td align="left"  >
+			<{ $memberdata[key].username }>
+		</td>
+		<td align="center">
+			<{ $memberdata[key].attendance }> 
+		</td>
+		<td align="left">
+			<{ $memberdata[key].option1 }> 
+		</td>
+		<td align="left">
+			<{ $memberdata[key].option2 }> 
+		</td>
+		<td align="left">
+			<{ $memberdata[key].option3 }> 
+		</td>
+	</tr>
+	<{/section}>
+</table>
+
+<br/>
+<br/>
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th colspan="2" align="center">活動人氣王</th>		
+	</tr>
+	<tr>
+		<td width="150" align="center">男生人氣王</td>
+		<td>			
+			<{ $match_result.hot_boy }>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">女生人氣王</td>
+		<td>
+			<{ $match_result.hot_girl }>
+		</td>
+	</tr>
+</table>
+

@@ -1,0 +1,57 @@
+<{ if $charge_type == "iBon"}>
+<table width="500" align="center" border="1" class="datatable">
+	<tr>
+		<th align="center" colspan="2">繳費資訊</th>
+	</tr>
+	<tr>
+		<td width="150" align="right">繳費代碼</td>
+		<td width="350" align="left" >
+		<font color="red" size="4"><b><{ $ibon_no }></b></font>
+		</td>
+	</tr>
+	<tr>
+		<td align="right">繳費期限</td>
+		<td align="left" >
+			<b><{ $ibon_deadline }></b><br />
+			(超過繳費期限未繳費系統將自動取消報名)
+		</td>
+	</tr>
+	<tr>
+		<td align="right">繳費金額</td>
+		<td align="left" >新台幣 <b><{ $fees }></b> 元</td>
+	</tr>
+	<tr>
+		<td align="left" colspan="2">
+			<ol>
+				<li>
+					請在繳費期限內至<b>全家便利商店</b>FamiPort系統選擇<b>會員儲值繳費</b> -> <b>綠界金流中心</b> 後輸入繳費代碼列印繳費單後繳費。(<a href="http://www.anow.com.tw/cvs/famiport_step123.php" target="_blank">如何繳費</a>)
+				</li>
+				<li>
+					若您未在繳費期限內完成繳費，系統將自動取消您的報名紀錄，請儘速完成繳費保障您的活動參與權利。
+				</li>
+				<li>
+					您報名的活動頁面下方也可以點選「詳細資料」查詢繳費代碼。
+				</li>
+			</ol>
+			<div align="right">iFriendxiFun</div>
+		</td>
+	</tr>
+</table>
+
+<center>
+	<br />
+	<br />
+	<a href="index.php?act=activities&sel=detail&aid=<{ $aid }>">回到活動詳情頁面</a>
+</center>
+
+<{/if}>
+
+
+
+<{ if $charge_type == "coupon"}>
+<center>
+	使用優惠卷參與活動，<br/>
+	<b>注意</b>若優惠卷類型為活動抵用卷，取消活動將視同放棄權利<br/>
+	檢視 <{ $coupon_detail }>
+</center>
+<{/if}>

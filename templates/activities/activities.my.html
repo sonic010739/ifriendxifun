@@ -1,0 +1,45 @@
+<table width="600" align="center" border="0">
+	<tr>
+		<td align="left"><{ $options }></td>	
+	</tr>
+</table>
+
+<br/>
+
+<{ if $list_count != 0 }>
+<table width="600" align="center" border="0">
+	<tr>
+		<th align="left"><{ $list_title }></th>	
+	</tr>
+</table>
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr>
+		<th align="center" width="70">活動主題</th>
+		<th align="center" width="90">活動日期</th>
+		<th align="center" width="210">活動名稱</th>			
+		<th align="center" width="70">活動地點</th>
+		<th align="center" width="100">活動EO</th>
+		<th align="center" width="60">活動狀態</th>
+	</tr>
+	<{section name=key loop=$activitielist}>	
+	<tr>
+		<td align="center"><{ $activitielist[key].tname }></td>
+		<td align="center"><{ $activitielist[key].act_date }></td>
+		<td align="left"><{ $activitielist[key].name }></td>		
+		<td align="center"><{ $activitielist[key].placecity }></td>		
+		<td align="left"  ><{ $activitielist[key].username }></td>
+		<td align="center"><{ $activitielist[key].status }></td>
+	</tr>
+	<{/section}>
+	<tr bgcolor="#DDDDDD">
+		<td align="right" colspan="6"><font color="gray">點選活動名稱可以檢視活動詳細資料</font></td>	
+	</tr>
+</table>
+
+	<{include file="page_foot.html"}>
+<{else}>
+	<center>
+		無記錄
+	</center>
+<{/if}>

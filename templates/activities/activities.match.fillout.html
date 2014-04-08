@@ -1,0 +1,56 @@
+<center>
+<b>
+	選擇要給予的聯繫資料
+</b>
+</center>
+
+<form name="questionary" method="post" action="./activities.match.act.php?act=fillout">
+<input type="hidden" name="aid" value="<{ $aid }>">
+<input type="hidden" name="uid" value="<{ $uid }>">
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr>
+		<th width="100" align="center">活動編號</th>
+		<th width="100" align="center">暱稱</th>
+		<th width="40" align="center">性別</th>
+		<th width="120" align="center">Email</th>
+		<th width="120" align="center">MSN</th>
+		<th width="120" align="center">手機</th>
+	</tr>
+	
+	<{ section name=key loop=$act_matches }>	
+	<tr>
+		<td align="center">
+			<{ $act_matches[key].sex_count }>
+		</td>
+		<td align="left">
+			<{ $act_matches[key].nickname }>
+		</td>
+		<td align="center">
+			<{ $act_matches[key].sex }> 
+		</td>
+		<td align="center">
+			<input type="checkbox" name="email[]" value="<{ $act_matches[key].uid }>" <{ $act_matches[key].match_email }> />
+		</td>
+		<td align="center">
+			<input type="checkbox" name="msn[]" value="<{ $act_matches[key].uid }>" <{ $act_matches[key].match_msn }> />
+		</td>
+		<td align="center">
+			<input type="checkbox" name="tel[]" value="<{ $act_matches[key].uid }>" <{ $act_matches[key].match_tel }> />
+		</td>
+	</tr>
+	<{/section}>
+	
+	<tr>
+		<td align="right" colspan="7">
+			預設給予 Email 及 MSN，可自由勾選要給予的資料及要給予的會員。
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="7">
+			<input type="submit" name="send" value="確定送出" class="button">
+			<input type="reset" name="reset" value="重新填寫" class="button">
+		</td>
+	</tr>
+</table>
+</form>

@@ -1,0 +1,202 @@
+﻿<script language="javascript" src = "./javascript/member.js" type="text/javascript" ></script>
+
+<form name="modifypassword" method="post" onSubmit="return MemberModPasswd()" action="./member.act.php?act=modify">
+<input name="uid" type="hidden" value ="<{ $memberdata.uid }>">
+<input name="username" type="hidden" value ="<{ $memberdata.username }>">
+
+<table width="600" align="center" border="1" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">變更密碼</th>	
+</tr>
+<tr>
+	<td width="150" align="center">輸入舊密碼</td>
+	<td>
+		<input name="oldpasswd" type="password" size="12" maxlength="12" class="input">
+	</td>
+</tr>
+<tr>
+	<td align="center">輸入新密碼</td>
+	<td>
+		<input name="newpasswd" type="password" size="12" maxlength="12" class="input">
+		<br/>
+		<font color="gray">登入所使用的密碼，請使用英文或數字，並在 6 ~ 12 個字元之間</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">確認新密碼</td>
+	<td>
+		<input name="confirmnewpasswd" type="password" size="12" maxlength="12" class="input">
+		<br/>
+		<font color="gray">請再次輸入剛剛的密碼，大小寫視為不同</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">密碼提示</td>
+	<td>
+		<input name="passwordhint" type="text" size="30" class="input" value ="<{ $memberdata.passwordhint }>">
+		<br/>
+		<font color="gray">避免您將來忘記您的密碼，請填寫密碼提示</font>
+	</td>
+</tr>
+</table>
+
+<br />
+<center>
+	<input type="submit" name="modifypassword" value="修改密碼" class=button>
+	<input type="reset" name="Submit" value="重新填寫" class=button>
+</center>
+
+</form>
+
+<br/>
+
+
+<form  name="membermodify" method="post" onSubmit="return MemberMod(this)" action="./member.act.php?act=modify">
+<table width="600" align="center" border="1" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">修改個人資料</th>
+</tr>
+<tr>
+	<td width="150" align="center">登入帳號</td>
+	<td>
+		<input name="uid" type="hidden" value ="<{ $memberdata.uid }>">
+		<input name="username" type="hidden" value ="<{ $memberdata.username }>">
+		<{ $memberdata.username }>
+	</td>
+</tr>
+<tr>
+	<td align="center">電子信箱</td>
+	<td>
+		<{ $memberdata.email }>
+	</td>
+</tr>
+<tr>
+	<td align="center">備用信箱</td>
+	<td>
+		<input name="backupemail" type="text" size="30" class="input" value ="<{ $memberdata.backupemail }>">
+		<br/>
+		<font color="gray">請填備用的電子信箱</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">真實姓名</td>
+	<td>
+		<{ $memberdata.realname }>
+	</td>
+</tr>
+<tr>
+	<td align="center">性別</td>
+	<td>
+		<{ $memberdata.sex }>
+	</td>
+</tr>
+<tr>
+	<td align="center">暱稱</td>
+	<td>
+		
+		<input name="nickname" type="text" size="30" class="input" value ="<{ $memberdata.nickname }>">
+		<br/>
+		<font color="gray">此暱稱為活動中的名字，建議使用英文名字</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">生日</td>
+	<td>
+		<{ $memberdata.birth_year }>年<{ $memberdata.birth_month }>月<{ $memberdata.birth_day }>日
+	</td>
+</tr>
+<tr>
+	<td align="center">星座</td>
+	<td>		
+		<{ $memberdata.constellation }>
+	</td>
+</tr>
+<tr>
+	<td align="center">電話</td>
+	<td>
+		<input name="tel1" type="text" maxlength="4" size="4" class="input" value ="<{ $memberdata.tel1 }>">
+		-
+		<input name="tel2" type="text" maxlength="3" size="3" class="input" value ="<{ $memberdata.tel2 }>">
+		-
+		<input name="tel3" type="text" maxlength="3" size="3" class="input" value ="<{ $memberdata.tel3 }>">
+	</td>
+</tr>
+<tr>
+	<td align="center">MSN或即時通</td>
+	<td>
+		<input name="msn" type="text" size="30" class="input" value ="<{ $memberdata.msn }>"><br/>
+		<font color="gray">請填寫MSN帳號或其他的即時通訊帳號</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">教育程度</td>
+	<td>
+		<select name="education">
+			<{ $memberdata.education }>
+		</select>
+		<br/>
+		<font color="gray">請選擇您的教育程度</font>
+		
+	</td>
+</tr>
+<tr>
+	<td align="center">最高學歷</td>
+	<td>		
+		<input name="top_education" type="text" size="30" class="input" value="<{ $memberdata.top_education }>">
+		<br/>
+		<font color="gray">請填寫您畢業的學校</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">職業</td>
+	<td>
+		職業類別 
+		<select name="career" onChange="buildkey();">
+			<{ $memberdata.career_type }>
+		</select>		
+		<br/>
+
+		職業
+		<select name="career_detail" onChange="buildkey2();">
+			<{ $memberdata.career_detail }>
+		</select>
+		<{ $memberdata.career_other }>
+		<br/>
+		
+		職務<{ $memberdata.career_title }>
+		<br/>
+		<font color="gray">請選填您目前的職業</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">興趣</td>
+	<td>
+		<{ $memberdata.interest }>
+		<{ $memberdata.interest_other }>		
+	</td>
+</tr>
+<tr>
+	<td align="center">居住地點</td>
+	<td>
+		<select name="inhabit">
+			<{ $memberdata.inhabit }>
+		</select>
+		<br/>
+		<font color="gray">請選擇您的居住地點</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">活動宣傳信件</td>
+	<td>
+		<input name="promote" type="checkbox" value="OK" <{ $memberdata.promote }> />我願意接收iF的活動宣傳信件 (每週五寄出)
+	</td>
+</tr>
+</table>
+
+<br />
+
+<center>
+	<input type="submit" name="modifyinfomation" value="修改個人資料" class=button>
+	<input type="reset" name="Submit" value="重新填寫" class=button>
+</center>
+</form>

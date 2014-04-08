@@ -1,0 +1,152 @@
+<script language="javascript" src = "./javascript/register.js" type="text/javascript" ></script>
+<form  name="membermodify" method="post"   action="./member.act.php?act=adminmodify"> <!--onSubmit="return MemberMod(this)"-->
+<input name="regcode" type="hidden" value="<{$regcode}>">
+<table width="600px" border = "1" align="center" class="datatable">
+<tr>
+	<td colspan="2" align="center">修改會員資料-管理者模式</td>
+</tr>
+<tr>
+	<td width="150px" align="center">會員編號</td>
+	<td>
+		<input name="uid" type="hidden" value ="<{ $memberdata.0 }>">
+		<{ $memberdata.0 }>		
+	</td>
+</tr>
+<tr>
+	<td align="center">登入帳號</td>
+	<td>
+		<input name="username" type="text" value ="<{ $memberdata.1 }>"><br/>
+		<font color="gray">需檢查是否有重複，除非必要請勿使用修改帳號名稱。</font>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center" bgcolor="#CCCCCC"><b>變更密碼</b></td>	
+</tr>
+<tr>
+	<td align="center">輸入新密碼</td>
+	<td>
+		<input name="password" type="password" size="12" maxlength="12" class="input"><br/>
+		<font color="gray">修改後新的密碼會寄送到會員所註冊的信箱，<br/>除非必要勿使用，有忘記密碼的功能，可自動重設密碼</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">確認新密碼</td>
+	<td>
+		<input name="confirmpassword" type="password" size="12" maxlength="12" class="input"><br/>
+		<font color="gray">請再次輸入剛剛的密碼，大小寫視為不同</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">密碼提示</td>
+	<td>
+		<input name="passwordhint" type="text" size="30" class="input" value ="<{ $memberdata.3 }>"><br/>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center" bgcolor="#CCCCCC"><b>若您不想更改密碼以上欄位請勿填寫</b></td>
+</tr>
+<tr>
+	<td align="center">電子信箱</td>
+	<td>
+		<input name="email" type="text" size="30" class="input" value ="<{ $memberdata.4 }>"><br/>
+	</td>
+</tr>
+<tr>
+	<td align="center">備用信箱</td>
+	<td>
+		<input name="backupemail" type="text" size="30" class="input" value ="<{ $memberdata.5 }>"><br/>
+	</td>
+</tr>
+<tr>
+	<td align="center">真實姓名</td>
+	<td>
+		<input name="realname" type="text" size="30" class="input" value ="<{ $memberdata.6 }>"><br/>
+	</td>
+</tr>
+<tr>
+	<td align="center">性別</td>
+	<td>
+		<select name="sex">
+			<option value="-1">請選擇</option>
+			<{ $memberdata.7 }>
+		</select><br/>
+	</td>
+</tr>
+<tr>
+	<td align="center">暱稱</td>
+	<td>
+		<input name="nickname" type="text" size="30" class="input" value ="<{ $memberdata.8 }>"><br/>
+	</td>
+</tr>
+<tr>
+	<td align="center">生日</td>
+	<td>
+		<input name="birth_year" type="text" size="4" maxlength="4" class="input" value ="<{ $memberdata.9 }>">
+		/
+		<input name="birth_month" type="text" size="2" maxlength="2" class="input" value ="<{ $memberdata.10 }>">
+		/
+		<input name="birth_day" type="text" size="2" maxlength="2" class="input" value ="<{ $memberdata.11 }>"><br/>
+		<font color="gray">格式：YYYY/MM/DD</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">星座</td>
+	<td>
+		<select name="constellation">
+			<option value="-1">請選擇</option>
+			<{ $memberdata.12 }>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td align="center">電話</td>
+	<td>
+		<input name="tel" type="text" size="30" class="input" value ="<{ $memberdata.13 }>"><br/>
+	</td>
+</tr>
+<tr>
+	<td align="center">MSN</td>
+	<td>
+		<input name="msn" type="text" size="30" class="input" value ="<{ $memberdata.14 }>"><br/>
+	</td>
+</tr>
+<tr>
+	<td align="center">教育程度</td>
+	<td>
+		<select name="education">
+			<option value="-1">請選擇</option>
+			<{ $memberdata.15 }>
+		</select>
+		<font color="gray">請選擇您的教育程度</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">最高學歷</td>
+	<td>
+		<input name="top_education" type="text" size="30" class="input" value ="<{ $memberdata.16 }>"><br/>
+		<font color="gray">請填寫您畢業的學校</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">職業</td>
+	<td>
+		<input name="career" type="text" size="30" class="input" value ="<{ $memberdata.17 }>"><br/>
+		<font color="gray">請填寫您目前的職業</font>		
+	</td>
+</tr>
+<tr>
+	<td align="center">興趣</td>
+	<td>
+		<textarea name="interest" cols="30" rows="3" class="input" ><{ $memberdata.18 }></textarea><br/>
+		<font color="gray">請填寫您興趣或嗜好</font>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="modifypassword" value="修改密碼" class=button>
+		<input type="submit" name="modifyinfomation" value="修改個人資料" class=button>
+		<input type="reset" name="Submit" value="重新填寫" class=button>
+	</td>
+</tr>
+</table>
+</form>

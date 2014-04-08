@@ -1,0 +1,27 @@
+<form name="place" method="post" onSubmit=""  action="./group.act.php?act=modify">
+<table width="600" border = "1" align="center" class="datatable">
+<tr bgcolor="#CCCCCC">
+	<th colspan="2" align="center">
+		修改族群資料
+	</th>
+</tr>
+<tr>
+	<td width="150" align="center">族群編號</td>
+	<td>
+		<input name="gid" type="text" size="10" class="input" readOnly value="<{ $groupdata.0}>">
+	</td>
+</tr>
+<tr>
+	<td width="150" align="center">族群名稱</td>
+	<td>
+		<input name="gname" type="text" size="50" class="input" value="<{ $groupdata.1}>">
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="Submit" value="送出修改" class=button>
+		<input type="reset" name="Submit" value="重新填寫" class=button>
+	</td>
+</tr>
+</table>
+</form>

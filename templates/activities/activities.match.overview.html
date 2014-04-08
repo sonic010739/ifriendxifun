@@ -1,0 +1,34 @@
+<center>
+<b>
+	所有會員給予的聯繫資料
+</b>
+</center>
+
+<br/>
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr>
+		<th width="100" align="center">會員</th>
+		<th width="500" align="center">給予的會員</th>		
+	</tr>	
+	<{section name=key loop=$act_matches}>
+	<tr>
+		<td rowspan="3" align="center">
+			<{ $act_matches[key].username }>
+		</td>
+		<td align="left">
+			<b>Email</b>: <{ $act_matches[key].email }>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<b>MSN</b>: <{ $act_matches[key].msn }>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<b>手機</b>: <{ $act_matches[key].tel }>
+		</td>
+	</tr>
+	<{/section}>
+</table>

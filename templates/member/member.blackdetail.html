@@ -1,0 +1,161 @@
+
+<br/>
+<br/>
+
+<{ if $blackdata.verified == 0 }>
+
+<script type="text/javascript">
+	function checkverify(verify)
+	{
+		if (!verify.result[0].checked && !verify.result[1].checked)
+		{
+			alert("未選擇審查結果方式!");
+			return false;
+		}	
+		
+		if (verify.result[0].checked && verify.days.value == "")
+		{
+			alert("若選擇通過請填寫停權的天數!");
+			verify.days.focus();
+			return false;
+		}	
+		
+		if (verify.comment.value == "")
+		{
+			alert("請填寫您的審查意見!");
+			verify.comment.focus();
+			return false;
+		}	
+		
+		if (confirm("確定要送出審查結果?")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+</script>
+<form name="verify" method="post" action="./member.act.php?act=verifyblack" onSubmit="return checkverify(this);">
+	<input name="black_serial" type="hidden" value="<{ $blackdata.black_serial }>">
+	
+	<table width="600" align="center" border="1" class="datatable">
+		<tr bgcolor="#CCCCCC">
+			<th colspan="2" align="center">黑名單資料審核</th>
+		</tr>
+		<tr>
+			<td align="center" width="150">被提報者</td>
+			<td> <{ $blackdata.black_name }> </td>
+		</tr>
+		<tr>
+			<td align="center">提報者</td>
+			<td> <{ $blackdata.accuse_name }> </td>
+		</tr>
+		<tr>
+			<td align="center">活動名稱</td>
+			<td> <{ $blackdata.act_name }> </td>
+		</tr>
+		<tr>
+			<td align="center">提報時間</td>
+			<td> <{ $blackdata.accuse_time }> </td>
+		</tr>
+		<tr>
+			<td align="center">提報原因</td>
+			<td> <{ $blackdata.reason }> </td>
+		</tr>
+		<tr>
+			<td align="center">該會員被提報的紀錄</td>
+			<td> <{ $blackdata.blackrecord }> </td>
+		</tr>
+		<tr>
+			<td align=center>審查結果</td>
+			<td>
+				<input type="radio" name="result" value="Pass" 	 id="abc"><label for="abc">通過</label>
+				<input type="radio" name="result" value="Refuse" id="def"><label for="def">拒絕</label>
+			</td>
+		</tr>
+		<tr>
+			<td align=center>停權天數</td>
+			<td>
+				<input type="text" name="days" size="5" maxlength="5" class="input"> 天
+				<br/>
+				<font color="gray">若選擇拒絕，此欄位可不填寫</font>
+			</td>
+		</tr>
+		<tr>
+			<td align=center>評論</td>
+			<td>
+				<textarea name="comment" style="width: 420px;" rows="10" class="input"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<input type="submit" name="send" value="確定送出" class=button>
+				<input type="reset" name="reset" value="重新填寫" class=button>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<{ else }>
+	<table width="600" align="center" border="1" class="datatable">
+		<tr bgcolor="#CCCCCC">
+			<th colspan="2" align="center">黑名單資料審核</th>
+		</tr>
+		<tr>
+			<td align="center" width="150">被提報者</td>
+			<td> <{ $blackdata.black_name }> </td>
+		</tr>
+		<tr>
+			<td align="center">提報者</td>
+			<td> <{ $blackdata.accuse_name }> </td>
+		</tr>
+		<tr>
+			<td align="center">活動名稱</td>
+			<td> <{ $blackdata.act_name }> </td>
+		</tr>
+		<tr>
+			<td align="center">提報時間</td>
+			<td> <{ $blackdata.accuse_time }> </td>
+		</tr>
+				<tr>
+			<td align="center">提報原因</td>
+			<td> <{ $blackdata.reason }> </td>
+		</tr>
+		<tr>
+			<td align="center">該會員被提報的紀錄</td>
+			<td> <{ $blackdata.blackrecord }> </td>
+		</tr>
+		<tr>
+			<td align="center">審查結果</td>
+			<td> <{ $blackdata.result }> </td>
+		</tr>
+		<tr>
+			<td align="center">審查者</td>
+			<td> <{ $blackdata.verify_name }> </td>
+		</tr>
+		<tr>
+			<td align="center">審查時間</td>
+			<td> <{ $blackdata.verify_time }> </td>
+		</tr>
+		<tr>
+			<td align="center">審查評論</td>
+			<td> <{ $blackdata.comment }> </td>
+		</tr>
+		<tr>
+			<td align="center">停權天數</td>
+			<td> <{ $blackdata.days }> </td>
+		</tr>
+		<tr>
+			<td align="center">開始日期</td>
+			<td> <{ $blackdata.start_date }> </td>
+		</tr>
+		<tr>
+			<td align="center">結束日期</td>
+			<td> <{ $blackdata.end_date }> </td>
+		</tr>
+		<tr>
+			<td align="center">帳號狀態</td>
+			<td> <{ $blackdata.lock }> </td>
+		</tr>
+	</table>
+<{ /if }>
+

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="Author" content="謝朝任 , Sonic, http://sonic.twbbs.org">
+	<meta name="description" content="7 Minute Speed Dating">
+	<meta name="keywords" content="7 Minute Speed Dating，Speed Dating，Dating，七分鐘快速約會，約會，iF，iFriendxiFun">	
+	
+	<title>&lt;iF&gt;iFriendxiFun http://www.iFriendxiFun.net/ 活動簽到表</title>	
+</head >
+
+<style type="text/css">
+	body
+	{
+		font-family:verdana, arial, helvetica, sans-serif;
+	}
+
+	html
+	{
+	    font-size: 13px
+	}
+	.datatable 
+	{
+		border: 1px solid #000000;
+		border-collapse: collapse;
+	}
+	.datatable td 
+	{
+		line-height: 25px;
+		height: 25px;
+		border: 1px solid #000000;
+		padding: 4px;
+	}
+
+	.datatable th 
+	{
+		border: 1px solid #000000;
+		text-align: center;
+		background-color: #CCCCCC;
+		padding: 4px;
+	}
+</style>
+
+<body>
+	<table width="800" border="0">
+	<tr>
+		<td width="200">
+			<img src="images/iFlogo.jpg" border="0" alt="iF LOGO" width="200" height="200">
+		</td>
+		<td width="600">
+			<table class="datatable" width="593" border="1">
+			<tr>
+				<th colspan="4" align="center">iF活動資訊</th>
+			</tr>
+			<tr>
+				<td width="150" align="right">活動主題</td>
+				<td colspan="3" align="left"><{ $actdata.tname }></td>		
+			</tr>			
+			<tr>		
+				<td width="150" align="right">活動日期與時間</td>
+				<td colspan="3" width="150" align="left"><{ $actdata.act_date }> <{ $actdata.act_time }></td>		
+			</tr>
+			<tr>
+				<td width="150" align="right">活動名稱</td>
+				<td colspan="3" align="left"><{ $actdata.name }></td>		
+			</tr>
+			<tr>
+				<td width="150" align="right">活動地點</td>
+				<td colspan="3" align="left"><{ $actdata.placename }> (<{ $actdata.placeaddress }>)</td>		
+			</tr>
+			<tr>
+				<td width="150" align="right">活動EO</td>
+				<td width="150" align="left"><{ $actdata.realname }> (<{ $actdata.username }>)</td>		
+				<td width="150" align="right">報名參加活動人數</td>
+				<td width="143" align="left">男: <{ $actdata.males }>人 / 女: <{ $actdata.females }>人</td>
+			</tr>	
+			</table>
+		</td>
+	</tr>
+	</table>
+	
+	<br />
+	
+	<table class="datatable" width="800" border="1">
+		<tr>
+			<th width="40" align="center">出席</th>
+			<th width="80" align="center">編號</th>
+			<th width="80" align="center">帳號</th>
+			<th width="80" align="center">姓名</th>
+			<th width="80" align="center">暱稱</th>
+			<th width="40" align="center">性別</th>
+			<th width="120" align="center">電話</th>
+			<th width="80" align="center">繳費方式</th>			
+			<th width="200" align="center">備註</th>
+		</tr>
+		<{section name=key loop=$joinmember}>	
+		<tr>
+			<td align="center"	>&nbsp;</td>
+			<td align="center"	><{ $joinmember[key].sex_count }></td>
+			<td align="left"	><{ $joinmember[key].username }></td>
+			<td align="left"	><{ $joinmember[key].realname }></td>
+			<td align="left"	><{ $joinmember[key].nickname }></td>
+			<td align="center"	><{ $joinmember[key].sex }></td>
+			<td align="center"	><{ $joinmember[key].tel }></td>
+			<td align="center"	><{ $joinmember[key].charge_type }></td>			
+			<td align="left"	><{ $joinmember[key].join_status }></td>
+		</tr>
+		<{/section}>
+		<tr>			
+			<td colspan="9" align="right"	>http://www.ifriendxifun.net/</td>
+		</tr>
+	</table>
+</body>
+</html>

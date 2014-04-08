@@ -1,0 +1,29 @@
+
+<center>
+	<b>申請取消列表</b>
+</center>
+
+<br/>
+
+<table width="600" align="center" border="1" class="datatable">
+	<tr bgcolor="#CCCCCC">
+		<th width="100"  align="center">申請者</th>
+		<th width="100" align="center">取消類型</th>
+		<th width="180" align="center">活動名稱</th>
+		<th width="140" align="center">申請時間</th>
+		<th width="80"  align="center">審核結果</th>
+	</tr>
+
+	<{section name=key loop=$verifylist}>	
+	<tr>
+		<td align="left"><{ $verifylist[key].username }></td>
+		<td align="center"><{ $verifylist[key].type }></td>		
+		<td align="left"><{ $verifylist[key].name }></td>
+		<td align="center"><{ $verifylist[key].apply_time }></td>
+		<td align="center"><{ $verifylist[key].result }></td>		
+	</tr>
+	<{/section}>
+
+</table>
+
+<{include file="page_foot.html"}>

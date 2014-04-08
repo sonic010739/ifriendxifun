@@ -1,0 +1,181 @@
+/*- Menu Tabs F--------------------------- */
+
+.tabsC
+{
+	/*如果分頁要放置在頁面任意處,則以下三行勿省略*/
+	padding:0;
+	margin: -1px 0 0px 0px;
+	width: 600px;
+	
+	/*	height: 301px;	*/
+	clear:both;
+	/*若分頁是獨立頁面,可以自訂 tabsC 的 padding 值，並加clear屬性*/
+	/*clear:both*/
+	/*padding:12px;*/
+	/*border:#CCCCCC 1px solid;*/
+}
+
+.tabsC2
+{
+	/*如果分頁要放置在頁面任意處,則以下三行勿省略*/
+	padding:0;
+	margin: -1px 0 0px 0px;
+	width: 650px;
+	
+	/*	height: 301px;	*/
+	clear:both;
+	/*若分頁是獨立頁面,可以自訂 tabsC 的 padding 值，並加clear屬性*/
+	/*clear:both*/
+	/*padding:12px;*/
+	/*border:#CCCCCC 1px solid;*/
+}
+
+.tabsC1
+{
+	/*如果分頁要放置在頁面任意處,則以下三行勿省略*/
+	padding:0;
+	margin: -1px 0px 0px 1px;
+	width: 550px;
+	
+	/*	height: 301px;	*/
+	clear:both;
+	/*若分頁是獨立頁面,可以自訂 tabsC 的 padding 值，並加clear屬性*/
+	/*clear:both*/
+	/*padding:12px;*/
+}
+
+.tabsF
+	{
+	float:left;
+	width:100%;
+	margin:0;
+	padding:0;
+	font-size:13px;
+	line-height:normal;
+	/*border-left:#000 1px solid;
+	border-right:#000 1px solid;*/
+	border-bottom:0px solid #666;
+	/*
+	background:#F4F4F4;
+	*/
+	/*
+	border: 1px dashed #000000;	
+	background:url("images/tabBG.gif") repeat-x left bottom;
+	*/
+	float:none;
+      	}
+
+.tabsF ul
+{	
+	margin:0;
+	padding:10px 0px 10px 0px;
+	list-style: none;
+}
+
+.tabsF li
+{
+	float:left;
+	display:inline;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;	
+}
+
+.tabsF a 
+{
+	float:left;
+	background:url("images/tableftJ.gif") no-repeat left top;
+	margin:0;
+	padding:0px 0px 0px 5px;
+	text-decoration: none;
+}
+
+.tabsF a:hover
+{
+	float:left;
+	background:url("images/tableftJ.gif") no-repeat left top;
+	margin:0;
+	padding:0px 0px 0px 5px;
+	text-decoration: none;
+}
+
+.tabsF a:link
+{
+	float:left;
+	background:url("images/tableftJ.gif") no-repeat left top;
+	margin:0;
+	padding:0px 0px 0px 5px;
+	text-decoration: none;
+}
+
+.tabsF a span
+{
+	float:left;
+	display:block;
+	background:url("images/tabrightJ.gif") no-repeat right top;
+	padding:5px 0px 4px 0px;
+	color:#24618E;
+	text-align: center;
+}
+
+.tabsF span
+{
+	float:left;
+	background:url("images/tableftJ.gif") no-repeat left top;
+	margin:0;
+	padding:5px 0px 5px 0px;
+	text-decoration:none;	
+}
+
+.tabsF span span
+{
+	float:left;
+	display:block;
+	background:url("images/tabrightJ.gif") no-repeat right top;
+	padding:9px 0px 5px 6px;
+	color:#000;		
+}
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+.tabsF a span {
+	float:none;
+}
+
+/* End IE5-Mac hack */
+.tabsF a:hover span 
+{
+	/*color:#000;*/
+}
+
+.tabsF a:hover
+{
+	/*
+	background-position:0% -42px;
+	*/
+}
+
+.tabsF a:hover span
+{
+	/*
+	background-position:100% -42px;
+	*/
+}
+
+.tabsF #current a
+{
+	background-position:0% -42px;
+	border-bottom:1px solid #FFF;
+	color:#FFF;
+}
+
+.tabsF #current a span
+{
+	background-position:100% -42px;
+    color:#FFF;
+}
+
+.tabsF #current span span
+{
+	background-position:100% -42px;
+    border-bottom:1px solid #FFF;
+    color:#000;
+}

@@ -1,0 +1,35 @@
+<center> 
+	<b>討論區</b>
+</center>
+
+<div id="response">
+<a href="./index.php?act=forum&amp;sel=add"><b>發表文章</b></a>
+</div>
+
+<div id="forum">
+	<div class="topic_header">
+		<div class="topic_header_topic">主題</div>
+		<div class="topic_header_reply">回覆</div>
+		<div class="topic_header_name">發表時間</div>
+		<div class="topic_header_last">最新回應</div>
+	</div>
+
+<{section name=key loop=$forumdata}>	
+	<div class="topic_info" style="background-color:<{$guest[guest].11}>">
+		<div class="topic_topic">
+			<{$forumdata[key].1}>
+		</div>
+		
+		<div class="topic_reply"><{$forumdata[key].2}></div>
+		
+		<div class="topic_name">
+			<{$forumdata[key].3}>
+		</div>
+		<div class="topic_last">
+			<{$forumdata[key].4}>
+		</div>
+	</div>
+<{/section}>							
+</div>
+<{include file="page_foot.html"}>
+	

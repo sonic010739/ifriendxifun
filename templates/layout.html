@@ -1,0 +1,166 @@
+	<br />
+	<form name="layout" method="post" action="./layout.act.php">
+	<table width="600" align="center" border="1" class="datatable">
+		<tr>
+			<th colspan="2" align="center">首頁版面設定</th>
+		</tr>
+		<tr>
+			<td width="100" align="center">跑馬燈文字內容</td>
+			<td>
+				<textarea name="scroll_text" rows="5" class="input" warp="hard" style="width: 480px;"><{ $layout.scroll_text }></textarea>
+			</td>
+		</tr>
+	</table>
+	
+	<br />
+	
+	<table width="600" align="center" border="0">
+		<tr>
+			<td width="300" valign="top">
+				左邊的圖檔寬度皆為110px，請先縮圖至適當的大小 (<a href="index.php?act=upload">上傳圖片</a>)<br />
+				<table width="298" align="center" border="1" class="datatable">
+					<tr>
+						<th align="center">左邊第一個</th>
+					</tr>
+					<tr>
+						<td>
+							圖檔位置<br />
+							<input type="text" name="left_1_image" style="width: 270px" class="input" value="<{ $layout.left_1_image }>">
+							<br />
+							連結位置<br />
+							<input type="text" name="left_1_link" style="width: 270px" class="input" value="<{ $layout.left_1_link }>">
+						</td>
+					</tr>
+				</table>
+				
+				<br />
+				
+				<table width="298" align="center" border="1" class="datatable">
+					<tr>
+						<th align="center">左邊第二個</th>
+					</tr>
+					<tr>
+						<td>
+							圖檔位置<br />
+							<input type="text" name="left_2_image" style="width: 270px" class="input" value="<{ $layout.left_2_image }>">
+							<br />
+							連結位置<br />
+							<input type="text" name="left_2_link" style="width: 270px" class="input" value="<{ $layout.left_2_link }>">
+						</td>
+					</tr>
+				</table>
+				
+				<br />
+				
+				<table width="298" align="center" border="1" class="datatable">
+					<tr>
+						<th align="center">左邊第三個</th>
+					</tr>
+					<tr>
+						<td>
+							圖檔位置<br />
+							<input type="text" name="left_3_image" style="width: 270px" class="input" value="<{ $layout.left_3_image }>">
+							<br />
+							連結位置<br />
+							<input type="text" name="left_3_link" style="width: 270px" class="input" value="<{ $layout.left_3_link }>">
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td width="300"  valign="top">
+				右邊的圖檔寬度皆為170px，請先縮圖至適當的大小 (<a href="index.php?act=upload">上傳圖片</a>)<br />
+				<table width="298" align="center" border="1" class="datatable">
+					<tr>
+						<th align="center">右邊第一個</th>
+					</tr>
+					<tr>
+						<td>
+							圖檔位置<br />
+							<input type="text" name="right_1_image" style="width: 270px" class="input" value="<{ $layout.right_1_image }>">
+							<br />
+							連結位置<br />
+							<input type="text" name="right_1_link" style="width: 270px" class="input" value="<{ $layout.right_1_link }>">
+						</td>
+					</tr>
+				</table>
+				
+				<br />
+				
+				<table width="298" align="center" border="1" class="datatable">
+					<tr>
+						<th align="center">右邊第二個</th>
+					</tr>
+					<tr>
+						<td>
+							圖檔位置<br />
+							<input type="text" name="right_2_image" style="width: 270px" class="input" value="<{ $layout.right_2_image }>">
+							<br />
+							連結位置<br />
+							<input type="text" name="right_2_link" style="width: 270px" class="input" value="<{ $layout.right_2_link }>">
+						</td>
+					</tr>
+				</table>
+				
+				<br />
+				
+				<table width="298" align="center" border="1" class="datatable">
+					<tr>
+						<th align="center">右邊第三個</th>
+					</tr>
+					<tr>
+						<td>
+							圖檔位置<br />
+							<input type="text" name="right_3_image" style="width: 270px" class="input" value="<{ $layout.right_3_image }>">
+							<br />
+							連結位置<br />
+							<input type="text" name="right_3_link" style="width: 270px" class="input" value="<{ $layout.right_3_link }>">
+						</td>
+					</tr>
+				</table>
+				
+				<br />
+				
+				<table width="298" align="center" border="1" class="datatable">
+					<tr>
+						<th align="center">右邊第四個</th>
+					</tr>
+					<tr>
+						<td>
+							圖檔位置<br />
+							<input type="text" name="right_4_image" style="width: 270px" class="input" value="<{ $layout.right_4_image }>">
+							<br />
+							連結位置<br />
+							<input type="text" name="right_4_link" style="width: 270px" class="input" value="<{ $layout.right_4_link }>">
+						</td>
+					</tr>
+				</table>
+				
+				<br />
+				
+				<table width="298" align="center" border="1" class="datatable">
+					<tr>
+						<th align="center">右邊第五個</th>
+					</tr>
+					<tr>
+						<td>
+							圖檔位置<br />
+							<input type="text" name="right_5_image" style="width: 270px" class="input" value="<{ $layout.right_5_image }>">
+							<br />
+							連結位置<br />
+							<input type="text" name="right_5_link" style="width: 270px" class="input" value="<{ $layout.right_5_link }>">
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
+				<input type="submit" name="Submit" value="確定更新" class="button">
+				
+				<input type="submit" name="Submit" value="重新填寫" class="button">
+			</td>
+		</tr>
+	</table>
+	
+	
+	</form>
